@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Plus, Trash } from 'lucide-react';
 
-function DictEditor({ title, data, onChange }: { title: string, data: Record<string, number>, onChange: (d: Record<string, number>) => void }) {
+function DictEditor({ title, data, onChange, unit = "Ft" }: { title: string, data: Record<string, number>, onChange: (d: Record<string, number>) => void, unit?: string }) {
   const [items, setItems] = useState<{id: string, k: string, v: number}[]>(() => {
     return Object.entries(data || {}).map(([k, v]) => ({ id: Math.random().toString(), k, v }));
   });

@@ -99,6 +99,10 @@ export default async function SettingsPage() {
             <div className="space-y-4 bg-gray-50 p-4 rounded-xl border border-gray-200">
               <h4 className="font-bold text-[#181A2C]">1. Főoldal Fejléc (Hero)</h4>
               <div>
+                <label className="block text-xs text-gray-500 mb-1">Kiemelt Címke (Badge)</label>
+                <input type="text" name="hero_badge" defaultValue={settings.hero_badge || 'Kiválóra Értékelt Szolgáltatás'} className="w-full border rounded-lg p-2 text-sm" />
+              </div>
+              <div>
                 <label className="block text-xs text-gray-500 mb-1">Főcím (H1)</label>
                 <input type="text" name="hero_title" defaultValue={settings.hero_title || 'Érd legmegbízhatóbb szőnyegtisztítója'} className="w-full border rounded-lg p-2 text-sm" />
               </div>

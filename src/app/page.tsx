@@ -29,6 +29,7 @@ export default async function HomePage() {
   }
 
   // --- 1. HERO SZEKCIÓ ---
+  const heroBadge = settings.hero_badge || 'Kiválóra Értékelt Szolgáltatás';
   const heroTitle = settings.hero_title || 'Érd legmegbízhatóbb szőnyegtisztítója';
   const heroSubtitle = settings.hero_subtitle || '4,6 csillagos minőség, amiben már 76 család megbízott.';
   const heroParagraph = settings.hero_paragraph || 'Ne kockáztasson amatőrökkel. Mi elszállítjuk, professzionális technológiával újjávarázsoljuk, és tisztán hozzuk vissza otthonába szőnyegeit és kárpitjait.';
@@ -104,7 +105,7 @@ export default async function HomePage() {
 
           <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
             <div className="max-w-3xl">
-              <span className="inline-block py-1 px-3 rounded-full bg-[#3AC2FE]/20 text-[#3AC2FE] font-bold text-sm tracking-widest uppercase mb-6 border border-[#3AC2FE]/30">Prémium Tisztító Szolgáltatás</span>
+              <span className="inline-block py-1 px-3 rounded-full bg-[#3AC2FE]/20 text-[#3AC2FE] font-bold text-sm tracking-widest uppercase mb-6 border border-[#3AC2FE]/30">{heroBadge}</span>
               <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4">
                 {heroTitle}
               </h1>
