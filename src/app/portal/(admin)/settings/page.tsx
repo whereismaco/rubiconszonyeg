@@ -159,6 +159,10 @@ export default async function SettingsPage() {
                 <label className="block text-xs text-gray-500 mb-1">Szöveg</label>
                 <textarea name="about_text" defaultValue={settings.about_text || 'Hartmann Zoltán vagyok, a Rubicon alapítója...'} rows={6} className="w-full border rounded-lg p-2 text-sm"></textarea>
               </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Kép URL (pl. /images/rubicon_szonyegtisztitas_szonyeg_felcsavaras.webp)</label>
+                <input type="text" name="about_image" defaultValue={settings.about_image || '/images/rubicon_szonyegtisztitas_szonyeg_felcsavaras.webp'} className="w-full border rounded-lg p-2 text-sm" />
+              </div>
             </div>
 
             {/* Szolgáltatások */}

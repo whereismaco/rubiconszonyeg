@@ -46,6 +46,7 @@ export default async function HomePage() {
   // --- 3. RÓLUNK SZEKCIÓ ---
   const aboutTitle = settings.about_title || 'A porszívózás nem elég a valódi tisztasághoz.';
   const aboutText = settings.about_text || 'Hartmann Zoltán vagyok, a Rubicon alapítója. Tudom, hogy Önnek az otthona nyugalma és egészsége a legfontosabb. A szőnyegek mélyén megbújó atkák, pollenek és makacs szennyeződések azonban nemcsak az esztétikát rontják, hanem hosszú távon az allergének forrásai is lehetnek.\n\nEzért fejlesztettük ki azt a többlépcsős tisztítási folyamatot, amely messze túlmutat a hagyományos megoldásokon. Nem csupán a látható foltokat távolítjuk el, hanem a textília legmélyebb rétegeit is fertőtlenítjük és felfrissítjük. Professzionális technológiánkkal garantáljuk, hogy szőnyegei és kárpitjai visszanyerik eredeti állapotukat, Önnek pedig csak a végeredményt kell élveznie.';
+  const aboutImage = settings.about_image || '/images/rubicon_szonyegtisztitas_szonyeg_felcsavaras.webp';
   
   // --- 4. SZOLGÁLTATÁSOK SZEKCIÓ ---
   const servicesTitle = settings.services_title || 'Szolgáltatásaink az Ön kényelméért';
@@ -161,9 +162,9 @@ export default async function HomePage() {
         {/* 3. RÓLUNK SZEKCIÓ */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
-              <Image src="/images/about_image_1776259413742.png" alt="Mélytisztítás hatása" fill className="object-cover" />
-              <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]"></div>
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+              <Image src={aboutImage} alt="Mélytisztítás hatása" width={800} height={800} className="w-full h-auto" />
+              <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.2)] pointer-events-none"></div>
             </div>
             <div>
               <h3 className="text-4xl md:text-5xl font-bold text-[#181A2C] mb-8 leading-tight">{aboutTitle}</h3>
