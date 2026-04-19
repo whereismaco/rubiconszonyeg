@@ -29,6 +29,31 @@ export async function getJobsByDate(datePrefix: string) {
   return stmt.all(`${datePrefix}%`);
 }
 
+export async function getJobById(id: number) {
+  const stmt = db.prepare('SELECT * FROM jobs WHERE id = ?');
+  return stmt.get(id);
+}
+
+export async function updateJob(id: number, data: any) {
+  const stmt = db.prepare(`
+    UPDATE jobs 
+    SET name = ?, address = ?, map_link = ?, total = ?, notes = ?, data_json = ?
+    WHERE id = ?
+  `);
+  
+  stmt.run(
+    data.name,
+    data.address,
+    `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
+    data.total,
+    data.notes,
+    JSON.stringify(data.items),
+    id
+  );
+  
+  revalidatePath('/portal');
+}
+
 const statusOrder = [
   'Felvételre vár',
   'Beérkezett',
@@ -44,7 +69,7 @@ export async function advanceJobStatus(id: number) {
   if (currentIndex >= 0 && currentIndex < statusOrder.length - 1) {
     const nextStatus = statusOrder[currentIndex + 1];
     db.prepare('UPDATE jobs SET status = ? WHERE id = ?').run(nextStatus, id);
-    revalidatePath('/rubicon-gate-portal');
+    revalidatePath('/portal');
   }
 }
 
@@ -63,7 +88,7 @@ export async function createJob(data: any) {
     JSON.stringify(data.items)
   );
   
-  revalidatePath('/rubicon-gate-portal');
+  revalidatePath('/portal');
 }
 
 export async function getSettings() {
@@ -81,7 +106,11 @@ export async function getSettings() {
 
 export async function updateSetting(key: string, value: string | any) {
   const strValue = typeof value === 'string' ? value : JSON.stringify(value);
-  db.prepare('UPDATE settings SET value = ? WHERE key = ?').run(strValue, key);
-  revalidatePath('/rubicon-gate-portal/settings');
+  db.prepare(`
+    INSERT INTO settings (key, value) 
+    VALUES (?, ?) 
+    ON CONFLICT(key) DO UPDATE SET value = excluded.value
+  `).run(key, strValue);
+  revalidatePath('/portal/settings');
   revalidatePath('/'); // assuming settings affect website
 }

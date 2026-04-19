@@ -13,14 +13,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = async () => {
     await logout();
-    router.push('/rubicon-gate-portal/login');
+    router.push('/portal/login');
   };
 
   const navItems = [
-    { name: 'Irányítópult', href: '/rubicon-gate-portal', icon: LayoutDashboard },
-    { name: 'Kalkulátor (Új Munka)', href: '/rubicon-gate-portal/new', icon: Calculator },
-    { name: 'Beállítások', href: '/rubicon-gate-portal/settings', icon: Settings },
-    { name: 'Értékelések', href: '/rubicon-gate-portal/reviews', icon: Star },
+    { name: 'Irányítópult', href: '/portal', icon: LayoutDashboard },
+    { name: 'Kalkulátor (Új Munka)', href: '/portal/new', icon: Calculator },
+    { name: 'Beállítások', href: '/portal/settings', icon: Settings },
+    { name: 'Értékelések', href: '/portal/reviews', icon: Star },
   ];
 
   return (

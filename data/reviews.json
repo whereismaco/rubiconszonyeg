@@ -1,0 +1,94 @@
+{
+  "id": "ChIJAXgrEnLhQUcR2p7b-NLc9ao",
+  "rating": 4.7,
+  "userRatingCount": 79,
+  "displayName": {
+    "text": "Rubicon szőnyegtisztító"
+  },
+  "reviews": [
+    {
+      "name": "r1",
+      "rating": 5,
+      "originalText": { "text": "Meg vagyok elégedve vele, mert visszakapta újonnanságát, a fehér tenyleg fehér, a bolyhosság is visszatért.", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Mónika Barnet", "photoUri": "" },
+      "relativePublishTimeDescription": "3 hónapja"
+    },
+    {
+      "name": "r2",
+      "rating": 5,
+      "originalText": { "text": "Egész otthonomban gyönyörű tiszta és puha szőnyegeim lettek, plussz az egész lakás illatozik, minőségi, nagyon kellemes illatú és kímélő vegyszereket használnak. Háztól-házig történő szállításban is a segítségemre van a szőnyegtisztító cég, így azzal sincs gondom.", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Erika Gáspár", "photoUri": "" },
+      "relativePublishTimeDescription": "4 hónapja"
+    },
+    {
+      "name": "r3",
+      "rating": 5,
+      "originalText": { "text": "Rövid teljesítési határidőre, a vállalt napra keszült el két szőnyegünk tisztítása is. Nagyon elégedettek vagyunk. Korábban több helyen is tisztították szőnyegünket, de ilyen szép tisztán még sosem kaptuk vissza.", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "József Barnet", "photoUri": "" },
+      "relativePublishTimeDescription": "3 hónapja"
+    },
+    {
+      "name": "r4",
+      "rating": 5,
+      "originalText": { "text": "Végtelenül meg vagyok elégedve a munkájukkal. Már 3. éve Hartmann Zoltán hozza-viszi szőnyeget tőlem, és mindig gyönyörűen tisztán kapom vissza.", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Eszter Hirtling", "photoUri": "" },
+      "relativePublishTimeDescription": "4 hónapja"
+    },
+    {
+      "name": "r5",
+      "rating": 5,
+      "originalText": { "text": "Nagyon szép lett a szőnyeg, a kopásokat leszámítva mintha új lenne. Puha és hozzáérve végre nem ragad.", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Tamás Kőszegi", "photoUri": "" },
+      "relativePublishTimeDescription": "2 hónapja"
+    },
+    {
+      "name": "r6",
+      "rating": 5,
+      "originalText": { "text": "Megbízható, korrekt cég. Szépen dolgoznak, elfogadható áron. Sos problémámat még szabadság alatt is kezelték.", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Szabolcs Iván", "photoUri": "" },
+      "relativePublishTimeDescription": "2 hónapja"
+    },
+    {
+      "name": "r7",
+      "rating": 5,
+      "originalText": { "text": "Maximálisan elégedett vagyok. Gyönyörűen kitisztította az autómat Zoli. A kárpit és a szőnyegek olyanok lettek, mintha új autóba szálltam volna. Csak ajánlani tudom! ☺️", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Olívia Nyírő", "photoUri": "" },
+      "relativePublishTimeDescription": "1 napja"
+    },
+    {
+      "name": "r8",
+      "rating": 5,
+      "originalText": { "text": "A szőnyegeim voltak már itt, és nagyon elégedett voltam. Most kipróbáltam a kárpittisztítás szolgáltatást is, amivel szintén nagyon elégedett vagyok. A kanapém tiszta és jó illatú, és ezek mellett nagyon udvariasak!!! Csak ajánlani tudom!", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Szilvia Füleki", "photoUri": "" },
+      "relativePublishTimeDescription": "1 hónapja"
+    },
+    {
+      "name": "r9",
+      "rating": 5,
+      "originalText": { "text": "Csillagos ötös! ⭐ Gyorsak, mégis alaposan és precízen dolgoznak. Látszik, hogy igényesek a saját munkájukra. Mindenkinek tiszta szívből ajánlom őket, nem fogtok csalódni!", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Diána Haáz-Bencsik", "photoUri": "" },
+      "relativePublishTimeDescription": "1 napja"
+    },
+    {
+      "name": "r10",
+      "rating": 5,
+      "originalText": { "text": "Tudjátok hogy tud kinézni egy szerbiai vadászat után a terepjáró?? Azt szorozzátok meg 3-mal...ilyen állapotban vittem az autót...amit visszakaptam annyira patika volt, akár a szalonból gördült volna ki! Köszi! ;)", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Gabriella Sas", "photoUri": "" },
+      "relativePublishTimeDescription": "6 éve"
+    },
+    {
+      "name": "r11",
+      "rating": 5,
+      "originalText": { "text": "A legjobb, legprecízebb, leggyorsabb szolgáltatást kaptam a legjobb áron! Mindig ide fogok járni mostmár! Köszönöm Nektek!", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Nikolett Veres", "photoUri": "" },
+      "relativePublishTimeDescription": "4 éve"
+    },
+    {
+      "name": "r12",
+      "rating": 5,
+      "originalText": { "text": "2db szőnyeget vittem, gyönyörűek lettek. Külön kiemelném a hétvégi szállítást.", "languageCode": "hu" },
+      "authorAttribution": { "displayName": "Haász Ákos", "photoUri": "" },
+      "relativePublishTimeDescription": "3 hónapja"
+    }
+  ]
+}

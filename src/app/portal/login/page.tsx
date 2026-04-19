@@ -13,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
     const res = await login(email);
     if (res?.success) {
-      router.push('/rubicon-gate-portal');
+      router.push('/portal');
     } else {
       setError(res?.error || 'Hibás bejelentkezés.');
     }

@@ -4,7 +4,7 @@ import path from 'path';
 // Resolve database path
 const dbPath = path.resolve(process.cwd(), 'rubicon.db');
 
-let db: Database.Database;
+let db!: Database.Database;
 
 try {
   db = new Database(dbPath, { verbose: console.log });

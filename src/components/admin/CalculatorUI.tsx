@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { createJob } from '@/lib/actions';
+import { createJob, updateJob } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash, Save, ShoppingCart, User, MapPin, ReceiptText } from 'lucide-react';
 
@@ -11,12 +11,21 @@ interface Props {
   pricingCar: any;
   deliveryFeeLimit: number;
   deliveryFeeBase: number;
+  initialJob?: any;
 }
 
-export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar, deliveryFeeLimit, deliveryFeeBase }: Props) {
+export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar, deliveryFeeLimit, deliveryFeeBase, initialJob }: Props) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'rug' | 'upholstery' | 'car'>('rug');
-  const [items, setItems] = useState<any[]>([]);
+
+  const [items, setItems] = useState<any[]>(() => {
+    if (initialJob?.data_json) {
+      try {
+        return JSON.parse(initialJob.data_json);
+      } catch(e) {}
+    }
+    return [];
+  });
 
   // Item Forms State
   const [rug, setRug] = useState({ type: 'Vékony', width: 100, length: 150, material: 'Pamut', condition: 'Enyhén', extras: [] as string[] });
@@ -24,7 +33,11 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   const [car, setCar] = useState({ category: 'Kicsi', package: 'Belső takarítás' });
 
   // Job Details
-  const [customerInfo, setCustomerInfo] = useState({ name: '', address: '', notes: '' });
+  const [customerInfo, setCustomerInfo] = useState({ 
+    name: initialJob?.name || '', 
+    address: initialJob?.address || '', 
+    notes: initialJob?.notes || '' 
+  });
 
   // Calculation
   const subtotal = items.reduce((sum, item) => sum + item.price, 0);
@@ -62,8 +75,12 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
     if (!customerInfo.name || !customerInfo.address) return alert("Név és Cím kötelező!");
     if (items.length === 0) return alert("Adj hozzá legalább egy tételt!");
     
-    await createJob({ ...customerInfo, items, total });
-    router.push('/rubicon-gate-portal');
+    if (initialJob?.id) {
+      await updateJob(initialJob.id, { ...customerInfo, items, total });
+    } else {
+      await createJob({ ...customerInfo, items, total });
+    }
+    router.push('/portal');
   };
 
   return (
@@ -265,13 +282,12 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
           </div>
         </div>
 
-        <button 
-          onClick={handleSave} 
+        <button
+          onClick={handleSave}
           className="flex items-center justify-center gap-2 w-full bg-[#1D63B7] hover:bg-[#3AC2FE] text-white py-4 rounded-xl font-bold transition-all transform active:scale-95 shadow-lg"
         >
-          <Save size={20} /> Munka Mentése
-        </button>
-      </div>
+          <Save size={20} /> {initialJob ? 'Változtatások Mentése' : 'Munka Mentése'}
+        </button>      </div>
     </div>
   );
 }

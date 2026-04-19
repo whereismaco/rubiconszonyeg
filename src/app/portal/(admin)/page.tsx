@@ -62,7 +62,14 @@ export default async function DashboardPage() {
                   <td className="p-4 text-right font-bold text-[#181A2C]">
                     {job.total.toLocaleString('hu-HU')} Ft
                   </td>
-                  <td className="p-4 flex justify-center">
+                  <td className="p-4 flex justify-center gap-2">
+                    <a 
+                      href={`/portal/edit/${job.id}`}
+                      className="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors shadow-sm"
+                      title="Szerkesztés"
+                    >
+                      Szerkesztés
+                    </a>
                     {job.status !== 'Kiszállítva' ? (
                       <form action={
                         async () => {
@@ -72,7 +79,7 @@ export default async function DashboardPage() {
                       }>
                         <button 
                           type="submit" 
-                          TITLE="Következő lépés"
+                          title="Következő lépés"
                           className="flex items-center gap-1 bg-[#1D63B7] hover:bg-[#3AC2FE] text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors shadow-sm"
                         >
                           Léptetés
@@ -80,7 +87,7 @@ export default async function DashboardPage() {
                         </button>
                       </form>
                     ) : (
-                      <div className="flex items-center gap-1 text-green-600 font-medium text-sm">
+                      <div className="flex items-center gap-1 text-green-600 font-medium text-sm px-2 py-1.5">
                         <CheckCircle2 size={16} />
                         Kész
                       </div>
