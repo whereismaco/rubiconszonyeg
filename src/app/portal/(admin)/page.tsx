@@ -1,15 +1,8 @@
-import { getJobs, advanceJobStatus } from '@/lib/actions';
-import { MapPin, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { getJobs } from '@/lib/actions';
+import { MapPin } from 'lucide-react';
+import JobStatusEditor from '@/components/admin/JobStatusEditor';
 
 export const dynamic = 'force-dynamic';
-
-const statusColors: Record<string, string> = {
-  'Felvételre vár': 'bg-red-100 text-red-800 border-red-200',
-  'Beérkezett': 'bg-orange-100 text-orange-800 border-orange-200',
-  'Tisztítás alatt': 'bg-blue-100 text-blue-800 border-blue-200',
-  'Elkészült': 'bg-green-100 text-green-800 border-green-200',
-  'Kiszállítva': 'bg-gray-100 text-gray-800 border-gray-200',
-};
 
 export default async function DashboardPage() {
   const jobs = await getJobs();
@@ -31,7 +24,7 @@ export default async function DashboardPage() {
                 <th className="p-4">ID</th>
                 <th className="p-4">Név</th>
                 <th className="p-4">Cím</th>
-                <th className="p-4">Státusz</th>
+                <th className="p-4 w-56">Státusz</th>
                 <th className="p-4 text-right">Végösszeg</th>
                 <th className="p-4 text-center">Műveletek</th>
               </tr>
@@ -43,7 +36,7 @@ export default async function DashboardPage() {
                 </tr>
               )}
               {jobs.map((job: any) => (
-                <tr key={job.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={job.id} className="hover:bg-gray-50 transition-colors relative">
                   <td className="p-4 font-mono text-sm text-gray-500">#{job.id}</td>
                   <td className="p-4 font-medium text-[#181A2C]">{job.name}</td>
                   <td className="p-4">
@@ -54,10 +47,8 @@ export default async function DashboardPage() {
                       </a>
                     )}
                   </td>
-                  <td className="p-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[job.status] || 'bg-gray-100 text-gray-800'}`}>
-                      {job.status}
-                    </span>
+                  <td className="p-4 relative">
+                    <JobStatusEditor jobId={job.id} currentStatus={job.status} />
                   </td>
                   <td className="p-4 text-right font-bold text-[#181A2C]">
                     {job.total.toLocaleString('hu-HU')} Ft
@@ -70,28 +61,6 @@ export default async function DashboardPage() {
                     >
                       Szerkesztés
                     </a>
-                    {job.status !== 'Kiszállítva' ? (
-                      <form action={
-                        async () => {
-                          'use server';
-                          await advanceJobStatus(job.id);
-                        }
-                      }>
-                        <button 
-                          type="submit" 
-                          title="Következő lépés"
-                          className="flex items-center gap-1 bg-[#1D63B7] hover:bg-[#3AC2FE] text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors shadow-sm"
-                        >
-                          Léptetés
-                          <ChevronRight size={16} />
-                        </button>
-                      </form>
-                    ) : (
-                      <div className="flex items-center gap-1 text-green-600 font-medium text-sm px-2 py-1.5">
-                        <CheckCircle2 size={16} />
-                        Kész
-                      </div>
-                    )}
                   </td>
                 </tr>
               ))}

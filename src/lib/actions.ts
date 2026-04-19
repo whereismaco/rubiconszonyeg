@@ -73,6 +73,13 @@ export async function advanceJobStatus(id: number) {
   }
 }
 
+export async function updateJobStatus(id: number, newStatus: string) {
+  if (statusOrder.includes(newStatus)) {
+    db.prepare('UPDATE jobs SET status = ? WHERE id = ?').run(newStatus, id);
+    revalidatePath('/portal');
+  }
+}
+
 export async function createJob(data: any) {
   const stmt = db.prepare(`
     INSERT INTO jobs (name, address, map_link, status, total, notes, data_json)

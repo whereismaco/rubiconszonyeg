@@ -98,24 +98,31 @@ export default async function HomePage() {
 
       <main className="bg-[#F8F9FA]">
         {/* 1. HERO Section */}
-        <section className="relative pt-20 pb-32 overflow-hidden flex items-center min-h-[90vh]">
-          <div className="absolute inset-0 z-0">
-            <Image src={heroBgImage} alt="Szőnyegtisztítás" fill className="object-cover" priority />
+        <section className="relative overflow-hidden bg-[#181A2C]">
+          {/* Background Image Container - Half height on mobile, full on desktop */}
+          <div className="absolute top-0 left-0 w-full h-[60vh] md:h-full z-0">
+            <Image src={heroBgImage} alt="Szőnyegtisztítás" fill className="object-cover object-[80%_top] md:object-right" priority quality={100} unoptimized />
+            {/* Desktop Gradient: dark on left, transparent on right so Zoli is visible */}
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#181A2C]/90 via-[#181A2C]/50 to-transparent" />
+            {/* Mobile Gradient: left to right for h1/h2 readability */}
+            <div className="block md:hidden absolute inset-0 bg-gradient-to-r from-[#181A2C]/90 via-[#181A2C]/40 to-transparent" />
+            {/* Mobile Gradient: dark at the bottom blending into the solid background below */}
+            <div className="block md:hidden absolute inset-0 bg-gradient-to-t from-[#181A2C] via-transparent to-transparent" />
           </div>
 
-          <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-[35vh] pb-24 md:pt-32 md:pb-32 md:min-h-[90vh] flex flex-col justify-center">
             <div className="max-w-3xl">
-              <span className="inline-block py-1 px-3 rounded-full bg-[#3AC2FE]/20 text-[#3AC2FE] font-bold text-sm tracking-widest uppercase mb-6 border border-[#3AC2FE]/30">{heroBadge}</span>
-              <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4">
+              <span className="inline-block py-1 px-3 rounded-full bg-[#3AC2FE]/20 text-[#3AC2FE] font-bold text-sm tracking-widest uppercase mb-4 md:mb-6 border border-[#3AC2FE]/30">{heroBadge}</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4">
                 {heroTitle}
               </h1>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 md:mb-6">
                 {heroSubtitle}
               </h2>
-              <p className="text-xl md:text-2xl text-gray-300 font-light mb-10 leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light mb-10 leading-relaxed">
                 {heroParagraph}
               </p>              
-              <a href="#kapcsolat" className="inline-block bg-[#3AC2FE] hover:bg-white hover:text-[#1D63B7] text-white font-bold text-xl px-10 py-5 rounded-full transition-all shadow-[0_0_40px_rgba(58,194,254,0.4)] hover:shadow-xl mt-8">
+              <a href="#kapcsolat" className="inline-block bg-[#3AC2FE] hover:bg-white hover:text-[#1D63B7] text-white font-bold text-xl px-10 py-5 rounded-full transition-all shadow-[0_0_40px_rgba(58,194,254,0.4)] hover:shadow-xl md:mt-8">
                 {heroCta}
               </a>
             </div>
