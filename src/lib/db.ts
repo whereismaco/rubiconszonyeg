@@ -101,7 +101,8 @@ try {
         'Kárpittisztítás ülésekre': 12000,
         'Teljes belső kozmetika': 20000
       }
-    })]
+    })],
+    ['whitelisted_emails', JSON.stringify(['whereismaco@gmail.com'])]
   ];
 
   const stmt = db.prepare('INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)');

@@ -1,19 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { logout } from '@/lib/actions';
+import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 import { LayoutDashboard, Calculator, Settings, LogOut, Star, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
-    router.push('/portal/login');
+    await signOut({ callbackUrl: '/portal/login' });
   };
 
   const navItems = [
