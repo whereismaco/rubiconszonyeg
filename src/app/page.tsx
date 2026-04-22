@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { CheckCircle2, Droplets, Wind, Sparkles, MapPin, Phone, Mail } from 'lucide-react';
 import GoogleReviews from "@/components/GoogleReviews";
+import VideosCarousel from "@/components/VideosCarousel";
 
 export async function generateMetadata() {
   const settings = await getSettings();
@@ -56,6 +57,22 @@ export default async function HomePage() {
   const srv2Text = settings.service_2_text || 'Kanapék, fotelek és matracok professzionális kezelése. Eltávolítjuk a foltokat és a baktériumokat, hogy családja biztonságban pihenhessen. Matractisztításunk során a teljes mélységű higiéniára fókuszálunk.';
   const srv3Title = settings.service_3_title || 'Ózonos Fertőtlenítés';
   const srv3Text = settings.service_3_text || 'A legmodernebb megoldás a szagok és kórokozók ellen. Vegyszermentes, gyors és kíméletlen a baktériumokkal, penésszel és vírusokkal szemben. Ideális választás kisgyermekes családoknak és kisállattartóknak.';
+
+  // --- 4.5. VIDEÓK SZEKCIÓ ---
+  const videosTitle = settings.videos_title || 'Nézze meg munkáinkat akció közben';
+  const videosSubtitle = settings.videos_subtitle || 'Ismerje meg a folyamatot videóinkon keresztül.';
+  
+  const v1Title = settings.video_1_title || 'Facebook Poszt';
+  const v1Desc = settings.video_1_desc || 'Egy korábbi szőnyegünk...';
+  const v1Iframe = settings.video_1_iframe || '<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02vXPwHK1HUg2yxxh8m4XfysjddfhQnRxATkfvhHGshasdZpvM778KdjAwhRqvs4Bql%26id%3D100063469152945&show_text=true&width=500" width="500" height="978" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>';
+
+  const v2Title = settings.video_2_title || 'Első Reels Videónk';
+  const v2Desc = settings.video_2_desc || 'Így dolgozunk a műhelyben';
+  const v2Iframe = settings.video_2_iframe || '<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F801175599372582%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>';
+
+  const v3Title = settings.video_3_title || 'Második Reels Videónk';
+  const v3Desc = settings.video_3_desc || 'Még egy videó a tisztításról';
+  const v3Iframe = settings.video_3_iframe || '<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F993489449670381%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>';
 
   // --- 5. ÁRAK SZEKCIÓ ---
   const pricingTitle = settings.pricing_title || 'Átlátható árak, rejtett költségek nélkül';
@@ -171,9 +188,13 @@ export default async function HomePage() {
               <div className="text-xl text-gray-600 font-light leading-relaxed mb-8 whitespace-pre-wrap">
                 {aboutText}
               </div>
-              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 italic text-gray-500 font-medium">
-                <div className="w-12 h-12 bg-[#1D63B7] text-white rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">HZ</div>
-                 Biztonságos és vegyszermentes megoldások az Ön és családja egészségéért.
+              <div className="flex flex-wrap gap-4">
+                <a href="#kapcsolat" className="inline-block bg-[#1D63B7] hover:bg-[#3AC2FE] text-white font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl">
+                  Ajánlatkérés
+                </a>
+                <a href={`tel:${contactPhone.replace(/\s+/g, '')}`} className="inline-block bg-white hover:bg-gray-50 text-[#1D63B7] font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl border-2 border-[#1D63B7]">
+                  Hívjon most
+                </a>
               </div>
             </div>
           </div>
@@ -229,6 +250,21 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* 4.5. VIDEÓK SZEKCIÓ */}
+        <VideosCarousel
+          title={videosTitle}
+          subtitle={videosSubtitle}
+          v1Title={v1Title}
+          v1Desc={v1Desc}
+          v1Iframe={v1Iframe}
+          v2Title={v2Title}
+          v2Desc={v2Desc}
+          v2Iframe={v2Iframe}
+          v3Title={v3Title}
+          v3Desc={v3Desc}
+          v3Iframe={v3Iframe}
+        />
+
         {/* 5. ÁRAK SZEKCIÓ */}
         <section id="arak" className="py-24 bg-[#181A2C] text-white">
           <div className="max-w-5xl mx-auto px-6 text-center">
@@ -263,7 +299,7 @@ export default async function HomePage() {
         </section>
 
         {/* 6. KAPCSOLAT SZEKCIÓ */}
-        <section id="kapcsolat" className="py-24 bg-[#3AC2FE] relative overflow-hidden">
+        <section id="kapcsolat" className="py-24 bg-[#1D63B7] relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           <div className="max-w-6xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
             

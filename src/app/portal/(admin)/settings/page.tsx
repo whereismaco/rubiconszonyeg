@@ -188,6 +188,55 @@ export default async function SettingsPage() {
               </div>
             </div>
 
+            {/* Videók szöveg és linkek */}
+            <div className="space-y-4 bg-gray-50 p-4 rounded-xl border border-gray-200 md:col-span-2">
+              <h4 className="font-bold text-[#181A2C]">4.5 Videók Szekció</h4>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Cím</label>
+                <input type="text" name="videos_title" defaultValue={settings.videos_title || 'Nézze meg munkáinkat akció közben'} className="w-full border rounded-lg p-2 text-sm" />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Alcím</label>
+                <input type="text" name="videos_subtitle" defaultValue={settings.videos_subtitle || 'Ismerje meg a folyamatot videóinkon keresztül.'} className="w-full border rounded-lg p-2 text-sm" />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 border-t border-gray-200 pt-4">
+                {/* 1. Videó */}
+                <div className="space-y-2">
+                  <label className="block text-xs text-gray-500 font-bold">1. Videó Címe</label>
+                  <input type="text" name="video_1_title" defaultValue={settings.video_1_title || 'Facebook Poszt'} className="w-full border rounded-lg p-2 text-sm mb-2" />
+                  
+                  <label className="block text-xs text-gray-500 font-bold">1. Videó Leírása</label>
+                  <textarea name="video_1_desc" defaultValue={settings.video_1_desc || 'Egy korábbi szőnyegünk...'} rows={2} className="w-full border rounded-lg p-2 text-sm"></textarea>
+                  
+                  <label className="block text-xs text-gray-500 font-bold">1. Iframe kód</label>
+                  <textarea name="video_1_iframe" defaultValue={settings.video_1_iframe || '<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02vXPwHK1HUg2yxxh8m4XfysjddfhQnRxATkfvhHGshasdZpvM778KdjAwhRqvs4Bql%26id%3D100063469152945&show_text=true&width=500" width="500" height="978" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'} rows={4} className="w-full border rounded-lg p-2 text-sm font-mono"></textarea>
+                </div>
+                {/* 2. Videó */}
+                <div className="space-y-2">
+                  <label className="block text-xs text-gray-500 font-bold">2. Videó Címe</label>
+                  <input type="text" name="video_2_title" defaultValue={settings.video_2_title || 'Első Reels Videónk'} className="w-full border rounded-lg p-2 text-sm mb-2" />
+                  
+                  <label className="block text-xs text-gray-500 font-bold">2. Videó Leírása</label>
+                  <textarea name="video_2_desc" defaultValue={settings.video_2_desc || 'Így dolgozunk a műhelyben'} rows={2} className="w-full border rounded-lg p-2 text-sm"></textarea>
+                  
+                  <label className="block text-xs text-gray-500 font-bold">2. Iframe kód</label>
+                  <textarea name="video_2_iframe" defaultValue={settings.video_2_iframe || '<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F801175599372582%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>'} rows={4} className="w-full border rounded-lg p-2 text-sm font-mono"></textarea>
+                </div>
+                {/* 3. Videó */}
+                <div className="space-y-2">
+                  <label className="block text-xs text-gray-500 font-bold">3. Videó Címe</label>
+                  <input type="text" name="video_3_title" defaultValue={settings.video_3_title || 'Második Reels Videónk'} className="w-full border rounded-lg p-2 text-sm mb-2" />
+                  
+                  <label className="block text-xs text-gray-500 font-bold">3. Videó Leírása</label>
+                  <textarea name="video_3_desc" defaultValue={settings.video_3_desc || 'Még egy videó a tisztításról'} rows={2} className="w-full border rounded-lg p-2 text-sm"></textarea>
+                  
+                  <label className="block text-xs text-gray-500 font-bold">3. Iframe kód</label>
+                  <textarea name="video_3_iframe" defaultValue={settings.video_3_iframe || '<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F993489449670381%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>'} rows={4} className="w-full border rounded-lg p-2 text-sm font-mono"></textarea>
+                </div>
+              </div>
+            </div>
+
             {/* Árak szöveg */}
             <div className="space-y-4 bg-gray-50 p-4 rounded-xl border border-gray-200">
               <h4 className="font-bold text-[#181A2C]">5. Árak Szekció Szövegei</h4>
