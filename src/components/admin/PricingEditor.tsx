@@ -142,16 +142,16 @@ function ListEditor({ title, data, onChange }: { title: string, data: string[], 
   );
 }
 
-export default function PricingEditor({ 
-  initialRug, 
-  initialUph, 
-  initialCar 
-}: { 
-  initialRug: any, 
-  initialUph: any, 
-  initialCar: any 
+export default function PricingEditor({
+  initialRug,
+  initialUph,
+  initialCar
+}: {
+  initialRug: any,
+  initialUph: any,
+  initialCar: any
 }) {
-  const [rug, setRug] = useState(initialRug || { types: {}, materials: [], conditions: {}, extras: {} });
+  const [rug, setRug] = useState(initialRug || { types: {}, materials: {}, conditions: {}, extras: {} });
   const [uph, setUph] = useState(initialUph || { types: {}, options: {} });
   const [car, setCar] = useState(initialCar || { categories: {}, packages: {} });
 
@@ -171,10 +171,9 @@ export default function PricingEditor({
           <DictEditor title="Típusok (Alapár)" data={rug.types} onChange={d => setRug({...rug, types: d})} unit="Ft/m²" />
           <DictEditor title="Szennyeződés (Állapot felár)" data={rug.conditions} onChange={d => setRug({...rug, conditions: d})} unit="Ft/m²" />
           <DictEditor title="Extrák (Opcionális felár)" data={rug.extras} onChange={d => setRug({...rug, extras: d})} unit="Ft/m²" />
-          <ListEditor title="Választható Anyagok (Csak lista)" data={rug.materials} onChange={d => setRug({...rug, materials: d})} />
+          <DictEditor title="Anyagok (Felár)" data={rug.materials || {}} onChange={d => setRug({...rug, materials: d})} unit="Ft/m²" />
         </div>
       </div>
-
       {/* Upholstery Pricing */}
       <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200">
         <h4 className="text-xl font-black text-[#1D63B7] mb-6 flex items-center gap-2">

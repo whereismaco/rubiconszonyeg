@@ -5,6 +5,7 @@ import { Pencil, Check, X } from 'lucide-react';
 import { updateJobStatus } from '@/lib/actions';
 
 const statuses = [
+  'Ajánlatra vár',
   'Felvételre vár',
   'Beérkezett',
   'Tisztítás alatt',

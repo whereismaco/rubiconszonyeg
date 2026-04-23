@@ -23,9 +23,10 @@ export default async function HomePage() {
     await createJob({
       name: formData.get('name') as string,
       address: formData.get('address') as string,
-      notes: `Telefonos elérhetőség: ${formData.get('phone')}\nSzolgáltatás: ${formData.get('service_type')}\nMegjegyzés (Méret/Darab): ${formData.get('message')}`,
+      notes: `Telefonos elérhetőség: ${formData.get('phone')}\nSzolgáltatás: ${formData.get('service_type')}\nMegjegyzés / Részletek:\n${formData.get('message')}`,
+      status: 'Ajánlatra vár',
       items: [],
-      total: 0
+      total: Number(formData.get('total') || 0)
     });
     redirect('/?success=1#kapcsolat');
   }
@@ -82,6 +83,7 @@ export default async function HomePage() {
 
   const pricingRug = settings.pricing_rug || { types: {} };
   const pricingUph = settings.pricing_upholstery || { types: {} };
+  const pricingCar = settings.pricing_car || { categories: {}, packages: {} };
 
   // --- 6. KAPCSOLAT SZEKCIÓ ---
   const contactTitle = settings.contact_title || 'Kérjen ajánlatot most, és szabaduljon meg a takarítás gondjától!';
@@ -330,7 +332,13 @@ export default async function HomePage() {
             </div>
 
             <div className="lg:col-span-3 bg-white rounded-[40px] p-8 md:p-12 shadow-2xl">
-              <QuoteForm action={handleContact} buttonText={contactCta} />
+              <QuoteForm 
+                action={handleContact} 
+                buttonText={contactCta} 
+                pricingRug={pricingRug}
+                pricingUph={pricingUph}
+                pricingCar={pricingCar}
+              />
             </div>
 
           </div>

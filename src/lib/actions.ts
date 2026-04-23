@@ -81,22 +81,23 @@ export async function updateJobStatus(id: number, newStatus: string) {
 }
 
 export async function createJob(data: any) {
+  const status = data.status || 'Felvételre vár';
   const stmt = db.prepare(`
     INSERT INTO jobs (name, address, map_link, status, total, notes, data_json)
-    VALUES (?, ?, ?, 'Felvételre vár', ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
-  
+
   stmt.run(
     data.name,
     data.address,
     `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
+    status,
     data.total,
     data.notes,
     JSON.stringify(data.items)
   );
-  
-  revalidatePath('/portal');
-}
+
+  revalidatePath('/portal');}
 
 export async function getSettings() {
   const rows = db.prepare('SELECT * FROM settings').all() as {key: string, value: string}[];

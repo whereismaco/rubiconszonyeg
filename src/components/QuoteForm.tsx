@@ -1,14 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Plus, Trash2, Calculator, CheckSquare, Square } from "lucide-react";
 
 interface QuoteFormProps {
   action: (formData: FormData) => void;
   buttonText: string;
+  pricingRug: any;
+  pricingUph: any;
+  pricingCar: any;
 }
 
-export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
+export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, pricingCar }: QuoteFormProps) {
   const [services, setServices] = useState({
     rug: false,
     upholstery: false,
@@ -18,18 +21,27 @@ export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
   const [advancedMode, setAdvancedMode] = useState(false);
   const [simpleMessage, setSimpleMessage] = useState("");
 
+  // Dynamic Options
+  const rugTypes = Object.keys(pricingRug?.types || {});
+  const rugMaterials = Object.keys(pricingRug?.materials || {});
+  const rugConditions = Object.keys(pricingRug?.conditions || {});
+  const rugExtras = Object.keys(pricingRug?.extras || {});
+
+  const uphTypes = Object.keys(pricingUph?.types || {});
+  const carSizes = Object.keys(pricingCar?.categories || {});
+
   // Advanced mode state
-  const [rugs, setRugs] = useState<{ w: string; l: string }[]>([]);
+  const [rugs, setRugs] = useState<{ w: string; l: string; thickness: string; dirtiness: string; material: string; extras: string[] }[]>([]);
   const [upholsteries, setUpholsteries] = useState<{ type: string; desc: string }[]>([]);
   const [cars, setCars] = useState<{ size: string; type: string }[]>([]);
 
-  const addRug = () => setRugs([...rugs, { w: "", l: "" }]);
+  const addRug = () => setRugs([...rugs, { w: "", l: "", thickness: rugTypes[0] || "Normál", dirtiness: rugConditions[0] || "Normál", material: rugMaterials[0] || "Szintetikus", extras: [] }]);
   const removeRug = (idx: number) => setRugs(rugs.filter((_, i) => i !== idx));
 
-  const addUph = () => setUpholsteries([...upholsteries, { type: "Kanapé", desc: "" }]);
+  const addUph = () => setUpholsteries([...upholsteries, { type: uphTypes[0] || "Kanapé", desc: "" }]);
   const removeUph = (idx: number) => setUpholsteries(upholsteries.filter((_, i) => i !== idx));
 
-  const addCar = () => setCars([...cars, { size: "Közepes", type: "" }]);
+  const addCar = () => setCars([...cars, { size: carSizes[0] || "Közepes", type: "" }]);
   const removeCar = (idx: number) => setCars(cars.filter((_, i) => i !== idx));
 
   const generatedServiceType = [
@@ -40,48 +52,86 @@ export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
     .filter(Boolean)
     .join(", ") || "Nincs megadva szolgáltatás";
 
-  const generatedMessage = () => {
+  const { message: generatedMessage, total: estimatedTotal } = useMemo(() => {
+    let total = 0;
+
     if (!advancedMode) {
       let result = simpleMessage;
       if (simpleMessage.trim() === "") {
         result = "Nincs megadva további információ.";
       }
-      return result;
+      return { message: result, total: 0 };
     }
 
     let msg = "";
     if (services.rug && rugs.length > 0) {
       msg += "--- Szőnyegek ---\n";
       let totalArea = 0;
+      let rugsTotal = 0;
       rugs.forEach((r, i) => {
         const w = parseFloat(r.w.replace(',', '.')) || 0;
         const l = parseFloat(r.l.replace(',', '.')) || 0;
-        const area = w * l;
+        let area = w * l;
+        if (area > 0 && area < 1) area = 1; // minimum 1 nm
         totalArea += area;
-        msg += `${i + 1}. Szőnyeg: ${w} m x ${l} m = ${area.toFixed(2)} m²\n`;
+
+        let basePrice = Number(pricingRug?.types?.[r.thickness]) || 0;
+        let matPrice = Number(pricingRug?.materials?.[r.material]) || 0;
+        let condPrice = Number(pricingRug?.conditions?.[r.dirtiness]) || 0;
+        let extrasPrice = r.extras.reduce((sum, ext) => sum + (Number(pricingRug?.extras?.[ext]) || 0), 0);
+
+        let rugPrice = area * (basePrice + matPrice + condPrice + extrasPrice);
+        if (isNaN(rugPrice)) rugPrice = 0;
+        
+        rugsTotal += rugPrice;
+        total += rugPrice;
+
+        msg += `${i + 1}. Szőnyeg: ${w} m x ${l} m = ${area.toFixed(2)} m² (Becsült ár: ~${rugPrice.toLocaleString('hu-HU')} Ft)\n`;
+        msg += `   Vastagság: ${r.thickness} | Anyag: ${r.material} | Szennyeződés: ${r.dirtiness}\n`;
+        if (r.extras.length > 0) {
+          msg += `   Extrák: ${r.extras.join(', ')}\n`;
+        }
       });
-      msg += `Összes Szőnyeg: ${totalArea.toFixed(2)} m²\n\n`;
+      msg += `\nÖsszes Szőnyeg: ${totalArea.toFixed(2)} m² (Összesen kb. ${rugsTotal.toLocaleString('hu-HU')} Ft)\n\n`;
     }
 
     if (services.upholstery && upholsteries.length > 0) {
       msg += "--- Kárpitok ---\n";
+      let uphTotal = 0;
       upholsteries.forEach((u, i) => {
-        msg += `${i + 1}. ${u.type}${u.desc ? ` - Részletek: ${u.desc}` : ""}\n`;
+        let uPrice = Number(pricingUph?.types?.[u.type]) || 0;
+        if (isNaN(uPrice)) uPrice = 0;
+        
+        uphTotal += uPrice;
+        total += uPrice;
+        msg += `${i + 1}. ${u.type}${u.desc ? ` - Részletek: ${u.desc}` : ""} (Becsült ár: ~${uPrice.toLocaleString('hu-HU')} Ft)\n`;
       });
-      msg += "\n";
+      msg += `\nÖsszes Kárpit kb. ${uphTotal.toLocaleString('hu-HU')} Ft\n\n`;
     }
 
     if (services.car && cars.length > 0) {
       msg += "--- Autók ---\n";
+      let carsTotal = 0;
       cars.forEach((c, i) => {
-        msg += `${i + 1}. ${c.size} méretű autó${c.type ? ` - ${c.type}` : ""}\n`;
+        let cPrice = Number(pricingCar?.categories?.[c.size]) || 0;
+        if (isNaN(cPrice)) cPrice = 0;
+        
+        carsTotal += cPrice;
+        total += cPrice;
+        msg += `${i + 1}. ${c.size} méretű autó${c.type ? ` - ${c.type}` : ""} (Becsült ár: ~${cPrice.toLocaleString('hu-HU')} Ft)\n`;
       });
-      msg += "\n";
+      msg += `\nÖsszes Autó kb. ${carsTotal.toLocaleString('hu-HU')} Ft\n\n`;
+    }
+
+    if (total > 0 && !isNaN(total)) {
+      msg += `==========================\nTeljes Becsült Végösszeg: ~${total.toLocaleString('hu-HU')} Ft\n==========================`;
+    } else {
+      total = 0;
     }
 
     const finalMsg = msg.trim();
-    return finalMsg ? finalMsg : "Haladó mód lett kiválasztva, de nem lett tétel hozzáadva.";
-  };
+    return { message: finalMsg ? finalMsg : "Haladó mód lett kiválasztva, de nem lett tétel hozzáadva.", total };
+  }, [advancedMode, simpleMessage, services, rugs, upholsteries, cars, pricingRug, pricingUph, pricingCar]);
 
   const handleServiceToggle = (key: keyof typeof services) => {
     setServices((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -91,7 +141,8 @@ export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
     <form action={action} className="space-y-8">
       {/* Hidden inputs for Server Action */}
       <input type="hidden" name="service_type" value={generatedServiceType} />
-      <input type="hidden" name="message" value={generatedMessage()} />
+      <input type="hidden" name="message" value={generatedMessage} />
+      <input type="hidden" name="total" value={estimatedTotal || 0} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -115,25 +166,22 @@ export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
           {/* Rug Checkbox */}
           <div 
             onClick={() => handleServiceToggle('rug')}
-            className={`cursor-pointer flex items-center gap-3 p-4 rounded-2xl border-2 h-full transition-all ${services.rug ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
+            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.rug ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
           >
-            {services.rug ? <CheckSquare className="text-[#3AC2FE] flex-shrink-0" /> : <Square className="text-gray-400 flex-shrink-0" />}
             <span className="font-bold text-sm text-[#181A2C] leading-tight">Szőnyegtisztítás</span>
           </div>
           {/* Upholstery Checkbox */}
           <div 
             onClick={() => handleServiceToggle('upholstery')}
-            className={`cursor-pointer flex items-center gap-3 p-4 rounded-2xl border-2 h-full transition-all ${services.upholstery ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
+            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.upholstery ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
           >
-            {services.upholstery ? <CheckSquare className="text-[#3AC2FE] flex-shrink-0" /> : <Square className="text-gray-400 flex-shrink-0" />}
             <span className="font-bold text-sm text-[#181A2C] leading-tight">Kárpittisztítás</span>
           </div>
           {/* Car Checkbox */}
           <div 
             onClick={() => handleServiceToggle('car')}
-            className={`cursor-pointer flex items-center gap-3 p-4 rounded-2xl border-2 h-full transition-all ${services.car ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
+            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.car ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
           >
-            {services.car ? <CheckSquare className="text-[#3AC2FE] flex-shrink-0" /> : <Square className="text-gray-400 flex-shrink-0" />}
             <span className="font-bold text-sm text-[#181A2C] leading-tight">Autókozmetika</span>
           </div>
         </div>
@@ -167,22 +215,69 @@ export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
               <div className="space-y-4">
                 <h5 className="font-bold text-[#1D63B7] border-b border-gray-200 pb-2">Szőnyegek hozzáadása</h5>
                 {rugs.map((rug, idx) => (
-                  <div key={idx} className="flex flex-wrap md:flex-nowrap items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
-                    <div className="flex-1">
-                      <label className="block text-xs text-gray-500 mb-1">Szélesség (m)</label>
-                      <input type="number" step="0.01" value={rug.w} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].w = e.target.value; setRugs(newRugs); }} placeholder="Pl: 1.5" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                  <div key={idx} className="flex flex-col gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <div className="flex flex-wrap md:flex-nowrap items-center gap-4">
+                      <div className="flex-1">
+                        <label className="block text-xs text-gray-500 mb-1">Szélesség (m)</label>
+                        <input type="number" step="0.01" value={rug.w} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].w = e.target.value; setRugs(newRugs); }} placeholder="Pl: 1.5" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                      </div>
+                      <span className="text-gray-400 font-bold mt-4">X</span>
+                      <div className="flex-1">
+                        <label className="block text-xs text-gray-500 mb-1">Hosszúság (m)</label>
+                        <input type="number" step="0.01" value={rug.l} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].l = e.target.value; setRugs(newRugs); }} placeholder="Pl: 2.0" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                      </div>
+                      <div className="w-full md:w-32 bg-[#3AC2FE]/10 text-[#1D63B7] rounded-lg px-3 py-2 text-center font-bold mt-4 md:mt-0">
+                        {((parseFloat(rug.w) || 0) * (parseFloat(rug.l) || 0)).toFixed(2)} m²
+                      </div>
+                      <button type="button" onClick={() => removeRug(idx)} className="mt-4 md:mt-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                        <Trash2 size={20} />
+                      </button>
                     </div>
-                    <span className="text-gray-400 font-bold mt-4">X</span>
-                    <div className="flex-1">
-                      <label className="block text-xs text-gray-500 mb-1">Hosszúság (m)</label>
-                      <input type="number" step="0.01" value={rug.l} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].l = e.target.value; setRugs(newRugs); }} placeholder="Pl: 2.0" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-gray-50">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Vastagság</label>
+                        <select value={rug.thickness} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].thickness = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                          {rugTypes.map(t => <option key={t} value={t}>{t}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Szőnyeg Anyaga</label>
+                        <select value={rug.material} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].material = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                          {rugMaterials.map(m => <option key={m} value={m}>{m}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Szennyeződés Mértéke</label>
+                        <select value={rug.dirtiness} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].dirtiness = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                          {rugConditions.map(c => <option key={c} value={c}>{c}</option>)}
+                        </select>
+                      </div>
                     </div>
-                    <div className="w-full md:w-32 bg-[#3AC2FE]/10 text-[#1D63B7] rounded-lg px-3 py-2 text-center font-bold mt-4 md:mt-0">
-                      {((parseFloat(rug.w) || 0) * (parseFloat(rug.l) || 0)).toFixed(2)} m²
+
+                    <div className="pt-2">
+                      <label className="block text-xs text-gray-500 mb-2">Extrák (Több is választható)</label>
+                      <div className="flex flex-wrap gap-2">
+                        {rugExtras.map((extra) => (
+                          <div 
+                            key={extra}
+                            onClick={() => {
+                              const newRugs = [...rugs];
+                              if (newRugs[idx].extras.includes(extra)) {
+                                newRugs[idx].extras = newRugs[idx].extras.filter(e => e !== extra);
+                              } else {
+                                newRugs[idx].extras.push(extra);
+                              }
+                              setRugs(newRugs);
+                            }}
+                            className={`cursor-pointer px-3 py-1.5 rounded-lg border text-sm font-medium transition-all ${rug.extras.includes(extra) ? 'bg-[#3AC2FE] border-[#3AC2FE] text-[#1D63B7] font-bold' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+                          >
+                            {extra}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <button type="button" onClick={() => removeRug(idx)} className="mt-4 md:mt-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                      <Trash2 size={20} />
-                    </button>
+
                   </div>
                 ))}
                 <button type="button" onClick={addRug} className="flex items-center gap-2 text-sm font-bold text-[#1D63B7] hover:text-[#3AC2FE] transition-colors">
@@ -200,11 +295,7 @@ export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
                     <div className="w-full md:w-1/3">
                       <label className="block text-xs text-gray-500 mb-1">Típus</label>
                       <select value={uph.type} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].type = e.target.value; setUpholsteries(newUph); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]">
-                        <option>Kanapé</option>
-                        <option>Fotel</option>
-                        <option>Matrac</option>
-                        <option>Szék</option>
-                        <option>Egyéb</option>
+                        {uphTypes.map(t => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </div>
                     <div className="flex-1">
@@ -231,9 +322,7 @@ export default function QuoteForm({ action, buttonText }: QuoteFormProps) {
                     <div className="w-full md:w-1/3">
                       <label className="block text-xs text-gray-500 mb-1">Autó Mérete</label>
                       <select value={car.size} onChange={(e) => { const newCars = [...cars]; newCars[idx].size = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]">
-                        <option>Kisméretű</option>
-                        <option>Közepes</option>
-                        <option>Nagyméretű (SUV/Egyterű)</option>
+                        {carSizes.map(s => <option key={s} value={s}>{s}</option>)}
                       </select>
                     </div>
                     <div className="flex-1">
