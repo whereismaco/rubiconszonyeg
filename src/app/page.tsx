@@ -108,11 +108,12 @@ export default async function HomePage() {
             </div>
           </Link>
           <nav className="hidden md:flex gap-8 items-center">
-            <Link href="#szolgaltatasok" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Szolgáltatások</Link>
-            <Link href="#arak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Árak</Link>
             <Link href="#velemenyek" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Vélemények</Link>
+            <Link href="#rolunk" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Rólunk</Link>
+            <Link href="#szolgaltatasok" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Szolgáltatásaink</Link>
+            <Link href="#arak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Árak</Link>
             <a href="#kapcsolat" className="bg-[#1D63B7] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#3AC2FE] transition-all transform hover:scale-105 shadow-md">
-              {heroCta}
+              Ajánlatkérés
             </a>
           </nav>
         </div>
@@ -181,7 +182,7 @@ export default async function HomePage() {
         </div>
 
         {/* 3. RÓLUNK SZEKCIÓ */}
-        <section className="py-24 bg-white relative">
+        <section id="rolunk" className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <Image src={aboutImage} alt="Mélytisztítás hatása" width={800} height={800} className="w-full h-auto" />
@@ -346,7 +347,9 @@ export default async function HomePage() {
           <div>
             <h4 className="text-white font-bold text-xl mb-4">Navigáció</h4>
             <ul className="space-y-2">
-              <li><Link href="#szolgaltatasok" className="hover:text-white transition-colors">Szolgáltatások</Link></li>
+              <li><Link href="#velemenyek" className="hover:text-white transition-colors">Vélemények</Link></li>
+              <li><Link href="#rolunk" className="hover:text-white transition-colors">Rólunk</Link></li>
+              <li><Link href="#szolgaltatasok" className="hover:text-white transition-colors">Szolgáltatásaink</Link></li>
               <li><Link href="#arak" className="hover:text-white transition-colors">Árak</Link></li>
               <li><Link href="/portal" className="hover:text-white transition-colors text-gray-600">Admin Portál</Link></li>
             </ul>

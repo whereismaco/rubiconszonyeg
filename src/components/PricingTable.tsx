@@ -111,25 +111,25 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
       {/* --- KÁRPIT TÁBLÁZAT --- */}
       {activeTab === 'uph' && (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8">
             <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
               <h4 className="text-xl font-bold text-[#3AC2FE] mb-6">Bútortípusok Árai</h4>
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {Object.entries(pricingUph?.types || {}).map(([name, price]) => (
-                  <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium">{name}</span>
-                    <span className="text-xl font-black text-white">{formatPrice(price)} Ft <span className="text-xs text-gray-400">/db-tól</span></span>
+                  <div key={name} className="bg-white/5 p-4 rounded-xl border border-white/5 flex flex-col">
+                    <span className="text-sm text-gray-400 mb-1">{name}</span>
+                    <span className="text-lg font-black text-white">{formatPrice(price)} Ft <span className="text-xs text-gray-400">/db-tól</span></span>
                   </div>
                 ))}
               </div>
             </div>
             <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
               <h4 className="text-xl font-bold text-[#3AC2FE] mb-6">Választható Extrák</h4>
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {Object.entries(pricingUph?.options || {}).map(([name, price]) => (
-                  <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium">{name}</span>
-                    <span className="text-xl font-black text-white">+{formatPrice(price)} Ft</span>
+                  <div key={name} className="bg-white/5 p-4 rounded-xl border border-white/5 flex flex-col">
+                    <span className="text-sm text-gray-400 mb-1">{name}</span>
+                    <span className="text-lg font-black text-white">+{formatPrice(price)} Ft</span>
                   </div>
                 ))}
               </div>
