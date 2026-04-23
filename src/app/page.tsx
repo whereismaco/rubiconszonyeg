@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { CheckCircle2, Sparkles, MapPin, Phone, Mail, Sofa, CarFront } from 'lucide-react';
 import GoogleReviews from "@/components/GoogleReviews";
 import VideosCarousel from "@/components/VideosCarousel";
+import QuoteForm from "@/components/QuoteForm";
 
 export async function generateMetadata() {
   const settings = await getSettings();
@@ -329,38 +330,7 @@ export default async function HomePage() {
             </div>
 
             <div className="lg:col-span-3 bg-white rounded-[40px] p-8 md:p-12 shadow-2xl">
-              <form action={handleContact} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Teljes Név</label>
-                    <input type="text" name="name" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="Példa János" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Telefonszám</label>
-                    <input type="tel" name="phone" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="+36 30 123 4567" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Település és utca</label>
-                  <input type="text" name="address" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="2030 Érd, Fő utca 12." />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Szolgáltatás típusa</label>
-                  <select name="service_type" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all">
-                    <option value="Szőnyegtisztítás">Szőnyegtisztítás</option>
-                    <option value="Kárpittisztítás">Kárpittisztítás</option>
-                    <option value="Ózonos Fertőtlenítés">Ózonos Fertőtlenítés</option>
-                    <option value="Több szolgáltatás is">Több szolgáltatás is</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Becsült méret vagy darabszám (Opcionális)</label>
-                  <textarea name="message" rows={2} className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="Pl: 2 darab közepes szőnyeg..."></textarea>
-                </div>
-                <button type="submit" className="w-full bg-[#181A2C] hover:bg-[#1D63B7] text-white font-bold text-xl py-5 rounded-2xl transition-all shadow-[0_20px_40px_rgba(24,26,44,0.3)] hover:shadow-[0_20px_40px_rgba(29,99,183,0.4)]">
-                  {contactCta}
-                </button>
-              </form>
+              <QuoteForm action={handleContact} buttonText={contactCta} />
             </div>
 
           </div>
