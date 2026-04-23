@@ -2,7 +2,7 @@ import { getSettings, createJob } from '@/lib/actions';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CheckCircle2, Droplets, Wind, Sparkles, MapPin, Phone, Mail } from 'lucide-react';
+import { CheckCircle2, Sparkles, MapPin, Phone, Mail, Sofa, CarFront } from 'lucide-react';
 import GoogleReviews from "@/components/GoogleReviews";
 import VideosCarousel from "@/components/VideosCarousel";
 
@@ -209,43 +209,48 @@ export default async function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
-                <div className="relative h-64 w-full overflow-hidden">
-                  <Image src="/images/service_rug_1776259429432.png" alt={srv1Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="relative aspect-square w-full overflow-hidden">
+                  <Image src="/images/rubicon_szonyegtisztitas_szolgaltatas.webp" alt={srv1Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <div className="p-8 flex-1">
-                  <div className="w-14 h-14 bg-[#1D63B7]/10 text-[#1D63B7] rounded-2xl mb-6 flex items-center justify-center">
-                    <Droplets size={28} />
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-14 h-14 bg-[#1D63B7]/10 text-[#1D63B7] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                      <Sparkles size={28} />
+                    </div>
+                    <h4 className="text-2xl font-bold text-[#181A2C]">{srv1Title}</h4>
                   </div>
-                  <h4 className="text-2xl font-bold text-[#181A2C] mb-4">{srv1Title}</h4>
                   <p className="text-gray-600 leading-relaxed font-light">{srv1Text}</p>
                 </div>
-              </div>
-              
-              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
-                <div className="relative h-64 w-full overflow-hidden">
-                  <Image src="/images/service_uph_1776259445038.png" alt={srv2Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                </div>
+
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
+                <div className="relative aspect-square w-full overflow-hidden">
+                  <Image src="/images/rubicon_karpittisztitas_szolgaltatas.webp" alt={srv2Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <div className="p-8 flex-1">
-                  <div className="w-14 h-14 bg-[#3AC2FE]/10 text-[#3AC2FE] rounded-2xl mb-6 flex items-center justify-center">
-                    <Sparkles size={28} />
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-14 h-14 bg-[#3AC2FE]/10 text-[#3AC2FE] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                      <Sofa size={28} />
+                    </div>
+                    <h4 className="text-2xl font-bold text-[#181A2C]">{srv2Title}</h4>
                   </div>
-                  <h4 className="text-2xl font-bold text-[#181A2C] mb-4">{srv2Title}</h4>
                   <p className="text-gray-600 leading-relaxed font-light">{srv2Text}</p>
                 </div>
-              </div>
+                </div>
 
-              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
-                <div className="relative h-64 w-full overflow-hidden">
-                  <Image src="/images/service_ozone_1776259461131.png" alt={srv3Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
+                <div className="relative aspect-square w-full overflow-hidden">
+                  <Image src="/images/rubicon_autokozmetika_szolgaltatas.webp" alt={srv3Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <div className="p-8 flex-1">
-                  <div className="w-14 h-14 bg-[#181A2C]/10 text-[#181A2C] rounded-2xl mb-6 flex items-center justify-center">
-                    <Wind size={28} />
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-14 h-14 bg-[#181A2C]/10 text-[#181A2C] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                      <CarFront size={28} />
+                    </div>
+                    <h4 className="text-2xl font-bold text-[#181A2C]">{srv3Title}</h4>
                   </div>
-                  <h4 className="text-2xl font-bold text-[#181A2C] mb-4">{srv3Title}</h4>
                   <p className="text-gray-600 leading-relaxed font-light">{srv3Text}</p>
-                </div>
-              </div>
+                </div>              </div>
             </div>
           </div>
         </section>

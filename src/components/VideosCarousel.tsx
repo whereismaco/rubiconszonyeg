@@ -68,19 +68,10 @@ export default function VideosCarousel({
           <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">{subtitle}</p>
         </div>
 
-        <div className="relative group">
-          {/* Bal nyíl */}
-          <button
-            onClick={() => scroll("left")}
-            className="md:hidden absolute -left-3 top-1/2 -translate-y-1/2 z-10 bg-white text-[#1D63B7] w-12 h-12 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#1D63B7] hover:text-white hover:scale-110"
-            aria-label="Előző videó"
-          >
-            <ChevronLeft className="w-6 h-6" strokeWidth={2} />
-          </button>
-
+        <div>
           <div
             ref={scrollContainerRef}
-            className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible gap-6 md:gap-10 snap-x snap-mandatory pb-8 pt-4 px-2 md:px-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+            className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible gap-6 md:gap-10 snap-x snap-mandatory pb-4 pt-4 px-2 md:px-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
           >
             <div className="shrink-0 w-[85vw] md:w-auto snap-center bg-gray-50 rounded-3xl overflow-hidden shadow-lg flex flex-col">
               <div className="p-6 text-center flex-1">
@@ -107,14 +98,23 @@ export default function VideosCarousel({
             </div>
           </div>
 
-          {/* Jobb nyíl */}
-          <button
-            onClick={() => scroll("right")}
-            className="md:hidden absolute -right-3 top-1/2 -translate-y-1/2 z-10 bg-white text-[#1D63B7] w-12 h-12 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#1D63B7] hover:text-white hover:scale-110"
-            aria-label="Következő videó"
-          >
-            <ChevronRight className="w-6 h-6" strokeWidth={2} />
-          </button>
+          {/* Mobilos lapozógombok a videók alatt */}
+          <div className="flex md:hidden justify-center gap-6 mt-8">
+            <button
+              onClick={() => scroll("left")}
+              className="bg-[#1D63B7] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none hover:bg-[#3AC2FE] hover:scale-110 active:scale-95"
+              aria-label="Előző videó"
+            >
+              <ChevronLeft className="w-8 h-8 pr-1" strokeWidth={2.5} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="bg-[#1D63B7] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none hover:bg-[#3AC2FE] hover:scale-110 active:scale-95"
+              aria-label="Következő videó"
+            >
+              <ChevronRight className="w-8 h-8 pl-1" strokeWidth={2.5} />
+            </button>
+          </div>
         </div>
       </div>
     </section>
