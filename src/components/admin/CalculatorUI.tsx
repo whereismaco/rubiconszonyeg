@@ -30,7 +30,12 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   // Item Forms State
   const [rug, setRug] = useState({ type: 'Vékony', width: 100, length: 150, material: 'Pamut', condition: 'Enyhén', extras: [] as string[] });
   const [uph, setUph] = useState({ type: 'Fotel', quantity: 1, options: [] as string[] });
-  const [car, setCar] = useState({ category: 'Kicsi', package: 'Belső takarítás' });
+  const [car, setCar] = useState({ 
+    category: Object.keys(pricingCar.categories || {})[0] || '', 
+    package: Object.keys(pricingCar.packages || {})[0] || '', 
+    type: '', 
+    extras: [] as string[] 
+  });
 
   // Job Details
   const [customerInfo, setCustomerInfo] = useState({ 
@@ -65,9 +70,12 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   };
 
   const addCar = () => {
-    let cat = pricingCar.categories[car.category] || 0;
-    let pkg = pricingCar.packages[car.package] || 0;
-    let price = cat + pkg;
+    let pkgData = pricingCar.packages[car.package];
+    let pkgPrice = typeof pkgData === 'object' ? (pkgData.price || 0) : (Number(pkgData) || 0);
+    let catPrice = pricingCar.categories[car.category] || 0;
+    let exPrice = (car.extras || []).reduce((s, e) => s + (pricingCar.extras?.[e] || 0), 0);
+    
+    let price = pkgPrice + catPrice + exPrice;
     setItems([...items, { ...car, service: 'Autó', price }]);
   };
 
@@ -192,17 +200,37 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
             {/* CAR ENGINE */}
             {activeTab === 'car' && (
               <div className="space-y-4">
-                <div>
-                  <label className="block text-sm text-gray-500 mb-1">Kategória</label>
-                  <select className="w-full border rounded-lg p-2" value={car.category} onChange={e => setCar({...car, category: e.target.value})}>
-                    {pricingCar.categories && Object.keys(pricingCar.categories).map(k => <option key={k} value={k}>{k}</option>)}
-                  </select>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-gray-500 mb-1">Csomag (Alapár)</label>
+                    <select className="w-full border rounded-lg p-2" value={car.package} onChange={e => setCar({...car, package: e.target.value})}>
+                      {pricingCar.packages && Object.keys(pricingCar.packages).map(pkg => <option key={pkg} value={pkg}>{pkg}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-500 mb-1">Kategória (Felár)</label>
+                    <select className="w-full border rounded-lg p-2" value={car.category} onChange={e => setCar({...car, category: e.target.value})}>
+                      {pricingCar.categories && Object.keys(pricingCar.categories).map(k => <option key={k} value={k}>{k}</option>)}
+                    </select>
+                  </div>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-500 mb-1">Csomag</label>
-                  <select className="w-full border rounded-lg p-2" value={car.package} onChange={e => setCar({...car, package: e.target.value})}>
-                    {pricingCar.packages && Object.keys(pricingCar.packages).map(pkg => <option key={pkg} value={pkg}>{pkg}</option>)}
-                  </select>
+                  <label className="block text-sm text-gray-500 mb-1">Autó Típusa</label>
+                  <input type="text" className="w-full border rounded-lg p-2" placeholder="Pl: BMW X5" value={car.type} onChange={e => setCar({...car, type: e.target.value})} />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500 mb-2">Kiegészítő Extrák</label>
+                  <div className="flex flex-wrap gap-2">
+                    {pricingCar.extras && Object.keys(pricingCar.extras).map(ext => (
+                      <label key={ext} className={`flex items-center gap-2 border p-2 rounded-lg text-sm bg-gray-50 cursor-pointer transition-all ${car.extras.includes(ext) ? 'border-[#3AC2FE] bg-[#3AC2FE]/10 ring-1 ring-[#3AC2FE]' : ''}`}>
+                        <input type="checkbox" className="hidden" checked={car.extras.includes(ext)} onChange={e => {
+                          const ne = e.target.checked ? [...car.extras, ext] : car.extras.filter(x => x !== ext);
+                          setCar({...car, extras: ne});
+                        }} />
+                        {ext}
+                      </label>
+                    ))}
+                  </div>
                 </div>
                 <button onClick={addCar} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#3AC2FE] hover:bg-[#1D63B7] text-white py-3 rounded-xl font-medium transition-colors">
                   <Plus size={20} /> Autó hozzáadása

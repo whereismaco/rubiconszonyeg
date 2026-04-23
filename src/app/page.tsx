@@ -6,6 +6,7 @@ import { CheckCircle2, Sparkles, MapPin, Phone, Mail, Sofa, CarFront } from 'luc
 import GoogleReviews from "@/components/GoogleReviews";
 import VideosCarousel from "@/components/VideosCarousel";
 import QuoteForm from "@/components/QuoteForm";
+import PricingTable from "@/components/PricingTable";
 
 export async function generateMetadata() {
   const settings = await getSettings();
@@ -275,31 +276,17 @@ export default async function HomePage() {
 
         {/* 5. ÁRAK SZEKCIÓ */}
         <section id="arak" className="py-24 bg-[#181A2C] text-white">
-          <div className="max-w-5xl mx-auto px-6 text-center">
+          <div className="max-w-7xl mx-auto px-6 text-center">
             <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">{pricingTitle}</h3>
             <p className="text-xl text-gray-300 font-light mb-16 max-w-2xl mx-auto">{pricingBody}</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              <div className="p-6 rounded-2xl border border-gray-700 bg-white/5 hover:bg-white/10 transition-colors">
-                <h5 className="font-bold text-lg text-[#3AC2FE] mb-2">Normál szőnyegtisztítás</h5>
-                <p className="text-2xl font-black text-white">{(pricingRug.types?.['Vékony'] || 2100).toLocaleString('hu-HU')} Ft<span className="text-sm font-medium text-gray-400"> /m²-től</span></p>
-              </div>
-              <div className="p-6 rounded-2xl border border-[#3AC2FE] bg-[#3AC2FE]/10 relative transform lg:-translate-y-4 shadow-2xl shadow-[#3AC2FE]/20">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#3AC2FE] text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">Prémium</div>
-                <h5 className="font-bold text-lg text-white mb-2">Vastag / Shaggy</h5>
-                <p className="text-2xl font-black text-white">{(pricingRug.types?.['Vastag'] || 2600).toLocaleString('hu-HU')} Ft<span className="text-sm font-medium text-blue-200"> /m²-től</span></p>
-              </div>
-              <div className="p-6 rounded-2xl border border-gray-700 bg-white/5 hover:bg-white/10 transition-colors">
-                <h5 className="font-bold text-lg text-[#3AC2FE] mb-2">Matrac tisztítás</h5>
-                <p className="text-2xl font-black text-white">{(pricingUph.types?.['Matrac (90x200)'] || 12000).toLocaleString('hu-HU')} Ft<span className="text-sm font-medium text-gray-400">-tól</span></p>
-              </div>
-              <div className="p-6 rounded-2xl border border-gray-700 bg-white/5 hover:bg-white/10 transition-colors">
-                <h5 className="font-bold text-lg text-[#3AC2FE] mb-2">Fotel tisztítása</h5>
-                <p className="text-2xl font-black text-white">{(pricingUph.types?.['Fotel'] || 6000).toLocaleString('hu-HU')} Ft<span className="text-sm font-medium text-gray-400"> /db-tól</span></p>
-              </div>
-            </div>
+            <PricingTable 
+              pricingRug={pricingRug}
+              pricingUph={pricingUph}
+              pricingCar={pricingCar}
+            />
 
-            <div className="inline-flex items-center gap-3 bg-[#FEC500]/20 text-[#FEC500] px-6 py-3 rounded-full font-bold text-lg">
+            <div className="inline-flex items-center gap-3 bg-[#FEC500]/20 text-[#FEC500] px-6 py-3 rounded-full font-bold text-lg mt-16">
               <Sparkles size={20} />
               {pricingExtra}
             </div>

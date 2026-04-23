@@ -142,6 +142,115 @@ function ListEditor({ title, data, onChange }: { title: string, data: string[], 
   );
 }
 
+function PackageEditor({ title, data, onChange }: { title: string, data: Record<string, any>, onChange: (d: Record<string, any>) => void }) {
+  const [items, setItems] = useState<{id: string, name: string, price: number, description: string, services: string}[]>(() => {
+    return Object.entries(data || {}).map(([name, val]: [string, any]) => ({ 
+      id: Math.random().toString(), 
+      name, 
+      price: typeof val === 'object' ? (val.price || 0) : Number(val),
+      description: val.description || '',
+      services: val.services || ''
+    }));
+  });
+
+  const sync = (newItems: typeof items) => {
+    const obj: Record<string, any> = {};
+    newItems.forEach(item => {
+      if (item.name.trim() !== '') {
+        obj[item.name.trim()] = {
+          price: item.price,
+          description: item.description,
+          services: item.services
+        };
+      }
+    });
+    onChange(obj);
+  };
+
+  const update = (id: string, fields: Partial<(typeof items)[0]>) => {
+    const newItems = items.map(it => it.id === id ? { ...it, ...fields } : it);
+    setItems(newItems);
+    sync(newItems);
+  };
+
+  const remove = (id: string) => {
+    const newItems = items.filter(it => it.id !== id);
+    setItems(newItems);
+    sync(newItems);
+  };
+
+  const add = () => {
+    const newItems = [...items, { id: Math.random().toString(), name: 'Új Csomag', price: 0, description: '', services: '' }];
+    setItems(newItems);
+    sync(newItems);
+  };
+
+  return (
+    <div className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm md:col-span-2">
+      <div className="flex justify-between items-center mb-4">
+        <h5 className="font-bold text-[#181A2C] text-sm">{title}</h5>
+        <button type="button" onClick={add} className="text-xs bg-[#1D63B7] text-white px-3 py-1.5 rounded-lg hover:bg-[#3AC2FE] flex items-center gap-1 transition-colors font-medium">
+          <Plus size={14} /> Csomag Hozzáadása
+        </button>
+      </div>
+      <div className="space-y-4">
+        {items.map((item) => (
+          <div key={item.id} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3 group relative">
+            <div className="flex items-center gap-2">
+              <input 
+                type="text" 
+                value={item.name} 
+                onChange={e => update(item.id, { name: e.target.value })} 
+                className="flex-1 border border-gray-200 rounded-lg p-2 text-sm font-bold focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+                placeholder="Csomag neve (pl. Rubicon Prémium)"
+              />
+              <div className="flex items-center gap-2">
+                <input 
+                  type="number" 
+                  value={item.price} 
+                  onChange={e => update(item.id, { price: Number(e.target.value) })} 
+                  className="w-28 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+                />
+                <span className="text-sm text-gray-500 font-medium">Ft</span>
+              </div>
+              <button 
+                type="button" 
+                onClick={() => remove(item.id)} 
+                className="text-gray-300 hover:text-red-500 p-2 transition-colors"
+              >
+                <Trash size={18} />
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider text-gray-400 mb-1 font-bold">Rövid leírás</label>
+                <textarea 
+                  value={item.description} 
+                  onChange={e => update(item.id, { description: e.target.value })}
+                  className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:outline-none focus:border-[#3AC2FE]"
+                  rows={2}
+                  placeholder="Ez a szöveg jelenik meg a csomag alatt..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider text-gray-400 mb-1 font-bold">Szolgáltatások (vesszővel elválasztva)</label>
+                <textarea 
+                  value={item.services} 
+                  onChange={e => update(item.id, { services: e.target.value })}
+                  className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:outline-none focus:border-[#3AC2FE]"
+                  rows={2}
+                  placeholder="Kárpittisztítás, Vegyszeres mosás, Szárítás..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        ))}
+        {items.length === 0 && <p className="text-xs text-gray-400 italic text-center py-4">Nincsenek csomagok megadva.</p>}
+      </div>
+    </div>
+  );
+}
+
 export default function PricingEditor({
   initialRug,
   initialUph,
@@ -153,7 +262,7 @@ export default function PricingEditor({
 }) {
   const [rug, setRug] = useState(initialRug || { types: {}, materials: {}, conditions: {}, extras: {} });
   const [uph, setUph] = useState(initialUph || { types: {}, options: {} });
-  const [car, setCar] = useState(initialCar || { categories: {}, packages: {} });
+  const [car, setCar] = useState(initialCar || { categories: {}, packages: {}, extras: {} });
 
   return (
     <div className="space-y-10 w-full">
@@ -191,8 +300,9 @@ export default function PricingEditor({
           3. Autótisztítás Árak
         </h4>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <PackageEditor title="Tisztítási Csomagok (Alapár + Leírás)" data={car.packages} onChange={d => setCar({...car, packages: d})} />
           <DictEditor title="Autó Kategóriák (Méret felár)" data={car.categories} onChange={d => setCar({...car, categories: d})} />
-          <DictEditor title="Tisztítási Csomagok (Alapár)" data={car.packages} onChange={d => setCar({...car, packages: d})} />
+          <DictEditor title="Kiegészítő Extrák" data={car.extras || {}} onChange={d => setCar({...car, extras: d})} />
         </div>
       </div>
 

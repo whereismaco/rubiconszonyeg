@@ -29,11 +29,13 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
 
   const uphTypes = Object.keys(pricingUph?.types || {});
   const carSizes = Object.keys(pricingCar?.categories || {});
+  const carPackages = Object.keys(pricingCar?.packages || {});
+  const carExtras = Object.keys(pricingCar?.extras || {});
 
   // Advanced mode state
   const [rugs, setRugs] = useState<{ w: string; l: string; thickness: string; dirtiness: string; material: string; extras: string[] }[]>([]);
   const [upholsteries, setUpholsteries] = useState<{ type: string; desc: string }[]>([]);
-  const [cars, setCars] = useState<{ size: string; type: string }[]>([]);
+  const [cars, setCars] = useState<{ size: string; type: string; pkg: string; extras: string[] }[]>([]);
 
   const addRug = () => setRugs([...rugs, { w: "", l: "", thickness: rugTypes[0] || "Normál", dirtiness: rugConditions[0] || "Normál", material: rugMaterials[0] || "Szintetikus", extras: [] }]);
   const removeRug = (idx: number) => setRugs(rugs.filter((_, i) => i !== idx));
@@ -41,7 +43,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
   const addUph = () => setUpholsteries([...upholsteries, { type: uphTypes[0] || "Kanapé", desc: "" }]);
   const removeUph = (idx: number) => setUpholsteries(upholsteries.filter((_, i) => i !== idx));
 
-  const addCar = () => setCars([...cars, { size: carSizes[0] || "Közepes", type: "" }]);
+  const addCar = () => setCars([...cars, { size: carSizes[0] || "", pkg: carPackages[0] || "", type: "", extras: [] }]);
   const removeCar = (idx: number) => setCars(cars.filter((_, i) => i !== idx));
 
   const generatedServiceType = [
@@ -113,12 +115,20 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       msg += "--- Autók ---\n";
       let carsTotal = 0;
       cars.forEach((c, i) => {
-        let cPrice = Number(pricingCar?.categories?.[c.size]) || 0;
+        let pkgData = pricingCar?.packages?.[c.pkg];
+        let pkgPrice = typeof pkgData === 'object' ? (Number(pkgData.price) || 0) : (Number(pkgData) || 0);
+        let catPrice = Number(pricingCar?.categories?.[c.size]) || 0;
+        let extrasPrice = c.extras.reduce((sum, ext) => sum + (Number(pricingCar?.extras?.[ext]) || 0), 0);
+        
+        let cPrice = pkgPrice + catPrice + extrasPrice;
         if (isNaN(cPrice)) cPrice = 0;
         
         carsTotal += cPrice;
         total += cPrice;
-        msg += `${i + 1}. ${c.size} méretű autó${c.type ? ` - ${c.type}` : ""} (Becsült ár: ~${cPrice.toLocaleString('hu-HU')} Ft)\n`;
+        msg += `${i + 1}. ${c.pkg} csomag | ${c.size} méret${c.type ? ` (${c.type})` : ""} (Becsült ár: ~${cPrice.toLocaleString('hu-HU')} Ft)\n`;
+        if (c.extras.length > 0) {
+          msg += `   Extrák: ${c.extras.join(', ')}\n`;
+        }
       });
       msg += `\nÖsszes Autó kb. ${carsTotal.toLocaleString('hu-HU')} Ft\n\n`;
     }
@@ -318,24 +328,57 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
               <div className="space-y-4">
                 <h5 className="font-bold text-[#1D63B7] border-b border-gray-200 pb-2">Autók hozzáadása</h5>
                 {cars.map((car, idx) => (
-                  <div key={idx} className="flex flex-wrap md:flex-nowrap items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
-                    <div className="w-full md:w-1/3">
-                      <label className="block text-xs text-gray-500 mb-1">Autó Mérete</label>
-                      <select value={car.size} onChange={(e) => { const newCars = [...cars]; newCars[idx].size = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]">
-                        {carSizes.map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
+                  <div key={idx} className="flex flex-col gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Választott Csomag</label>
+                        <select value={car.pkg} onChange={(e) => { const newCars = [...cars]; newCars[idx].pkg = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                          {carPackages.map(p => <option key={p} value={p}>{p}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Gépjármű Kategória</label>
+                        <select value={car.size} onChange={(e) => { const newCars = [...cars]; newCars[idx].size = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                          {carSizes.map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      </div>
                     </div>
-                    <div className="flex-1">
+                    
+                    <div>
                       <label className="block text-xs text-gray-500 mb-1">Autó Típusa / Részletek</label>
-                      <input type="text" value={car.type} onChange={(e) => { const newCars = [...cars]; newCars[idx].type = e.target.value; setCars(newCars); }} placeholder="Pl: Ford Focus Kombi" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                      <input type="text" value={car.type} onChange={(e) => { const newCars = [...cars]; newCars[idx].type = e.target.value; setCars(newCars); }} placeholder="Pl: Ford Focus Kombi" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm" />
                     </div>
-                    <button type="button" onClick={() => removeCar(idx)} className="mt-4 md:mt-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                      <Trash2 size={20} />
+
+                    <div className="pt-2">
+                      <label className="block text-xs text-gray-500 mb-2">Kiegészítő Extrák</label>
+                      <div className="flex flex-wrap gap-2">
+                        {carExtras.map((extra) => (
+                          <div 
+                            key={extra}
+                            onClick={() => {
+                              const newCars = [...cars];
+                              if (newCars[idx].extras.includes(extra)) {
+                                newCars[idx].extras = newCars[idx].extras.filter(e => e !== extra);
+                              } else {
+                                newCars[idx].extras.push(extra);
+                              }
+                              setCars(newCars);
+                            }}
+                            className={`cursor-pointer px-3 py-1.5 rounded-lg border text-sm font-medium transition-all ${car.extras.includes(extra) ? 'bg-[#3AC2FE] border-[#3AC2FE] text-[#1D63B7] font-bold' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+                          >
+                            {extra}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <button type="button" onClick={() => removeCar(idx)} className="self-end p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold">
+                      <Trash2 size={16} /> Autó törlése
                     </button>
                   </div>
                 ))}
                 <button type="button" onClick={addCar} className="flex items-center gap-2 text-sm font-bold text-[#1D63B7] hover:text-[#3AC2FE] transition-colors">
-                  <Plus size={16} /> Új autó
+                  <Plus size={16} /> Új autó hozzáadása
                 </button>
               </div>
             )}
