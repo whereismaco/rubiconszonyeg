@@ -1,6 +1,7 @@
 import { getSettings, updateSetting } from '@/lib/actions';
 import { Save } from 'lucide-react';
 import PricingEditor from '@/components/admin/PricingEditor';
+import EmailListEditor from '@/components/admin/EmailListEditor';
 import { revalidatePath } from 'next/cache';
 
 export const dynamic = 'force-dynamic';
@@ -36,63 +37,81 @@ export default async function SettingsPage() {
         <p className="text-gray-500 mt-1">Cégadatok, tartalom és globális árak kezelése</p>
       </div>
 
-      <form action={handleSave} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Általános Cégadatok */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-          <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Általános Cégadatok</h3>
-          
+        <form action={handleSave} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4 flex flex-col justify-between">
           <div>
-            <label className="block text-sm text-gray-500 mb-1">Cégnév</label>
-            <input type="text" name="company_name" defaultValue={settings.company_name} className="w-full border rounded-lg p-2" />
+            <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Általános Cégadatok</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Cégnév</label>
+                <input type="text" name="company_name" defaultValue={settings.company_name} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Logó URL (pl. /images/logo/rubicon-logo-fekvo.png)</label>
+                <input type="text" name="company_logo" defaultValue={settings.company_logo || '/images/logo/rubicon-logo-fekvo.png'} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Cím</label>
+                <input type="text" name="contact_address" defaultValue={settings.contact_address} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Telefonszám</label>
+                <input type="text" name="contact_phone" defaultValue={settings.contact_phone} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Email (Kapcsolat)</label>
+                <input type="email" name="contact_email" defaultValue={settings.contact_email} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Kommunikációs Stílus</label>
+                <select name="style_formal" defaultValue={settings.style_formal} className="w-full border rounded-lg p-2">
+                  <option value="1">Magázó (Professzionális)</option>
+                  <option value="0">Tegező (Közvetlen)</option>
+                </select>
+              </div>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm text-gray-500 mb-1">Logó URL (pl. /images/logo/rubicon-logo-fekvo.png)</label>
-            <input type="text" name="company_logo" defaultValue={settings.company_logo || '/images/logo/rubicon-logo-fekvo.png'} className="w-full border rounded-lg p-2" />
+          <div className="pt-4 border-t border-gray-100 flex justify-end">
+            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+              <Save size={18} /> Mentés
+            </button>
           </div>
-          <div>
-            <label className="block text-sm text-gray-500 mb-1">Cím</label>
-            <input type="text" name="contact_address" defaultValue={settings.contact_address} className="w-full border rounded-lg p-2" />
-          </div>
-          <div>
-            <label className="block text-sm text-gray-500 mb-1">Telefonszám</label>
-            <input type="text" name="contact_phone" defaultValue={settings.contact_phone} className="w-full border rounded-lg p-2" />
-          </div>
-          <div>
-            <label className="block text-sm text-gray-500 mb-1">Email (Kapcsolat)</label>
-            <input type="email" name="contact_email" defaultValue={settings.contact_email} className="w-full border rounded-lg p-2" />
-          </div>
-          <div>
-            <label className="block text-sm text-gray-500 mb-1">Kommunikációs Stílus</label>
-            <select name="style_formal" defaultValue={settings.style_formal} className="w-full border rounded-lg p-2">
-              <option value="1">Magázó (Professzionális)</option>
-              <option value="0">Tegező (Közvetlen)</option>
-            </select>
-          </div>
-        </div>
+        </form>
 
         {/* Kiszállási Díjak & Hozzáférés */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-          <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Működési Beállítások</h3>
-          
+        <form action={handleSave} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4 flex flex-col justify-between">
           <div>
-            <label className="block text-sm text-gray-500 mb-1">Kiszállási DÍj (Alap)</label>
-            <input type="number" name="delivery_fee_base" defaultValue={settings.delivery_fee_base} className="w-full border rounded-lg p-2" />
+            <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Működési Beállítások</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Kiszállási DÍj (Alap)</label>
+                <input type="number" name="delivery_fee_base" defaultValue={settings.delivery_fee_base} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Kiszállási Limit (Ez az összeg felett ingyenes)</label>
+                <input type="number" name="delivery_fee_limit" defaultValue={settings.delivery_fee_limit} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Engedélyezett Email címek (Belépéshez)</label>
+                <EmailListEditor data={settings.whitelisted_emails || []} />
+              </div>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm text-gray-500 mb-1">Kiszállási Limit (Ez az összeg felett ingyenes)</label>
-            <input type="number" name="delivery_fee_limit" defaultValue={settings.delivery_fee_limit} className="w-full border rounded-lg p-2" />
+          <div className="pt-4 mt-6 border-t border-gray-100 flex justify-end">
+            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+              <Save size={18} /> Mentés
+            </button>
           </div>
-          <div>
-            <label className="block text-sm text-gray-500 mb-1">Engedélyezett Email címek (JSON List)</label>
-            <textarea name="whitelisted_emails" defaultValue={JSON.stringify(settings.whitelisted_emails, null, 2)} className="w-full border rounded-lg p-2 font-mono text-sm" rows={3}></textarea>
-            <p className="text-xs text-gray-400 mt-1">Figyelem: Ezzel a listával lehet belépni (Whitelist Auth).</p>
-          </div>
-        </div>
+        </form>
 
         {/* --- ÚJ: Szövegek Szerkesztése --- */}
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-          <h3 className="text-2xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Weboldal Tartalom (Szerkeszthető Szövegek)</h3>
+        <form action={handleSave} className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6 flex flex-col justify-between">
+          <div>
+            <h3 className="text-2xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Weboldal Tartalom (Szerkeszthető Szövegek)</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Hero Szekció */}
@@ -272,10 +291,16 @@ export default async function SettingsPage() {
             </div>
 
           </div>
-        </div>
+          </div>
+          <div className="pt-4 mt-6 border-t border-gray-100 flex justify-end">
+            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+              <Save size={18} /> Tartalmak Mentése
+            </button>
+          </div>
+        </form>
 
         {/* Árlisták (Vizuális Szerkesztő) */}
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
+        <form action={handleSave} className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
           <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Árlista Konfiguráció</h3>
           <p className="text-sm text-gray-500 mb-6">Itt tudod módosítani az alapárakat, a választható extrákat és az anyagokat. A megadott értékek azonnal frissülnek a főoldalon és az új munkák kalkulátorában.</p>
           
@@ -284,15 +309,14 @@ export default async function SettingsPage() {
             initialUph={settings.pricing_upholstery} 
             initialCar={settings.pricing_car} 
           />
-        </div>
+          <div className="pt-4 mt-6 border-t border-gray-100 flex justify-end">
+            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+              <Save size={18} /> Árak Mentése
+            </button>
+          </div>
+        </form>
 
-        <div className="lg:col-span-2 flex justify-end pb-12">
-          <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg transform hover:scale-105 active:scale-95">
-            <Save size={20} /> Beállítások és Tartalmak Mentése
-          </button>
-        </div>
-
-      </form>
+      </div>
     </div>
   );
 }
