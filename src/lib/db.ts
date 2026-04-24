@@ -45,6 +45,12 @@ try {
     );
   `);
 
+  try {
+    db.exec(`ALTER TABLE jobs ADD COLUMN phone TEXT;`);
+  } catch (e: any) {
+    // Column might already exist, ignore
+  }
+
   // Default settings insertion
   const defaultSettings = [
     ['company_name', 'Rubicon Szőnyegtisztítás'],

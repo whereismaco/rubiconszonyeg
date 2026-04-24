@@ -1,5 +1,5 @@
 import { getJobs } from '@/lib/actions';
-import { MapPin } from 'lucide-react';
+import { MapPin, Phone } from 'lucide-react';
 import JobStatusEditor from '@/components/admin/JobStatusEditor';
 
 export const dynamic = 'force-dynamic';
@@ -22,8 +22,9 @@ export default async function DashboardPage() {
             <thead>
               <tr className="bg-gray-50 text-gray-500 font-medium border-b border-gray-200">
                 <th className="p-4">ID</th>
-                <th className="p-4">Név</th>
+                <th className="p-4">Név & Kapcsolat</th>
                 <th className="p-4">Cím</th>
+                <th className="p-4">Tételek</th>
                 <th className="p-4 w-56">Státusz</th>
                 <th className="p-4 text-right">Végösszeg</th>
                 <th className="p-4 text-center">Műveletek</th>
@@ -32,20 +33,63 @@ export default async function DashboardPage() {
             <tbody className="divide-y divide-gray-100">
               {jobs.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-gray-500">Jelenleg nincsenek aktív munkák.</td>
+                  <td colSpan={7} className="p-8 text-center text-gray-500">Jelenleg nincsenek aktív munkák.</td>
                 </tr>
               )}
-              {jobs.map((job: any) => (
+              {jobs.map((job: any) => {
+                let items: any[] = [];
+                try {
+                  if (job.data_json) items = JSON.parse(job.data_json);
+                } catch(e) {}
+                
+                let rugsCount = 0;
+                let rugsArea = 0;
+                let uphCount = 0;
+                let carCount = 0;
+                
+                items.forEach(it => {
+                  if (it.service === 'Szőnyeg') {
+                    rugsCount++;
+                    rugsArea += (it.area || 0);
+                  } else if (it.service === 'Kárpit') {
+                    uphCount++;
+                  } else if (it.service === 'Autó') {
+                    carCount++;
+                  }
+                });
+
+                return (
                 <tr key={job.id} className="hover:bg-gray-50 transition-colors relative">
                   <td className="p-4 font-mono text-sm text-gray-500">#{job.id}</td>
-                  <td className="p-4 font-medium text-[#181A2C]">{job.name}</td>
+                  <td className="p-4">
+                    <div className="font-medium text-[#181A2C]">{job.name}</div>
+                    {job.phone ? (
+                      <a href={`tel:${job.phone.replace(/\s+/g, '')}`} className="flex items-center text-gray-500 hover:text-[#1D63B7] text-sm mt-1">
+                        <Phone size={14} className="mr-1" />
+                        {job.phone}
+                      </a>
+                    ) : (
+                      <span className="flex items-center text-gray-400 text-sm mt-1 italic">
+                        <Phone size={14} className="mr-1" />
+                        Nincs megadva
+                      </span>
+                    )}
+                  </td>
                   <td className="p-4">
                     {job.address && (
                       <a href={job.map_link} target="_blank" rel="noopener noreferrer" className="flex items-center text-[#1D63B7] hover:underline text-sm">
-                        <MapPin size={16} className="mr-1" />
-                        {job.address}
+                        <MapPin size={16} className="mr-1 shrink-0" />
+                        <span className="line-clamp-1">{job.address}</span>
                       </a>
                     )}
+                  </td>
+                  <td className="p-4 text-sm text-gray-600">
+                    <div className="flex flex-col gap-1">
+                      {items.length === 0 && <span className="text-gray-400 italic">Üres</span>}
+                      {rugsCount > 0 && <span>{rugsCount} db szőnyeg</span>}
+                      {uphCount > 0 && <span>{uphCount} db kárpit</span>}
+                      {carCount > 0 && <span>{carCount} db autó</span>}
+                    </div>
                   </td>
                   <td className="p-4 relative">
                     <JobStatusEditor jobId={job.id} currentStatus={job.status} />
@@ -63,7 +107,8 @@ export default async function DashboardPage() {
                     </a>
                   </td>
                 </tr>
-              ))}
+              );
+              })}
             </tbody>
           </table>
         </div>

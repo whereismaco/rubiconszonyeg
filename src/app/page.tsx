@@ -7,6 +7,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import VideosCarousel from "@/components/VideosCarousel";
 import QuoteForm from "@/components/QuoteForm";
 import PricingTable from "@/components/PricingTable";
+import MobileMenu from "@/components/MobileMenu";
 
 export async function generateMetadata() {
   const settings = await getSettings();
@@ -21,12 +22,24 @@ export default async function HomePage() {
 
   async function handleContact(formData: FormData) {
     'use server';
+    
+    let parsedItems = [];
+    try {
+      const itemsJson = formData.get('items_json') as string;
+      if (itemsJson) {
+        parsedItems = JSON.parse(itemsJson);
+      }
+    } catch (e) {
+      console.error("Failed to parse items_json", e);
+    }
+
     await createJob({
       name: formData.get('name') as string,
+      phone: formData.get('phone') as string,
       address: formData.get('address') as string,
       notes: `Telefonos elérhetőség: ${formData.get('phone')}\nSzolgáltatás: ${formData.get('service_type')}\nMegjegyzés / Részletek:\n${formData.get('message')}`,
       status: 'Ajánlatra vár',
-      items: [],
+      items: parsedItems,
       total: Number(formData.get('total') || 0)
     });
     redirect('/?success=1#kapcsolat');
@@ -116,6 +129,9 @@ export default async function HomePage() {
               Ajánlatkérés
             </a>
           </nav>
+          
+          {/* Mobile Navigation */}
+          <MobileMenu />
         </div>
       </header>
 
@@ -351,7 +367,6 @@ export default async function HomePage() {
               <li><Link href="#rolunk" className="hover:text-white transition-colors">Rólunk</Link></li>
               <li><Link href="#szolgaltatasok" className="hover:text-white transition-colors">Szolgáltatásaink</Link></li>
               <li><Link href="#arak" className="hover:text-white transition-colors">Árak</Link></li>
-              <li><Link href="/portal" className="hover:text-white transition-colors text-gray-600">Admin Portál</Link></li>
             </ul>
           </div>
         </div>

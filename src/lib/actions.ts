@@ -37,12 +37,13 @@ export async function getJobById(id: number) {
 export async function updateJob(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE jobs 
-    SET name = ?, address = ?, map_link = ?, total = ?, notes = ?, data_json = ?
+    SET name = ?, phone = ?, address = ?, map_link = ?, total = ?, notes = ?, data_json = ?
     WHERE id = ?
   `);
   
   stmt.run(
     data.name,
+    data.phone,
     data.address,
     `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
     data.total,

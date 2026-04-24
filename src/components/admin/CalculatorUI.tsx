@@ -40,6 +40,7 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   // Job Details
   const [customerInfo, setCustomerInfo] = useState({ 
     name: initialJob?.name || '', 
+    phone: initialJob?.phone || '',
     address: initialJob?.address || '', 
     notes: initialJob?.notes || '' 
   });
@@ -122,7 +123,7 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
                   <div>
                     <label className="block text-sm text-gray-500 mb-1">Anyag</label>
                     <select className="w-full border rounded-lg p-2" value={rug.material} onChange={e => setRug({...rug, material: e.target.value})}>
-                      {pricingRug.materials?.map((m:string) => <option key={m} value={m}>{m}</option>)}
+                      {pricingRug.materials && Object.keys(pricingRug.materials).map((m:string) => <option key={m} value={m}>{m}</option>)}
                     </select>
                   </div>
                 </div>
@@ -245,14 +246,25 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
           <h3 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-4">
             <User className="text-[#1D63B7]" /> Ügyfél Adatok
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm text-gray-500 mb-1">Név</label>
               <input type="text" className="w-full border rounded-lg p-2" value={customerInfo.name} onChange={e => setCustomerInfo({...customerInfo, name: e.target.value})} placeholder="Példa János" required />
             </div>
             <div>
+              <label className="block text-sm text-gray-500 mb-1">Telefonszám</label>
+              <input type="text" className="w-full border rounded-lg p-2" value={customerInfo.phone} onChange={e => setCustomerInfo({...customerInfo, phone: e.target.value})} placeholder="+36 30 123 4567" />
+            </div>
+            <div>
               <label className="block text-sm text-gray-500 mb-1">Cím (Google Térképhez)</label>
-              <input type="text" className="w-full border rounded-lg p-2" value={customerInfo.address} onChange={e => setCustomerInfo({...customerInfo, address: e.target.value})} placeholder="1024, Budapest, Példa utca 12." required />
+              <div className="flex gap-2">
+                <input type="text" className="flex-1 w-full border rounded-lg p-2" value={customerInfo.address} onChange={e => setCustomerInfo({...customerInfo, address: e.target.value})} placeholder="1024, Budapest, Példa utca 12." required />
+                {customerInfo.address && (
+                  <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(customerInfo.address)}`} target="_blank" rel="noopener noreferrer" className="bg-[#1D63B7] hover:bg-[#3AC2FE] text-white p-2 rounded-lg transition-colors flex items-center justify-center shrink-0" title="Útvonaltervezés Térképen">
+                    <MapPin size={20} />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
           <div>

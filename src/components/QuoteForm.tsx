@@ -54,18 +54,19 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
     .filter(Boolean)
     .join(", ") || "Nincs megadva szolgáltatás";
 
-  const { message: generatedMessage, total: estimatedTotal } = useMemo(() => {
+  const { message: generatedMessage, total: estimatedTotal, items: structuredItems } = useMemo(() => {
     let total = 0;
-
     if (!advancedMode) {
       let result = simpleMessage;
       if (simpleMessage.trim() === "") {
         result = "Nincs megadva további információ.";
       }
-      return { message: result, total: 0 };
+      return { message: result, total: 0, items: [] };
     }
 
     let msg = "";
+    let items: any[] = [];
+
     if (services.rug && rugs.length > 0) {
       msg += "--- Szőnyegek ---\n";
       let totalArea = 0;
@@ -84,9 +85,21 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
 
         let rugPrice = area * (basePrice + matPrice + condPrice + extrasPrice);
         if (isNaN(rugPrice)) rugPrice = 0;
-        
+
         rugsTotal += rugPrice;
         total += rugPrice;
+
+        items.push({
+          service: 'Szőnyeg',
+          w: r.w,
+          l: r.l,
+          area: area,
+          type: r.thickness,
+          material: r.material,
+          condition: r.dirtiness,
+          extras: r.extras,
+          price: rugPrice
+        });
 
         msg += `${i + 1}. Szőnyeg: ${w} m x ${l} m = ${area.toFixed(2)} m² (Becsült ár: ~${rugPrice.toLocaleString('hu-HU')} Ft)\n`;
         msg += `   Vastagság: ${r.thickness} | Anyag: ${r.material} | Szennyeződés: ${r.dirtiness}\n`;
@@ -103,9 +116,18 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       upholsteries.forEach((u, i) => {
         let uPrice = Number(pricingUph?.types?.[u.type]) || 0;
         if (isNaN(uPrice)) uPrice = 0;
-        
+
         uphTotal += uPrice;
         total += uPrice;
+
+        items.push({
+          service: 'Kárpit',
+          type: u.type,
+          options: u.desc ? [u.desc] : [],
+          quantity: 1,
+          price: uPrice
+        });
+
         msg += `${i + 1}. ${u.type}${u.desc ? ` - Részletek: ${u.desc}` : ""} (Becsült ár: ~${uPrice.toLocaleString('hu-HU')} Ft)\n`;
       });
       msg += `\nÖsszes Kárpit kb. ${uphTotal.toLocaleString('hu-HU')} Ft\n\n`;
@@ -119,12 +141,22 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
         let pkgPrice = typeof pkgData === 'object' ? (Number(pkgData.price) || 0) : (Number(pkgData) || 0);
         let catPrice = Number(pricingCar?.categories?.[c.size]) || 0;
         let extrasPrice = c.extras.reduce((sum, ext) => sum + (Number(pricingCar?.extras?.[ext]) || 0), 0);
-        
+
         let cPrice = pkgPrice + catPrice + extrasPrice;
         if (isNaN(cPrice)) cPrice = 0;
-        
+
         carsTotal += cPrice;
         total += cPrice;
+
+        items.push({
+          service: 'Autó',
+          package: c.pkg,
+          category: c.size,
+          type: c.type,
+          extras: c.extras,
+          price: cPrice
+        });
+
         msg += `${i + 1}. ${c.pkg} csomag | ${c.size} méret${c.type ? ` (${c.type})` : ""} (Becsült ár: ~${cPrice.toLocaleString('hu-HU')} Ft)\n`;
         if (c.extras.length > 0) {
           msg += `   Extrák: ${c.extras.join(', ')}\n`;
@@ -140,7 +172,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
     }
 
     const finalMsg = msg.trim();
-    return { message: finalMsg ? finalMsg : "Haladó mód lett kiválasztva, de nem lett tétel hozzáadva.", total };
+    return { message: finalMsg ? finalMsg : "Haladó mód lett kiválasztva, de nem lett tétel hozzáadva.", total, items };
   }, [advancedMode, simpleMessage, services, rugs, upholsteries, cars, pricingRug, pricingUph, pricingCar]);
 
   const handleServiceToggle = (key: keyof typeof services) => {
@@ -153,6 +185,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       <input type="hidden" name="service_type" value={generatedServiceType} />
       <input type="hidden" name="message" value={generatedMessage} />
       <input type="hidden" name="total" value={estimatedTotal || 0} />
+      <input type="hidden" name="items_json" value={JSON.stringify(structuredItems)} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
