@@ -37,10 +37,10 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
   const [upholsteries, setUpholsteries] = useState<{ type: string; desc: string }[]>([]);
   const [cars, setCars] = useState<{ size: string; type: string; pkg: string; extras: string[] }[]>([]);
 
-  const addRug = () => setRugs([...rugs, { w: "", l: "", thickness: rugTypes[0] || "Normál", dirtiness: rugConditions[0] || "Normál", material: rugMaterials[0] || "Szintetikus", extras: [] }]);
+  const addRug = () => setRugs([...rugs, { w: "", l: "", thickness: rugTypes[0] || "", dirtiness: rugConditions[0] || "", material: rugMaterials[0] || "", extras: [] }]);
   const removeRug = (idx: number) => setRugs(rugs.filter((_, i) => i !== idx));
 
-  const addUph = () => setUpholsteries([...upholsteries, { type: uphTypes[0] || "Kanapé", desc: "" }]);
+  const addUph = () => setUpholsteries([...upholsteries, { type: uphTypes[0] || "", desc: "" }]);
   const removeUph = (idx: number) => setUpholsteries(upholsteries.filter((_, i) => i !== idx));
 
   const addCar = () => setCars([...cars, { size: carSizes[0] || "", pkg: carPackages[0] || "", type: "", extras: [] }]);
@@ -74,7 +74,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       rugs.forEach((r, i) => {
         const w = parseFloat(r.w.replace(',', '.')) || 0;
         const l = parseFloat(r.l.replace(',', '.')) || 0;
-        let area = w * l;
+        let area = (w * l) / 10000;
         if (area > 0 && area < 1) area = 1; // minimum 1 nm
         totalArea += area;
 
@@ -101,7 +101,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
           price: rugPrice
         });
 
-        msg += `${i + 1}. Szőnyeg: ${w} m x ${l} m = ${area.toFixed(2)} m² (Becsült ár: ~${rugPrice.toLocaleString('hu-HU')} Ft)\n`;
+        msg += `${i + 1}. Szőnyeg: ${w} cm x ${l} cm = ${area.toFixed(2)} m² (Becsült ár: ~${rugPrice.toLocaleString('hu-HU')} Ft)\n`;
         msg += `   Vastagság: ${r.thickness} | Anyag: ${r.material} | Szennyeződés: ${r.dirtiness}\n`;
         if (r.extras.length > 0) {
           msg += `   Extrák: ${r.extras.join(', ')}\n`;
@@ -261,16 +261,16 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
                   <div key={idx} className="flex flex-col gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
                     <div className="flex flex-wrap md:flex-nowrap items-center gap-4">
                       <div className="flex-1">
-                        <label className="block text-xs text-gray-500 mb-1">Szélesség (m)</label>
-                        <input type="number" step="0.01" value={rug.w} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].w = e.target.value; setRugs(newRugs); }} placeholder="Pl: 1.5" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                        <label className="block text-xs text-gray-500 mb-1">Szélesség (cm)</label>
+                        <input type="number" step="1" value={rug.w} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].w = e.target.value; setRugs(newRugs); }} placeholder="Pl: 150" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
                       </div>
                       <span className="text-gray-400 font-bold mt-4">X</span>
                       <div className="flex-1">
-                        <label className="block text-xs text-gray-500 mb-1">Hosszúság (m)</label>
-                        <input type="number" step="0.01" value={rug.l} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].l = e.target.value; setRugs(newRugs); }} placeholder="Pl: 2.0" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                        <label className="block text-xs text-gray-500 mb-1">Hosszúság (cm)</label>
+                        <input type="number" step="1" value={rug.l} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].l = e.target.value; setRugs(newRugs); }} placeholder="Pl: 200" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
                       </div>
                       <div className="w-full md:w-32 bg-[#3AC2FE]/10 text-[#1D63B7] rounded-lg px-3 py-2 text-center font-bold mt-4 md:mt-0">
-                        {((parseFloat(rug.w) || 0) * (parseFloat(rug.l) || 0)).toFixed(2)} m²
+                        {((parseFloat(rug.w) || 0) * (parseFloat(rug.l) || 0) / 10000).toFixed(2)} m²
                       </div>
                       <button type="button" onClick={() => removeRug(idx)} className="mt-4 md:mt-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
                         <Trash2 size={20} />

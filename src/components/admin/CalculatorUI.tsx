@@ -28,8 +28,19 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   });
 
   // Item Forms State
-  const [rug, setRug] = useState({ type: 'Vékony', width: 100, length: 150, material: 'Pamut', condition: 'Enyhén', extras: [] as string[] });
-  const [uph, setUph] = useState({ type: 'Fotel', quantity: 1, options: [] as string[] });
+  const [rug, setRug] = useState({ 
+    type: Object.keys(pricingRug.types || {})[0] || '', 
+    width: 100, 
+    length: 150, 
+    material: Object.keys(pricingRug.materials || {})[0] || '', 
+    condition: Object.keys(pricingRug.conditions || {})[0] || '', 
+    extras: [] as string[] 
+  });
+  const [uph, setUph] = useState({ 
+    type: Object.keys(pricingUpholstery.types || {})[0] || '', 
+    quantity: 1, 
+    options: [] as string[] 
+  });
   const [car, setCar] = useState({ 
     category: Object.keys(pricingCar.categories || {})[0] || '', 
     package: Object.keys(pricingCar.packages || {})[0] || '', 
@@ -53,16 +64,18 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   // Add Handlers
   const addRug = () => {
     let base = pricingRug.types[rug.type] || 0;
+    let mat = pricingRug.materials[rug.material] || 0;
     let cond = pricingRug.conditions[rug.condition] || 0;
     let exPrice = rug.extras.reduce((s, e) => s + (pricingRug.extras[e] || 0), 0);
-    
-    let area = Math.max(1.0, (rug.width * rug.length) / 10000);
-    let priceItemM2 = base + cond + exPrice;
+
+    let area = (rug.width * rug.length) / 10000;
+    if (area > 0 && area < 1) area = 1;
+
+    let priceItemM2 = base + mat + cond + exPrice;
     let price = Math.round(area * priceItemM2);
-    
+
     setItems([...items, { ...rug, service: 'Szőnyeg', area, price }]);
   };
-
   const addUph = () => {
     let base = pricingUpholstery.types[uph.type] || 0;
     let optPrice = uph.options.reduce((s, e) => s + (pricingUpholstery.options[e] || 0), 0);
@@ -289,8 +302,8 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
                 <div className="flex-1">
                   <p className="font-bold text-[#181A2C]">{it.service} ({it.type || it.package || 'Egyéb'})</p>
                   <p className="text-gray-500 text-xs mt-1">
-                    {it.service === 'Szőnyeg' ? `${it.width}x${it.length}cm (${it.area?.toFixed(2)}m2) ${it.condition}` : ''}
-                    {it.service === 'Kárpit' ? `${it.quantity} darab` : ''}
+                    {it.service === 'Szőnyeg' ? `${it.width || it.w}x${it.length || it.l}cm (${it.area?.toFixed(2)}m2) ${it.condition}` : ''}
+                    {it.service === 'Kárpit' ? `${it.quantity || 1} darab` : ''}
                     {it.service === 'Autó' ? `${it.category} kategória` : ''}
                   </p>
                 </div>

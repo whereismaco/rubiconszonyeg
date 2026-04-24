@@ -33,8 +33,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Sidebar */}
       <div className={`fixed lg:relative z-40 inset-y-0 left-0 w-64 bg-[#181A2C] text-[#EDEDED] transform transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-[#3AC2FE]">Rubicon Gate</h2>
+        <div className="p-6 pt-16 lg:pt-6">
+          <h2 className="text-2xl font-bold text-[#3AC2FE]">Rubicon Portál</h2>
           <p className="text-sm text-gray-400 mt-1">Adminportál</p>
         </div>
         <nav className="mt-6 flex flex-col space-y-1 px-4">
