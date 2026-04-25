@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { LayoutDashboard, Calculator, Settings, LogOut, Star, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Calculator, Settings, LogOut, Star, Menu, X, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -17,6 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navItems = [
     { name: 'Irányítópult', href: '/portal', icon: LayoutDashboard },
     { name: 'Kalkulátor (Új Munka)', href: '/portal/new', icon: Calculator },
+    { name: 'Statisztika', href: '/portal/statistics', icon: BarChart3 },
     { name: 'Beállítások', href: '/portal/settings', icon: Settings },
     { name: 'Értékelések', href: '/portal/reviews', icon: Star },
   ];
