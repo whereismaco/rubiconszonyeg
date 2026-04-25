@@ -1,13 +1,13 @@
 import { getSettings, createJob } from '@/lib/actions';
 import { redirect } from 'next/navigation';
-import Link from 'next/link';
 import Image from 'next/image';
 import { CheckCircle2, Sparkles, MapPin, Phone, Mail, Sofa, CarFront } from 'lucide-react';
 import GoogleReviews from "@/components/GoogleReviews";
 import VideosCarousel from "@/components/VideosCarousel";
 import QuoteForm from "@/components/QuoteForm";
 import PricingTable from "@/components/PricingTable";
-import MobileMenu from "@/components/MobileMenu";
+import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 export async function generateMetadata() {
   const settings = await getSettings();
@@ -109,33 +109,10 @@ export default async function HomePage() {
   const contactPhone = settings.contact_phone || '+36 30 350 6109';
   const contactEmail = settings.contact_email || 'info@rubiconszonyeg.hu';
 
-  const companyLogo = settings.company_logo || '/images/logo/rubicon-logo-fekvo.png';
-
   return (
     <div className="min-h-screen bg-[#EDEDED] text-[#181A2C] font-sans selection:bg-[#3AC2FE] selection:text-white scroll-smooth">
       {/* Navbar */}
-      <header className="bg-white/90 backdrop-blur-md shadow-sm fixed top-0 w-full z-50 transition-all">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/">
-            <div className="relative h-10 w-48">
-              <Image src={companyLogo} alt={settings.company_name || 'RUBICON'} fill className="object-contain object-left" priority />
-            </div>
-          </Link>
-          <nav className="hidden md:flex gap-8 items-center">
-            <Link href="#velemenyek" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Vélemények</Link>
-            <Link href="#rolunk" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Rólunk</Link>
-            <Link href="#szolgaltatasok" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Szolgáltatásaink</Link>
-            <Link href="#referenciak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Referenciák</Link>
-            <Link href="#arak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Árak</Link>
-            <a href="#kapcsolat" className="bg-[#1D63B7] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#3AC2FE] transition-all transform hover:scale-105 shadow-md">
-              Ajánlatkérés
-            </a>
-          </nav>
-          
-          {/* Mobile Navigation */}
-          <MobileMenu />
-        </div>
-      </header>
+      <PublicHeader settings={settings} />
 
       <main className="bg-[#F8F9FA]">
         {/* 1. HERO Section */}
@@ -373,31 +350,7 @@ export default async function HomePage() {
         </section>
       </main>
 
-      <footer className="bg-[#181A2C] py-16 text-center text-gray-400 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
-          <div>
-            <h4 className="text-white font-bold text-xl mb-4">{settings.company_name || 'RUBICON'}</h4>
-            <p className="font-light text-gray-400 mb-2">Professzionális tisztítás Érden és környékén.</p>
-          </div>
-          <div>
-            <h4 className="text-white font-bold text-xl mb-4">Elérhetőségek</h4>
-            <p className="font-light text-gray-400">Telefon: {contactPhone}</p>
-            <p className="font-light text-gray-400">Email: {contactEmail}</p>
-          </div>
-          <div>
-            <h4 className="text-white font-bold text-xl mb-4">Navigáció</h4>
-            <ul className="space-y-2">
-              <li><Link href="#velemenyek" className="hover:text-white transition-colors">Vélemények</Link></li>
-              <li><Link href="#rolunk" className="hover:text-white transition-colors">Rólunk</Link></li>
-              <li><Link href="#szolgaltatasok" className="hover:text-white transition-colors">Szolgáltatásaink</Link></li>
-              <li><Link href="#referenciak" className="hover:text-white transition-colors">Referenciák</Link></li>
-              <li><Link href="#arak" className="hover:text-white transition-colors">Árak</Link></li>
-            </ul>
-          </div>
-        </div>
-        <p>&copy; {new Date().getFullYear()} {settings.company_name || 'Rubicon Szőnyegtisztítás'}. Minden jog fenntartva.</p>
-        <p className="mt-2 text-xs opacity-50">Powered by MacoLabs & Rubicon Engine v2</p>
-      </footer>
+      <PublicFooter settings={settings} />
     </div>
   );
 }
