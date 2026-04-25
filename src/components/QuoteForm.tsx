@@ -200,8 +200,23 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
     setServices((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const handleSubmit = () => {
+    if (typeof window !== "undefined") {
+      const w = window as any;
+      const value = estimatedTotal || 0;
+
+      if (w.fbq) {
+        w.fbq('track', 'Lead', { value: value, currency: 'HUF' });
+      }
+
+      if (w.gtag) {
+        w.gtag('event', 'generate_lead', { value: value, currency: 'HUF' });
+      }
+    }
+  };
+
   return (
-    <form action={action} className="space-y-8">
+    <form action={action} onSubmit={handleSubmit} className="space-y-8">
       {/* Hidden inputs for Server Action */}
       <input type="hidden" name="service_type" value={generatedServiceType} />
       <input type="hidden" name="message" value={generatedMessage} />
