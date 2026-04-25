@@ -36,8 +36,9 @@ export default async function HomePage() {
     await createJob({
       name: formData.get('name') as string,
       phone: formData.get('phone') as string,
+      email: formData.get('email') as string,
       address: formData.get('address') as string,
-      notes: `Telefonos elérhetőség: ${formData.get('phone')}\nSzolgáltatás: ${formData.get('service_type')}\nMegjegyzés / Részletek:\n${formData.get('message')}`,
+      notes: `Telefonos elérhetőség: ${formData.get('phone')}\nEmail: ${formData.get('email') || 'Nincs megadva'}\nSzolgáltatás: ${formData.get('service_type')}\nMegjegyzés / Részletek:\n${formData.get('message')}`,
       status: 'Ajánlatra vár',
       items: parsedItems,
       total: Number(formData.get('total') || 0)
@@ -314,38 +315,60 @@ export default async function HomePage() {
         {/* 6. KAPCSOLAT SZEKCIÓ */}
         <section id="kapcsolat" className="py-24 bg-[#1D63B7] relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-          <div className="max-w-6xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-            
-            <div className="lg:col-span-2 text-white">
-              <h3 className="text-4xl md:text-5xl font-black mb-6 leading-tight">{contactTitle}</h3>
-              <p className="text-xl font-medium opacity-90 mb-10">{contactSubtitle}</p>
-              
-              <div className="space-y-6">
-                <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
-                  <div className="bg-white/20 p-3 rounded-full"><MapPin size={24} /></div>
-                  <span className="text-lg font-medium">{contactAddress}</span>
+          
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+              <div className="text-white">
+                <h3 className="text-4xl md:text-5xl font-black mb-6 leading-tight">{contactTitle}</h3>
+                <p className="text-xl font-medium opacity-90 mb-10">{contactSubtitle}</p>
+                
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
+                    <div className="bg-white/20 p-3 rounded-full"><MapPin size={24} /></div>
+                    <span className="text-lg font-medium">{contactAddress}</span>
+                  </div>
+                  <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
+                    <div className="bg-white/20 p-3 rounded-full"><Phone size={24} /></div>
+                    <span className="text-lg font-medium">{contactPhone}</span>
+                  </div>
+                  <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
+                    <div className="bg-white/20 p-3 rounded-full"><Mail size={24} /></div>
+                    <span className="text-lg font-medium">{contactEmail}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
-                  <div className="bg-white/20 p-3 rounded-full"><Phone size={24} /></div>
-                  <span className="text-lg font-medium">{contactPhone}</span>
+              </div>
+
+              <div className="flex flex-col items-center justify-center">
+                <div className="relative aspect-square md:aspect-video lg:aspect-square w-full">
+                  <Image 
+                    src="/images/rubicon_szonyegtisztitas_lefedettsegi_terkep.webp" 
+                    alt="Rubicon Lefedettségi Térkép" 
+                    fill 
+                    className="object-contain" 
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    quality={100}
+                    unoptimized={true}
+                  />
                 </div>
-                <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
-                  <div className="bg-white/20 p-3 rounded-full"><Mail size={24} /></div>
-                  <span className="text-lg font-medium">{contactEmail}</span>
+                <div className="mt-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 shadow-lg">
+                  <MapPin size={18} className="text-[#3AC2FE]" />
+                  <span>Lefedettségi térképünk: <strong>15 km-es sugárban</strong> a telephelytől</span>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-3 bg-white rounded-[40px] p-8 md:p-12 shadow-2xl">
+            {/* Ajánlatkérő Űrlap Teljes Szélességben */}
+            <div className="bg-white rounded-[40px] p-8 md:p-12 shadow-2xl max-w-5xl mx-auto">
               <QuoteForm 
                 action={handleContact} 
                 buttonText={contactCta} 
                 pricingRug={pricingRug}
                 pricingUph={pricingUph}
                 pricingCar={pricingCar}
+                deliveryFeeBase={Number(settings.delivery_fee_base) || 0}
+                deliveryFeeLimit={Number(settings.delivery_fee_limit) || 0}
               />
             </div>
-
           </div>
         </section>
       </main>

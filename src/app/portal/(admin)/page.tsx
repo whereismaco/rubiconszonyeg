@@ -74,6 +74,12 @@ export default async function DashboardPage() {
                         Nincs megadva
                       </span>
                     )}
+                    {job.email && (
+                      <a href={`mailto:${job.email}`} className="flex items-center text-gray-500 hover:text-[#1D63B7] text-sm mt-1 truncate max-w-[200px]" title={job.email}>
+                        <Mail size={14} className="mr-1 shrink-0" />
+                        {job.email}
+                      </a>
+                    )}
                   </td>
                   <td className="p-4">
                     {job.address && (

@@ -9,9 +9,11 @@ interface QuoteFormProps {
   pricingRug: any;
   pricingUph: any;
   pricingCar: any;
+  deliveryFeeBase: number;
+  deliveryFeeLimit: number;
 }
 
-export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, pricingCar }: QuoteFormProps) {
+export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, pricingCar, deliveryFeeBase, deliveryFeeLimit }: QuoteFormProps) {
   const [services, setServices] = useState({
     rug: false,
     upholstery: false,
@@ -34,13 +36,13 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
 
   // Advanced mode state
   const [rugs, setRugs] = useState<{ w: string; l: string; thickness: string; dirtiness: string; material: string; extras: string[] }[]>([]);
-  const [upholsteries, setUpholsteries] = useState<{ type: string; desc: string }[]>([]);
+  const [upholsteries, setUpholsteries] = useState<{ type: string; desc: string; quantity: number }[]>([]);
   const [cars, setCars] = useState<{ size: string; type: string; pkg: string; extras: string[] }[]>([]);
 
   const addRug = () => setRugs([...rugs, { w: "", l: "", thickness: rugTypes[0] || "", dirtiness: rugConditions[0] || "", material: rugMaterials[0] || "", extras: [] }]);
   const removeRug = (idx: number) => setRugs(rugs.filter((_, i) => i !== idx));
 
-  const addUph = () => setUpholsteries([...upholsteries, { type: uphTypes[0] || "", desc: "" }]);
+  const addUph = () => setUpholsteries([...upholsteries, { type: uphTypes[0] || "", desc: "", quantity: 1 }]);
   const removeUph = (idx: number) => setUpholsteries(upholsteries.filter((_, i) => i !== idx));
 
   const addCar = () => setCars([...cars, { size: carSizes[0] || "", pkg: carPackages[0] || "", type: "", extras: [] }]);
@@ -54,14 +56,14 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
     .filter(Boolean)
     .join(", ") || "Nincs megadva szolgáltatás";
 
-  const { message: generatedMessage, total: estimatedTotal, items: structuredItems } = useMemo(() => {
+  const { message: generatedMessage, total: estimatedTotal, subtotal: estimatedSubtotal, delivery: estimatedDelivery, items: structuredItems } = useMemo(() => {
     let total = 0;
     if (!advancedMode) {
       let result = simpleMessage;
       if (simpleMessage.trim() === "") {
         result = "Nincs megadva további információ.";
       }
-      return { message: result, total: 0, items: [] };
+      return { message: result, total: 0, subtotal: 0, delivery: 0, items: [] };
     }
 
     let msg = "";
@@ -116,19 +118,23 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       upholsteries.forEach((u, i) => {
         let uPrice = Number(pricingUph?.types?.[u.type]) || 0;
         if (isNaN(uPrice)) uPrice = 0;
+        
+        let qty = u.quantity || 1;
+        let rowPrice = uPrice * qty;
+        uphTotal += rowPrice;
+        total += rowPrice;
 
-        uphTotal += uPrice;
-        total += uPrice;
+        for (let j = 0; j < qty; j++) {
+          items.push({
+            service: 'Kárpit',
+            type: u.type,
+            options: u.desc ? [u.desc] : [],
+            quantity: 1,
+            price: uPrice
+          });
+        }
 
-        items.push({
-          service: 'Kárpit',
-          type: u.type,
-          options: u.desc ? [u.desc] : [],
-          quantity: 1,
-          price: uPrice
-        });
-
-        msg += `${i + 1}. ${u.type}${u.desc ? ` - Részletek: ${u.desc}` : ""} (Becsült ár: ~${uPrice.toLocaleString('hu-HU')} Ft)\n`;
+        msg += `${i + 1}. ${u.type}${u.desc ? ` - Részletek: ${u.desc}` : ""} | ${qty} db (Becsült ár: ~${rowPrice.toLocaleString('hu-HU')} Ft)\n`;
       });
       msg += `\nÖsszes Kárpit kb. ${uphTotal.toLocaleString('hu-HU')} Ft\n\n`;
     }
@@ -165,15 +171,30 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       msg += `\nÖsszes Autó kb. ${carsTotal.toLocaleString('hu-HU')} Ft\n\n`;
     }
 
-    if (total > 0 && !isNaN(total)) {
-      msg += `==========================\nTeljes Becsült Végösszeg: ~${total.toLocaleString('hu-HU')} Ft\n==========================`;
+    let subtotal = total;
+    let delivery = 0;
+    
+    if (subtotal > 0 && !isNaN(subtotal)) {
+      if (subtotal < deliveryFeeLimit) {
+        delivery = deliveryFeeBase;
+      }
+      total = subtotal + delivery;
+
+      if (delivery > 0) {
+        msg += `\nKiszállási díj: ${delivery.toLocaleString('hu-HU')} Ft (Ingyenes kiszállítás ${deliveryFeeLimit.toLocaleString('hu-HU')} Ft felett)\n`;
+      } else {
+        msg += `\nKiszállási díj: Ingyenes (A rendelés elérte a ${deliveryFeeLimit.toLocaleString('hu-HU')} Ft-ot)\n`;
+      }
+      
+      msg += `==========================\nTeljes Becsült Végösszeg (Kiszállással): ~${total.toLocaleString('hu-HU')} Ft\n==========================`;
     } else {
       total = 0;
+      subtotal = 0;
     }
 
     const finalMsg = msg.trim();
-    return { message: finalMsg ? finalMsg : "Haladó mód lett kiválasztva, de nem lett tétel hozzáadva.", total, items };
-  }, [advancedMode, simpleMessage, services, rugs, upholsteries, cars, pricingRug, pricingUph, pricingCar]);
+    return { message: finalMsg ? finalMsg : "Haladó mód lett kiválasztva, de nem lett tétel hozzáadva.", total, subtotal, delivery, items };
+  }, [advancedMode, simpleMessage, services, rugs, upholsteries, cars, pricingRug, pricingUph, pricingCar, deliveryFeeBase, deliveryFeeLimit]);
 
   const handleServiceToggle = (key: keyof typeof services) => {
     setServices((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -187,14 +208,18 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       <input type="hidden" name="total" value={estimatedTotal || 0} />
       <input type="hidden" name="items_json" value={JSON.stringify(structuredItems)} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">Teljes Név *</label>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Név *</label>
           <input type="text" name="name" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="Példa János" />
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Telefonszám *</label>
           <input type="tel" name="phone" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="+36 30 123 4567" />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Email Cím *</label>
+          <input type="email" name="email" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="pelda@email.hu" />
         </div>
       </div>
       
@@ -341,6 +366,10 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
                         {uphTypes.map(t => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </div>
+                    <div className="w-24">
+                      <label className="block text-xs text-gray-500 mb-1">Db</label>
+                      <input type="number" min="1" value={uph.quantity || 1} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].quantity = Math.max(1, parseInt(e.target.value) || 1); setUpholsteries(newUph); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                    </div>
                     <div className="flex-1">
                       <label className="block text-xs text-gray-500 mb-1">Méretek / Részletek</label>
                       <input type="text" value={uph.desc} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].desc = e.target.value; setUpholsteries(newUph); }} placeholder="Pl: 3 személyes L-alakú" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
@@ -419,6 +448,37 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
             {!services.rug && !services.upholstery && !services.car && (
               <p className="text-gray-500 italic text-sm">A haladó mód használatához válasszon ki fent legalább egy szolgáltatást.</p>
             )}
+          </div>
+        )}
+      </div>
+
+      {/* Ez a konténer rejthető el később egyszerűen css-el vagy feltétellel */}
+      <div className="quote-summary-container">
+        {advancedMode && estimatedTotal > 0 && (
+          <div className="bg-[#3AC2FE]/10 border border-[#3AC2FE]/30 rounded-2xl p-6 flex flex-col gap-4 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#3AC2FE]/20 pb-4">
+              <div>
+                <h4 className="text-lg font-bold text-[#1D63B7]">Kiszállási díj</h4>
+                {estimatedDelivery === 0 ? (
+                  <p className="text-sm text-gray-500 mt-1">A rendelés elérte a(z) {deliveryFeeLimit.toLocaleString('hu-HU')} Ft-os limitet.</p>
+                ) : (
+                  <p className="text-sm text-gray-500 mt-1">Ingyenes kiszállítás {deliveryFeeLimit.toLocaleString('hu-HU')} Ft felett.</p>
+                )}
+              </div>
+              <div className="text-xl font-bold text-[#181A2C]">
+                {estimatedDelivery === 0 ? 'Ingyenes' : `${estimatedDelivery.toLocaleString('hu-HU')} Ft`}
+              </div>
+            </div>
+            
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h4 className="text-2xl font-black text-[#1D63B7]">Becsült Végösszeg</h4>
+                <p className="text-sm text-gray-500 mt-1">Az itt látható ár tájékoztató jellegű a megadott adatok alapján.</p>
+              </div>
+              <div className="text-4xl font-black text-[#181A2C]">
+                ~{estimatedTotal.toLocaleString('hu-HU')} <span className="text-xl text-gray-500">Ft</span>
+              </div>
+            </div>
           </div>
         )}
       </div>

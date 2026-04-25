@@ -52,6 +52,7 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   const [customerInfo, setCustomerInfo] = useState({ 
     name: initialJob?.name || '', 
     phone: initialJob?.phone || '',
+    email: initialJob?.email || '',
     address: initialJob?.address || '', 
     notes: initialJob?.notes || '' 
   });
@@ -79,8 +80,14 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   const addUph = () => {
     let base = pricingUpholstery.types[uph.type] || 0;
     let optPrice = uph.options.reduce((s, e) => s + (pricingUpholstery.options[e] || 0), 0);
-    let price = (base + optPrice) * uph.quantity;
-    setItems([...items, { ...uph, service: 'Kárpit', price }]);
+    let pricePerItem = base + optPrice;
+    
+    let newItems = [];
+    let qty = uph.quantity || 1;
+    for(let i=0; i<qty; i++) {
+      newItems.push({ ...uph, service: 'Kárpit', quantity: 1, price: pricePerItem });
+    }
+    setItems([...items, ...newItems]);
   };
 
   const addCar = () => {

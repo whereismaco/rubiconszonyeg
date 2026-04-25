@@ -37,13 +37,14 @@ export async function getJobById(id: number) {
 export async function updateJob(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE jobs 
-    SET name = ?, phone = ?, address = ?, map_link = ?, total = ?, notes = ?, data_json = ?
+    SET name = ?, phone = ?, email = ?, address = ?, map_link = ?, total = ?, notes = ?, data_json = ?
     WHERE id = ?
   `);
   
   stmt.run(
     data.name,
     data.phone,
+    data.email,
     data.address,
     `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
     data.total,
@@ -86,13 +87,14 @@ import nodemailer from 'nodemailer';
 export async function createJob(data: any) {
   const status = data.status || 'Felvételre vár';
   const stmt = db.prepare(`
-    INSERT INTO jobs (name, phone, address, map_link, status, total, notes, data_json)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO jobs (name, phone, email, address, map_link, status, total, notes, data_json)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   stmt.run(
     data.name,
     data.phone,
+    data.email,
     data.address,
     `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
     status,
@@ -124,15 +126,16 @@ export async function createJob(data: any) {
       itemsHtml += '</ul>';
     }
 
-    const mailOptions = {
+    const mailOptions: any = {
       from: '"Rubicon Rendszer" <info@rubiconszonyeg.hu>',
       to: 'info@rubiconszonyeg.hu',
       subject: `Új Ajánlatkérés érkezett: ${data.name}`,
       html: `
         <h2>Új Ajánlatkérés a Weboldalról</h2>
         <p><b>Név:</b> ${data.name}</p>
-        <p><b>Cím:</b> ${data.address}</p>
+        <p><b>Email:</b> ${data.email || 'Nincs megadva'}</p>
         <p><b>Telefon:</b> ${data.phone || 'Nincs megadva'}</p>
+        <p><b>Cím:</b> ${data.address}</p>
         <p><b>Végösszeg (Becsült):</b> ${data.total.toLocaleString('hu-HU')} Ft</p>
         <hr />
         <h3>Megjegyzés / Üzenet:</h3>
@@ -142,6 +145,10 @@ export async function createJob(data: any) {
         <p><a href="https://rubiconszonyeg.hu/portal">Megtekintés az Admin Portálon</a></p>
       `,
     };
+
+    if (data.email) {
+      mailOptions.replyTo = data.email;
+    }
 
     await transporter.sendMail(mailOptions);
     console.log("Értesítő email sikeresen elküldve.");

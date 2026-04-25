@@ -51,6 +51,12 @@ try {
     // Column might already exist, ignore
   }
 
+  try {
+    db.exec(`ALTER TABLE jobs ADD COLUMN email TEXT;`);
+  } catch (e: any) {
+    // Column might already exist, ignore
+  }
+
   // Default settings insertion
   const defaultSettings = [
     ['company_name', 'Rubicon Szőnyegtisztítás'],
