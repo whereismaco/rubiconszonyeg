@@ -81,15 +81,18 @@ export async function updateJobStatus(id: number, newStatus: string) {
   }
 }
 
+import nodemailer from 'nodemailer';
+
 export async function createJob(data: any) {
   const status = data.status || 'Felvételre vár';
   const stmt = db.prepare(`
-    INSERT INTO jobs (name, address, map_link, status, total, notes, data_json)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO jobs (name, phone, address, map_link, status, total, notes, data_json)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   stmt.run(
     data.name,
+    data.phone,
     data.address,
     `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
     status,
@@ -98,7 +101,54 @@ export async function createJob(data: any) {
     JSON.stringify(data.items)
   );
 
-  revalidatePath('/portal');}
+  revalidatePath('/portal');
+
+  // Send Email Notification
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'smtp.hostinger.com',
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: process.env.SMTP_USER || 'info@rubiconszonyeg.hu',
+        pass: process.env.SMTP_PASS || '', 
+      },
+    });
+
+    let itemsHtml = '';
+    if (data.items && data.items.length > 0) {
+      itemsHtml = '<h3>Rendelt Tételek (Haladó Kalkulátor alapján)</h3><ul>';
+      data.items.forEach((it: any) => {
+        itemsHtml += `<li><b>${it.service}</b>: ${it.type || it.package || ''} - ~${it.price.toLocaleString('hu-HU')} Ft</li>`;
+      });
+      itemsHtml += '</ul>';
+    }
+
+    const mailOptions = {
+      from: '"Rubicon Rendszer" <info@rubiconszonyeg.hu>',
+      to: 'info@rubiconszonyeg.hu',
+      subject: `Új Ajánlatkérés érkezett: ${data.name}`,
+      html: `
+        <h2>Új Ajánlatkérés a Weboldalról</h2>
+        <p><b>Név:</b> ${data.name}</p>
+        <p><b>Cím:</b> ${data.address}</p>
+        <p><b>Telefon:</b> ${data.phone || 'Nincs megadva'}</p>
+        <p><b>Végösszeg (Becsült):</b> ${data.total.toLocaleString('hu-HU')} Ft</p>
+        <hr />
+        <h3>Megjegyzés / Üzenet:</h3>
+        <pre style="font-family: inherit; white-space: pre-wrap;">${data.notes}</pre>
+        ${itemsHtml}
+        <br />
+        <p><a href="https://rubiconszonyeg.hu/portal">Megtekintés az Admin Portálon</a></p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Értesítő email sikeresen elküldve.");
+  } catch (error) {
+    console.error("Hiba az email küldésekor:", error);
+  }
+}
 
 export async function getSettings() {
   const rows = db.prepare('SELECT * FROM settings').all() as {key: string, value: string}[];
