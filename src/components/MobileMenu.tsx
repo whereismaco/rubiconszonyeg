@@ -39,6 +39,7 @@ export default function MobileMenu() {
           <Link href="#velemenyek" onClick={closeMenu} className="text-xl font-semibold text-gray-800 hover:text-[#3AC2FE] transition-colors">Vélemények</Link>
           <Link href="#rolunk" onClick={closeMenu} className="text-xl font-semibold text-gray-800 hover:text-[#3AC2FE] transition-colors">Rólunk</Link>
           <Link href="#szolgaltatasok" onClick={closeMenu} className="text-xl font-semibold text-gray-800 hover:text-[#3AC2FE] transition-colors">Szolgáltatásaink</Link>
+          <Link href="#referenciak" onClick={closeMenu} className="text-xl font-semibold text-gray-800 hover:text-[#3AC2FE] transition-colors">Referenciák</Link>
           <Link href="#arak" onClick={closeMenu} className="text-xl font-semibold text-gray-800 hover:text-[#3AC2FE] transition-colors">Árak</Link>
           <a href="#kapcsolat" onClick={closeMenu} className="bg-[#1D63B7] text-center text-white px-6 py-4 rounded-full font-bold hover:bg-[#3AC2FE] transition-all shadow-md mt-4">
             Ajánlatkérés

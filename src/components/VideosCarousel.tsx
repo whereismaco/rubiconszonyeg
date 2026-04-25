@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import BeforeAfterGallery from "./BeforeAfterGallery";
 
 interface VideosCarouselProps {
   title: string;
@@ -61,7 +62,7 @@ export default function VideosCarousel({
   };
 
   return (
-    <section id="videok" className="py-32 bg-white relative">
+    <section id="referenciak" className="py-32 bg-white relative">
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h3 className="text-4xl md:text-5xl font-bold text-[#1D63B7] mb-6">{title}</h3>
@@ -116,6 +117,16 @@ export default function VideosCarousel({
             </button>
           </div>
         </div>
+
+        {/* Előtte-Utána Galéria */}
+        <div className="mt-32">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h3 className="text-3xl md:text-4xl font-bold text-[#181A2C] mb-4">Varázslatos Előtte-Utána Eredmények</h3>
+            <p className="text-lg text-gray-600 font-light">Nézze meg a saját szemével, mire képes a Rubicon mélytisztítási technológiája!</p>
+          </div>
+          <BeforeAfterGallery />
+        </div>
+
       </div>
     </section>
   );

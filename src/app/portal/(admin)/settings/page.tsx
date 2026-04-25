@@ -1,13 +1,15 @@
 import { getSettings, updateSetting } from '@/lib/actions';
-import { Save } from 'lucide-react';
+import { Save, CheckCircle2 } from 'lucide-react';
 import PricingEditor from '@/components/admin/PricingEditor';
 import EmailListEditor from '@/components/admin/EmailListEditor';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
-export default async function SettingsPage() {
+export default async function SettingsPage({ searchParams }: { searchParams: Promise<{ success?: string }> }) {
   const settings = await getSettings();
+  const { success } = await searchParams;
 
   async function handleSave(formData: FormData) {
     'use server';
@@ -28,13 +30,22 @@ export default async function SettingsPage() {
     }
     revalidatePath('/portal/settings');
     revalidatePath('/'); // refresh homepage cache
+    redirect('/portal/settings?success=1');
   }
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <h1 className="text-3xl font-bold text-[#181A2C]">Beállítások</h1>
-        <p className="text-gray-500 mt-1">Cégadatok, tartalom és globális árak kezelése</p>
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-[#181A2C]">Beállítások</h1>
+          <p className="text-gray-500 mt-1">Cégadatok, tartalom és globális árak kezelése</p>
+        </div>
+        {success && (
+          <div className="bg-green-50 text-green-700 px-4 py-2 rounded-lg flex items-center gap-2 font-bold animate-in slide-in-from-right-4 fade-in duration-300">
+            <CheckCircle2 size={20} />
+            Sikeresen mentve!
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

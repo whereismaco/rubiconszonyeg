@@ -113,7 +113,7 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-[#EDEDED] text-[#181A2C] font-sans selection:bg-[#3AC2FE] selection:text-white scroll-smooth">
       {/* Navbar */}
-      <header className="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all">
+      <header className="bg-white/90 backdrop-blur-md shadow-sm fixed top-0 w-full z-50 transition-all">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/">
             <div className="relative h-10 w-48">
@@ -124,6 +124,7 @@ export default async function HomePage() {
             <Link href="#velemenyek" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Vélemények</Link>
             <Link href="#rolunk" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Rólunk</Link>
             <Link href="#szolgaltatasok" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Szolgáltatásaink</Link>
+            <Link href="#referenciak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Referenciák</Link>
             <Link href="#arak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Árak</Link>
             <a href="#kapcsolat" className="bg-[#1D63B7] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#3AC2FE] transition-all transform hover:scale-105 shadow-md">
               Ajánlatkérés
@@ -366,6 +367,7 @@ export default async function HomePage() {
               <li><Link href="#velemenyek" className="hover:text-white transition-colors">Vélemények</Link></li>
               <li><Link href="#rolunk" className="hover:text-white transition-colors">Rólunk</Link></li>
               <li><Link href="#szolgaltatasok" className="hover:text-white transition-colors">Szolgáltatásaink</Link></li>
+              <li><Link href="#referenciak" className="hover:text-white transition-colors">Referenciák</Link></li>
               <li><Link href="#arak" className="hover:text-white transition-colors">Árak</Link></li>
             </ul>
           </div>
