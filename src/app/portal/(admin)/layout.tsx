@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { LayoutDashboard, Calculator, Settings, LogOut, Star, Menu, X, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, Calculator, Settings, LogOut, Star, Menu, X, BarChart3, HelpCircle, FileText, Zap } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -16,10 +16,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { name: 'Irányítópult', href: '/portal', icon: LayoutDashboard },
-    { name: 'Kalkulátor (Új Munka)', href: '/portal/new', icon: Calculator },
-    { name: 'Statisztika', href: '/portal/statistics', icon: BarChart3 },
+    { name: 'Kézi Munkafelvétel', href: '/portal/new', icon: Calculator },
     { name: 'Beállítások', href: '/portal/settings', icon: Settings },
     { name: 'Értékelések', href: '/portal/reviews', icon: Star },
+    { name: 'Súgóközpont', href: '/portal/help', icon: HelpCircle },
+    { name: 'Extra Funkciók', href: '/portal/extras', icon: Zap },
+  ];
+
+  const demoItems = [
+    { name: 'Irányítópult (Auto)', href: '/portal/demo-dashboard', icon: LayoutDashboard },
+    { name: 'Intelligens Ajánlatkérő', href: '/portal/demo-quote', icon: FileText },
+    { name: 'Intelligens Kalkulátor', href: '/portal/demo-new', icon: Calculator },
+    { name: 'Statisztika (SEO+AIO)', href: '/portal/statistics', icon: BarChart3 },
   ];
 
   return (
@@ -39,6 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <p className="text-sm text-gray-400 mt-1">Adminportál</p>
         </div>
         <nav className="mt-6 flex flex-col space-y-1 px-4">
+          <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 px-4 mt-2">Menü</div>
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -48,6 +57,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#1D63B7] text-white' : 'hover:bg-[#1D63B7]/50'}`}
+              >
+                <Icon size={20} />
+                <span className="font-medium">{item.name}</span>
+              </Link>
+            );
+          })}
+
+          <div className="text-xs font-bold text-yellow-500 uppercase tracking-wider mb-2 px-4 mt-8 border-t border-gray-700 pt-6">Prémium DEMO</div>
+          {demoItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href;
+            return (
+              <Link 
+                key={item.name} 
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#3AC2FE]/20 text-[#3AC2FE]' : 'hover:bg-[#3AC2FE]/10 text-gray-300'}`}
               >
                 <Icon size={20} />
                 <span className="font-medium">{item.name}</span>

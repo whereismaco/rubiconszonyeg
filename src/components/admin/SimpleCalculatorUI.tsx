@@ -14,7 +14,7 @@ interface Props {
   initialJob?: any;
 }
 
-export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar, deliveryFeeLimit, deliveryFeeBase, initialJob }: Props) {
+export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pricingCar, deliveryFeeLimit, deliveryFeeBase, initialJob }: Props) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'rug' | 'upholstery' | 'car'>('rug');
 
@@ -34,18 +34,21 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
     length: 150, 
     material: Object.keys(pricingRug.materials || {})[0] || '', 
     condition: Object.keys(pricingRug.conditions || {})[0] || '', 
-    extras: [] as string[] 
+    extras: [] as string[], 
+    manualPrice: 0 
   });
   const [uph, setUph] = useState({ 
     type: Object.keys(pricingUpholstery.types || {})[0] || '', 
     quantity: 1, 
-    options: [] as string[] 
+    options: [] as string[], 
+    manualPrice: 0 
   });
   const [car, setCar] = useState({ 
     category: Object.keys(pricingCar.categories || {})[0] || '', 
     package: Object.keys(pricingCar.packages || {})[0] || '', 
     type: '', 
-    extras: [] as string[] 
+    extras: [] as string[], 
+    manualPrice: 0 
   });
 
   // Job Details
@@ -64,23 +67,14 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
 
   // Add Handlers
   const addRug = () => {
-    let base = pricingRug.types[rug.type] || 0;
-    let mat = pricingRug.materials[rug.material] || 0;
-    let cond = pricingRug.conditions[rug.condition] || 0;
-    let exPrice = rug.extras.reduce((s, e) => s + (pricingRug.extras[e] || 0), 0);
-
     let area = (rug.width * rug.length) / 10000;
     if (area > 0 && area < 1) area = 1;
-
-    let priceItemM2 = base + mat + cond + exPrice;
-    let price = Math.round(area * priceItemM2);
+    let price = Number(rug.manualPrice) || 0;
 
     setItems([...items, { ...rug, service: 'Szőnyeg', area, price }]);
   };
   const addUph = () => {
-    let base = pricingUpholstery.types[uph.type] || 0;
-    let optPrice = uph.options.reduce((s, e) => s + (pricingUpholstery.options[e] || 0), 0);
-    let pricePerItem = base + optPrice;
+    let pricePerItem = Number(uph.manualPrice) || 0;
     
     let newItems = [];
     let qty = uph.quantity || 1;
@@ -91,17 +85,20 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
   };
 
   const addCar = () => {
-    let pkgData = pricingCar.packages[car.package];
-    let pkgPrice = typeof pkgData === 'object' ? (pkgData.price || 0) : (Number(pkgData) || 0);
-    let catPrice = pricingCar.categories[car.category] || 0;
-    let exPrice = (car.extras || []).reduce((s, e) => s + (pricingCar.extras?.[e] || 0), 0);
-    
-    let price = pkgPrice + catPrice + exPrice;
+    let price = Number(car.manualPrice) || 0;
     setItems([...items, { ...car, service: 'Autó', price }]);
   };
 
   const handleSave = async () => {
-    alert("Ez a funkció csak a PRÉMIUM csomagban érhető el!\n\nJelenleg egy bemutató (DEMO) felületen vagy, ahol a rendszer automatikusan és hajszálpontosan számol, de a munkák mentése le van tiltva.\n\nHa szeretnéd ezt élesben használni az ügyfeleidnél, kérd az Árkalkulátor modul aktiválását!");
+    if (!customerInfo.name || !customerInfo.address) return alert("Név és Cím kötelező!");
+    if (items.length === 0) return alert("Adj hozzá legalább egy tételt!");
+    
+    if (initialJob?.id) {
+      await updateJob(initialJob.id, { ...customerInfo, items, total });
+    } else {
+      await createJob({ ...customerInfo, items, total });
+    }
+    router.push('/portal');
   };
 
   return (
@@ -169,6 +166,10 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
                     ))}
                   </div>
                 </div>
+                <div>
+                  <label className="block text-sm text-[#1D63B7] mb-1 font-bold">Kézi Ár megadása (Ft)</label>
+                  <input type="number" className="w-full border-2 border-[#1D63B7] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#3AC2FE]" value={rug.manualPrice || ''} onChange={e => setRug({...rug, manualPrice: Number(e.target.value)})} placeholder="Pl: 4500" />
+                </div>
                 <button onClick={addRug} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#3AC2FE] hover:bg-[#1D63B7] text-white py-3 rounded-xl font-medium transition-colors">
                   <Plus size={20} /> Szőnyeg hozzáadása
                 </button>
@@ -203,6 +204,10 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
                       </label>
                     ))}
                   </div>
+                </div>
+                <div>
+                  <label className="block text-sm text-[#1D63B7] mb-1 font-bold">Kézi Ár megadása / db (Ft)</label>
+                  <input type="number" className="w-full border-2 border-[#1D63B7] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#3AC2FE]" value={uph.manualPrice || ''} onChange={e => setUph({...uph, manualPrice: Number(e.target.value)})} placeholder="Pl: 5000" />
                 </div>
                 <button onClick={addUph} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#3AC2FE] hover:bg-[#1D63B7] text-white py-3 rounded-xl font-medium transition-colors">
                   <Plus size={20} /> Kárpit hozzáadása
@@ -244,6 +249,10 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
                       </label>
                     ))}
                   </div>
+                </div>
+                <div>
+                  <label className="block text-sm text-[#1D63B7] mb-1 font-bold">Kézi Ár megadása (Ft)</label>
+                  <input type="number" className="w-full border-2 border-[#1D63B7] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#3AC2FE]" value={car.manualPrice || ''} onChange={e => setCar({...car, manualPrice: Number(e.target.value)})} placeholder="Pl: 25000" />
                 </div>
                 <button onClick={addCar} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#3AC2FE] hover:bg-[#1D63B7] text-white py-3 rounded-xl font-medium transition-colors">
                   <Plus size={20} /> Autó hozzáadása
@@ -301,35 +310,10 @@ export default function CalculatorUI({ pricingRug, pricingUpholstery, pricingCar
                 <div className="flex-1">
                   <p className="font-bold text-[#181A2C]">{it.service} ({it.type || it.package || 'Egyéb'})</p>
                   <p className="text-gray-500 text-xs mt-1">
-                    {it.service === 'Szőnyeg' ? `${it.width || it.w}x${it.length || it.l}cm (${it.area?.toFixed(2)}m2) - ${it.condition}` : ''}
+                    {it.service === 'Szőnyeg' ? `${it.width || it.w}x${it.length || it.l}cm (${it.area?.toFixed(2)}m2) ${it.condition}` : ''}
                     {it.service === 'Kárpit' ? `${it.quantity || 1} darab` : ''}
                     {it.service === 'Autó' ? `${it.category} kategória` : ''}
                   </p>
-                  
-                  {/* Extrák kilistázása */}
-                  {(it.extras || it.options)?.length > 0 && (
-                    <div className="mt-2 pt-2 border-t border-gray-200/50 space-y-1">
-                      <span className="text-[10px] uppercase font-bold text-[#1D63B7] tracking-wider mb-1 block">Kiválasztott extrák</span>
-                      {(it.extras || it.options).map((ext: string, i: number) => {
-                        let extPrice = 0;
-                        if (it.service === 'Szőnyeg') {
-                          let baseExt = pricingRug?.extras?.[ext] || 0;
-                          extPrice = Math.round(baseExt * (it.area || 1));
-                        } else if (it.service === 'Kárpit') {
-                          extPrice = pricingUpholstery?.options?.[ext] || 0;
-                        } else if (it.service === 'Autó') {
-                          extPrice = pricingCar?.extras?.[ext] || 0;
-                        }
-                        
-                        return (
-                          <div key={i} className="flex justify-between text-xs text-gray-600">
-                            <span className="truncate pr-2">- {ext}</span>
-                            <span className="font-medium shrink-0">+{extPrice.toLocaleString('hu-HU')} Ft</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
                 </div>
                 <div className="flex flex-col items-end pl-2">
                   <span className="font-medium">{it.price.toLocaleString('hu-HU')} Ft</span>

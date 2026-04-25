@@ -11,16 +11,18 @@ interface QuoteFormProps {
   pricingCar: any;
   deliveryFeeBase: number;
   deliveryFeeLimit: number;
+  publicMode?: boolean;
+  demoMode?: boolean;
 }
 
-export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, pricingCar, deliveryFeeBase, deliveryFeeLimit }: QuoteFormProps) {
+export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, pricingCar, deliveryFeeBase, deliveryFeeLimit, publicMode = true, demoMode = false }: QuoteFormProps) {
   const [services, setServices] = useState({
     rug: false,
     upholstery: false,
     car: false,
   });
 
-  const [advancedMode, setAdvancedMode] = useState(false);
+  const [advancedMode, setAdvancedMode] = useState(demoMode ? true : false);
   const [simpleMessage, setSimpleMessage] = useState("");
 
   // Dynamic Options
@@ -200,7 +202,13 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
     setServices((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (demoMode) {
+      e.preventDefault();
+      alert("Ez a funkció csak a PRÉMIUM csomagban érhető el!\n\nHa szeretnéd, hogy a látogatóid is tudják használni ezt a pontos, intelligens árkalkulátort a weboldaladon, kérd az Árkalkulátor modul aktiválását!");
+      return;
+    }
+
     if (typeof window !== "undefined") {
       const w = window as any;
       const value = estimatedTotal || 0;
@@ -216,7 +224,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
   };
 
   return (
-    <form action={action} onSubmit={handleSubmit} className="space-y-8">
+    <form action={demoMode ? undefined : (action as any)} onSubmit={handleSubmit} className="space-y-8">
       {/* Hidden inputs for Server Action */}
       <input type="hidden" name="service_type" value={generatedServiceType} />
       <input type="hidden" name="message" value={generatedMessage} />
@@ -273,14 +281,16 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       <div className="pt-4 border-t border-gray-100">
         <div className="flex items-center justify-between mb-4">
           <label className="block text-sm font-bold text-gray-700">Részletek (Opcionális)</label>
-          <button 
-            type="button" 
-            onClick={() => setAdvancedMode(!advancedMode)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${advancedMode ? 'bg-[#181A2C] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-          >
-            <Calculator size={16} />
-            Haladó Mód (Pontos számolás)
-          </button>
+          {!publicMode && (
+            <button 
+              type="button" 
+              onClick={() => setAdvancedMode(!advancedMode)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${advancedMode ? 'bg-[#181A2C] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              <Calculator size={16} />
+              Haladó Mód (Pontos számolás)
+            </button>
+          )}
         </div>
 
         {!advancedMode ? (
