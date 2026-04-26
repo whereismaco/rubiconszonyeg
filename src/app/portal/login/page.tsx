@@ -23,7 +23,7 @@ function LoginContent() {
 
   return (
     <div className="bg-[#EDEDED] max-w-sm w-full p-8 rounded-xl shadow-2xl">
-      <h1 className="text-3xl font-bold text-[#1D63B7] mb-6 text-center">Admin Belépés</h1>
+      <h1 className="text-3xl font-bold text-[#064E3B] mb-6 text-center">Admin Belépés</h1>
       
       {error && <div className="bg-red-100 text-red-600 p-3 rounded mb-6 text-sm text-center">{error}</div>}
       

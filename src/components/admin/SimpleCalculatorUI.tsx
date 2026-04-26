@@ -111,7 +111,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab as any)}
-                className={`px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${activeTab === tab ? 'bg-[#1D63B7] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                className={`px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${activeTab === tab ? 'bg-[#064E3B] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
               >
                 {tab === 'rug' ? 'Szőnyegtisztítás' : tab === 'upholstery' ? 'Bútorkárpit' : 'Autótisztítás'}
               </button>
@@ -167,10 +167,10 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm text-[#1D63B7] mb-1 font-bold">Kézi Ár megadása (Ft)</label>
-                  <input type="number" className="w-full border-2 border-[#1D63B7] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#3AC2FE]" value={rug.manualPrice || ''} onChange={e => setRug({...rug, manualPrice: Number(e.target.value)})} placeholder="Pl: 4500" />
+                  <label className="block text-sm text-[#064E3B] mb-1 font-bold">Kézi Ár megadása (Ft)</label>
+                  <input type="number" className="w-full border-2 border-[#064E3B] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#059669]" value={rug.manualPrice || ''} onChange={e => setRug({...rug, manualPrice: Number(e.target.value)})} placeholder="Pl: 4500" />
                 </div>
-                <button onClick={addRug} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#3AC2FE] hover:bg-[#1D63B7] text-white py-3 rounded-xl font-medium transition-colors">
+                <button onClick={addRug} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#059669] hover:bg-[#064E3B] text-white py-3 rounded-xl font-medium transition-colors">
                   <Plus size={20} /> Szőnyeg hozzáadása
                 </button>
               </div>
@@ -206,10 +206,10 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm text-[#1D63B7] mb-1 font-bold">Kézi Ár megadása / db (Ft)</label>
-                  <input type="number" className="w-full border-2 border-[#1D63B7] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#3AC2FE]" value={uph.manualPrice || ''} onChange={e => setUph({...uph, manualPrice: Number(e.target.value)})} placeholder="Pl: 5000" />
+                  <label className="block text-sm text-[#064E3B] mb-1 font-bold">Kézi Ár megadása / db (Ft)</label>
+                  <input type="number" className="w-full border-2 border-[#064E3B] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#059669]" value={uph.manualPrice || ''} onChange={e => setUph({...uph, manualPrice: Number(e.target.value)})} placeholder="Pl: 5000" />
                 </div>
-                <button onClick={addUph} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#3AC2FE] hover:bg-[#1D63B7] text-white py-3 rounded-xl font-medium transition-colors">
+                <button onClick={addUph} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#059669] hover:bg-[#064E3B] text-white py-3 rounded-xl font-medium transition-colors">
                   <Plus size={20} /> Kárpit hozzáadása
                 </button>
               </div>
@@ -240,7 +240,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
                   <label className="block text-sm text-gray-500 mb-2">Kiegészítő Extrák</label>
                   <div className="flex flex-wrap gap-2">
                     {pricingCar.extras && Object.keys(pricingCar.extras).map(ext => (
-                      <label key={ext} className={`flex items-center gap-2 border p-2 rounded-lg text-sm bg-gray-50 cursor-pointer transition-all ${car.extras.includes(ext) ? 'border-[#3AC2FE] bg-[#3AC2FE]/10 ring-1 ring-[#3AC2FE]' : ''}`}>
+                      <label key={ext} className={`flex items-center gap-2 border p-2 rounded-lg text-sm bg-gray-50 cursor-pointer transition-all ${car.extras.includes(ext) ? 'border-[#059669] bg-[#059669]/10 ring-1 ring-[#059669]' : ''}`}>
                         <input type="checkbox" className="hidden" checked={car.extras.includes(ext)} onChange={e => {
                           const ne = e.target.checked ? [...car.extras, ext] : car.extras.filter(x => x !== ext);
                           setCar({...car, extras: ne});
@@ -251,10 +251,10 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm text-[#1D63B7] mb-1 font-bold">Kézi Ár megadása (Ft)</label>
-                  <input type="number" className="w-full border-2 border-[#1D63B7] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#3AC2FE]" value={car.manualPrice || ''} onChange={e => setCar({...car, manualPrice: Number(e.target.value)})} placeholder="Pl: 25000" />
+                  <label className="block text-sm text-[#064E3B] mb-1 font-bold">Kézi Ár megadása (Ft)</label>
+                  <input type="number" className="w-full border-2 border-[#064E3B] rounded-lg p-2 font-bold focus:outline-none focus:ring-2 focus:ring-[#059669]" value={car.manualPrice || ''} onChange={e => setCar({...car, manualPrice: Number(e.target.value)})} placeholder="Pl: 25000" />
                 </div>
-                <button onClick={addCar} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#3AC2FE] hover:bg-[#1D63B7] text-white py-3 rounded-xl font-medium transition-colors">
+                <button onClick={addCar} className="mt-4 flex items-center justify-center gap-2 w-full bg-[#059669] hover:bg-[#064E3B] text-white py-3 rounded-xl font-medium transition-colors">
                   <Plus size={20} /> Autó hozzáadása
                 </button>
               </div>
@@ -265,7 +265,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
         {/* Customer Forms */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
           <h3 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-4">
-            <User className="text-[#1D63B7]" /> Ügyfél Adatok
+            <User className="text-[#064E3B]" /> Ügyfél Adatok
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -281,7 +281,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
               <div className="flex gap-2">
                 <input type="text" className="flex-1 w-full border rounded-lg p-2" value={customerInfo.address} onChange={e => setCustomerInfo({...customerInfo, address: e.target.value})} placeholder="1024, Budapest, Példa utca 12." required />
                 {customerInfo.address && (
-                  <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(customerInfo.address)}`} target="_blank" rel="noopener noreferrer" className="bg-[#1D63B7] hover:bg-[#3AC2FE] text-white p-2 rounded-lg transition-colors flex items-center justify-center shrink-0" title="Útvonaltervezés Térképen">
+                  <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(customerInfo.address)}`} target="_blank" rel="noopener noreferrer" className="bg-[#064E3B] hover:bg-[#059669] text-white p-2 rounded-lg transition-colors flex items-center justify-center shrink-0" title="Útvonaltervezés Térképen">
                     <MapPin size={20} />
                   </a>
                 )}
@@ -298,7 +298,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
       {/* Cart Summary */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col h-fit sticky top-6">
         <h3 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-4 border-b pb-4">
-          <ShoppingCart className="text-[#1D63B7]" /> Rendelés Összesítő
+          <ShoppingCart className="text-[#064E3B]" /> Rendelés Összesítő
         </h3>
         
         <div className="flex-1 overflow-y-auto space-y-3 min-h-[150px] mb-6">
@@ -337,7 +337,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
             </span>
             <span>{delivery.toLocaleString('hu-HU')} Ft</span>
           </div>
-          <div className="flex justify-between text-xl font-black text-[#1D63B7] pt-2 border-t mt-2">
+          <div className="flex justify-between text-xl font-black text-[#064E3B] pt-2 border-t mt-2">
             <span>Végösszeg</span>
             <span>{total.toLocaleString('hu-HU')} Ft</span>
           </div>
@@ -345,7 +345,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
 
         <button
           onClick={handleSave}
-          className="flex items-center justify-center gap-2 w-full bg-[#1D63B7] hover:bg-[#3AC2FE] text-white py-4 rounded-xl font-bold transition-all transform active:scale-95 shadow-lg"
+          className="flex items-center justify-center gap-2 w-full bg-[#064E3B] hover:bg-[#059669] text-white py-4 rounded-xl font-bold transition-all transform active:scale-95 shadow-lg"
         >
           <Save size={20} /> {initialJob ? 'Változtatások Mentése' : 'Munka Mentése'}
         </button>      </div>

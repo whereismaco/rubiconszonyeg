@@ -4,7 +4,7 @@ export default function HelpCenterPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <div className="flex items-center gap-3 mb-8">
-        <div className="p-3 bg-[#1D63B7]/10 text-[#1D63B7] rounded-xl">
+        <div className="p-3 bg-[#064E3B]/10 text-[#064E3B] rounded-xl">
           <HelpCircle size={32} />
         </div>
         <div>
@@ -16,7 +16,7 @@ export default function HelpCenterPage() {
       {/* Általános áttekintés */}
       <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
         <h2 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-6">
-          <LayoutDashboard className="text-[#3AC2FE]" /> 1. Irányítópult (Munkák kezelése)
+          <LayoutDashboard className="text-[#059669]" /> 1. Irányítópult (Munkák kezelése)
         </h2>
         <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
@@ -34,7 +34,7 @@ export default function HelpCenterPage() {
       {/* Munkafelvétel */}
       <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
         <h2 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-6">
-          <Calculator className="text-[#3AC2FE]" /> 2. Kézi Munkafelvétel (Telefonos megrendelések)
+          <Calculator className="text-[#059669]" /> 2. Kézi Munkafelvétel (Telefonos megrendelések)
         </h2>
         <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
@@ -54,18 +54,18 @@ export default function HelpCenterPage() {
       {/* Beállítások és Árazás */}
       <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
         <h2 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-6">
-          <Settings className="text-[#3AC2FE]" /> 3. Beállítások és Weboldal módosítása
+          <Settings className="text-[#059669]" /> 3. Beállítások és Weboldal módosítása
         </h2>
         <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>A Beállítások menüpontban három fő dolgot tudsz módosítani anélkül, hogy programozóhoz kellene fordulnod:</p>
           
           <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-            <h3 className="font-bold text-[#1D63B7] mb-2">A) Weboldal Szövegei (Tartalom)</h3>
+            <h3 className="font-bold text-[#064E3B] mb-2">A) Weboldal Szövegei (Tartalom)</h3>
             <p className="text-sm">Itt tudod átírni a cég nevét, a telefonszámodat, vagy épp a főoldalon lévő bemutatkozó szövegeket.</p>
           </div>
 
           <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <h3 className="font-bold text-[#1D63B7] mb-2">B) Árlista (Szolgáltatások)</h3>
+            <h3 className="font-bold text-[#064E3B] mb-2">B) Árlista (Szolgáltatások)</h3>
             <p className="text-sm mb-2">Itt adhatod meg a szőnyeg vastagságokat, kárpit típusokat és az árakat. <strong>Kérlek, nagyon figyelj az alábbiakra:</strong></p>
             <ul className="list-disc pl-5 text-sm space-y-1">
               <li>Amikor átírod az árakat, mindig <strong>csak számokat</strong> írj be! (Pl. helyes: <code>1500</code>. Helytelen: <code>1500 Ft</code>).</li>
@@ -75,7 +75,7 @@ export default function HelpCenterPage() {
           </div>
 
           <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <h3 className="font-bold text-[#1D63B7] mb-2">C) Biztonság (Ki léphet be ide?)</h3>
+            <h3 className="font-bold text-[#064E3B] mb-2">C) Biztonság (Ki léphet be ide?)</h3>
             <p className="text-sm">Az admin felület extrém biztonságos. Ide <strong>csak az léphet be, akinek az email címe fel van véve a listára</strong>! Ha hozzá akarsz adni egy munkatársat, csak írd be az ő Google (Gmail) címét is a "Biztonság" fül alatt.</p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function HelpCenterPage() {
       {/* Vélemények */}
       <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
         <h2 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-6">
-          <Star className="text-[#3AC2FE]" /> 4. Értékelések Kezelése
+          <Star className="text-[#059669]" /> 4. Értékelések Kezelése
         </h2>
         <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
@@ -96,7 +96,7 @@ export default function HelpCenterPage() {
       </div>
 
       {/* Upsell / Prémium */}
-      <div className="bg-gradient-to-r from-[#181A2C] to-[#1D63B7] rounded-3xl p-8 shadow-lg border border-gray-100 text-white">
+      <div className="bg-gradient-to-r from-[#181A2C] to-[#064E3B] rounded-3xl p-8 shadow-lg border border-gray-100 text-white">
         <h2 className="text-xl font-bold flex items-center gap-2 mb-4 text-[#FEC500]">
           <Lock size={20} /> Mi az a "Prémium DEMO" a menüben?
         </h2>

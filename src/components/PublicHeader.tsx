@@ -14,13 +14,13 @@ export default function PublicHeader({ settings }: { settings: any }) {
           </div>
         </Link>
         <nav className="hidden md:flex gap-8 items-center">
-          <Link href="/#velemenyek" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Vélemények</Link>
-          <Link href="/#rolunk" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Rólunk</Link>
-          <Link href="/#szolgaltatasok" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Szolgáltatásaink</Link>
-          <Link href="/#referenciak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Referenciák</Link>
-          <Link href="/#arak" className="font-semibold text-gray-600 hover:text-[#3AC2FE] transition-colors">Árak</Link>
-          <a href="/#kapcsolat" className="bg-[#1D63B7] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#3AC2FE] transition-all transform hover:scale-105 shadow-md">
-            Ajánlatkérés
+          <Link href="/#velemenyek" className="font-semibold text-gray-600 hover:text-[#059669] transition-colors">Vélemények</Link>
+          <Link href="/#rolunk" className="font-semibold text-gray-600 hover:text-[#059669] transition-colors">Rólunk</Link>
+          <Link href="/#szolgaltatasok" className="font-semibold text-gray-600 hover:text-[#059669] transition-colors">Szolgáltatásaink</Link>
+          <Link href="/#referenciak" className="font-semibold text-gray-600 hover:text-[#059669] transition-colors">Referenciák</Link>
+          <Link href="/#arak" className="font-semibold text-gray-600 hover:text-[#059669] transition-colors">Árak</Link>
+          <a href="/#kapcsolat" className="bg-[#064E3B] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#059669] transition-all transform hover:scale-105 shadow-md">
+            Kapcsolat
           </a>
         </nav>
         

@@ -129,9 +129,9 @@ export async function createJob(data: any) {
     const mailOptions: any = {
       from: '"Rubicon Rendszer" <info@rubiconszonyeg.hu>',
       to: 'info@rubiconszonyeg.hu',
-      subject: `Új Ajánlatkérés érkezett: ${data.name}`,
+      subject: `Új Érdeklődés érkezett: ${data.name}`,
       html: `
-        <h2>Új Ajánlatkérés a Weboldalról</h2>
+        <h2>Új Érdeklődés a Weboldalról</h2>
         <p><b>Név:</b> ${data.name}</p>
         <p><b>Email:</b> ${data.email || 'Nincs megadva'}</p>
         <p><b>Telefon:</b> ${data.phone || 'Nincs megadva'}</p>

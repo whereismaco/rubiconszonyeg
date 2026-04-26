@@ -53,7 +53,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
         {/* Általános Cégadatok */}
         <form action={handleSave} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Általános Cégadatok</h3>
+            <h3 className="text-xl font-bold text-[#064E3B] border-b pb-2 mb-4">Általános Cégadatok</h3>
             
             <div className="space-y-4">
               <div>
@@ -86,7 +86,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
             </div>
           </div>
           <div className="pt-4 border-t border-gray-100 flex justify-end">
-            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+            <button type="submit" className="flex items-center gap-2 bg-[#059669] hover:bg-[#064E3B] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
               <Save size={18} /> Mentés
             </button>
           </div>
@@ -95,7 +95,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
         {/* Kiszállási Díjak & Hozzáférés */}
         <form action={handleSave} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Működési Beállítások</h3>
+            <h3 className="text-xl font-bold text-[#064E3B] border-b pb-2 mb-4">Működési Beállítások</h3>
             
             <div className="space-y-4">
               <div>
@@ -113,7 +113,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
             </div>
           </div>
           <div className="pt-4 mt-6 border-t border-gray-100 flex justify-end">
-            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+            <button type="submit" className="flex items-center gap-2 bg-[#059669] hover:bg-[#064E3B] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
               <Save size={18} /> Mentés
             </button>
           </div>
@@ -122,7 +122,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
         {/* --- ÚJ: Szövegek Szerkesztése --- */}
         <form action={handleSave} className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6 flex flex-col justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Weboldal Tartalom (Szerkeszthető Szövegek)</h3>
+            <h3 className="text-2xl font-bold text-[#064E3B] border-b pb-2 mb-4">Weboldal Tartalom (Szerkeszthető Szövegek)</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Hero Szekció */}
@@ -146,7 +146,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Gomb Szövege</label>
-                <input type="text" name="hero_cta" defaultValue={settings.hero_cta || 'Ingyenes Ajánlatkérés'} className="w-full border rounded-lg p-2 text-sm" />
+                <input type="text" name="hero_cta" defaultValue={settings.hero_cta || 'Érdeklődjön most'} className="w-full border rounded-lg p-2 text-sm" />
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Háttérkép URL (pl. /images/rubicon_szonyegtisztitas_hero_img.webp)</label>
@@ -289,7 +289,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
               <h4 className="font-bold text-[#181A2C]">6. Kapcsolat Szekció</h4>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Cím</label>
-                <input type="text" name="contact_title" defaultValue={settings.contact_title || 'Kérjen ajánlatot most, és szabaduljon meg a takarítás gondjától!'} className="w-full border rounded-lg p-2 text-sm" />
+                <input type="text" name="contact_title" defaultValue={settings.contact_title || 'Érdeklődjön most, és szabaduljon meg a takarítás gondjától!'} className="w-full border rounded-lg p-2 text-sm" />
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Leírás</label>
@@ -297,14 +297,14 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Gomb Szövege</label>
-                <input type="text" name="contact_cta" defaultValue={settings.contact_cta || 'Kérem a tiszta szőnyeget – Ajánlatküldés'} className="w-full border rounded-lg p-2 text-sm" />
+                <input type="text" name="contact_cta" defaultValue={settings.contact_cta || 'Kérem a tiszta szőnyeget – Érdeklődés'} className="w-full border rounded-lg p-2 text-sm" />
               </div>
             </div>
 
           </div>
           </div>
           <div className="pt-4 mt-6 border-t border-gray-100 flex justify-end">
-            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+            <button type="submit" className="flex items-center gap-2 bg-[#059669] hover:bg-[#064E3B] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
               <Save size={18} /> Tartalmak Mentése
             </button>
           </div>
@@ -312,7 +312,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
 
         {/* Árlisták (Vizuális Szerkesztő) */}
         <form action={handleSave} className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-          <h3 className="text-xl font-bold text-[#1D63B7] border-b pb-2 mb-4">Árlista Konfiguráció</h3>
+          <h3 className="text-xl font-bold text-[#064E3B] border-b pb-2 mb-4">Árlista Konfiguráció</h3>
           <p className="text-sm text-gray-500 mb-6">Itt tudod módosítani az alapárakat, a választható extrákat és az anyagokat. A megadott értékek azonnal frissülnek a főoldalon és az új munkák kalkulátorában.</p>
           
           <PricingEditor 
@@ -321,7 +321,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
             initialCar={settings.pricing_car} 
           />
           <div className="pt-4 mt-6 border-t border-gray-100 flex justify-end">
-            <button type="submit" className="flex items-center gap-2 bg-[#3AC2FE] hover:bg-[#1D63B7] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
+            <button type="submit" className="flex items-center gap-2 bg-[#059669] hover:bg-[#064E3B] text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-sm">
               <Save size={18} /> Árak Mentése
             </button>
           </div>

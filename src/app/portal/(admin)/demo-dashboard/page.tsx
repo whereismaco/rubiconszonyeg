@@ -64,7 +64,7 @@ export default async function DashboardPage() {
                   <td className="p-4">
                     <div className="font-medium text-[#181A2C]">{job.name}</div>
                     {job.phone ? (
-                      <a href={`tel:${job.phone.replace(/\s+/g, '')}`} className="flex items-center text-gray-500 hover:text-[#1D63B7] text-sm mt-1">
+                      <a href={`tel:${job.phone.replace(/\s+/g, '')}`} className="flex items-center text-gray-500 hover:text-[#064E3B] text-sm mt-1">
                         <Phone size={14} className="mr-1" />
                         {job.phone}
                       </a>
@@ -75,7 +75,7 @@ export default async function DashboardPage() {
                       </span>
                     )}
                     {job.email && (
-                      <a href={`mailto:${job.email}`} className="flex items-center text-gray-500 hover:text-[#1D63B7] text-sm mt-1 truncate max-w-[200px]" title={job.email}>
+                      <a href={`mailto:${job.email}`} className="flex items-center text-gray-500 hover:text-[#064E3B] text-sm mt-1 truncate max-w-[200px]" title={job.email}>
                         <Mail size={14} className="mr-1 shrink-0" />
                         {job.email}
                       </a>
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
                   </td>
                   <td className="p-4">
                     {job.address && (
-                      <a href={job.map_link} target="_blank" rel="noopener noreferrer" className="flex items-center text-[#1D63B7] hover:underline text-sm">
+                      <a href={job.map_link} target="_blank" rel="noopener noreferrer" className="flex items-center text-[#064E3B] hover:underline text-sm">
                         <MapPin size={16} className="mr-1 shrink-0" />
                         <span className="line-clamp-1">{job.address}</span>
                       </a>

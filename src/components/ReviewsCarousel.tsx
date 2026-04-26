@@ -61,7 +61,7 @@ export default function ReviewsCarousel({ reviews, rating, userRatingCount, goog
         
         {/* Fejléc */}
         <div className="flex flex-col items-center text-center mb-16">
-          <span className="text-[#1D63B7] font-bold text-sm tracking-widest uppercase mb-3">
+          <span className="text-[#064E3B] font-bold text-sm tracking-widest uppercase mb-3">
             Ügyfeleink Mondták
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-[#181A2C] mb-6">
@@ -89,7 +89,7 @@ export default function ReviewsCarousel({ reviews, rating, userRatingCount, goog
           {/* Bal nyíl */}
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-3 md:-left-14 lg:-left-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#1D63B7] w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#1D63B7] hover:text-white hover:scale-110"
+            className="absolute -left-3 md:-left-14 lg:-left-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#064E3B] w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white hover:scale-110"
             aria-label="Előző értékelések"
           >
             <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2} />
@@ -136,7 +136,7 @@ export default function ReviewsCarousel({ reviews, rating, userRatingCount, goog
           {/* Jobb nyíl */}
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-3 md:-right-14 lg:-right-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#1D63B7] w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#1D63B7] hover:text-white hover:scale-110"
+            className="absolute -right-3 md:-right-14 lg:-right-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#064E3B] w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white hover:scale-110"
             aria-label="Következő értékelések"
           >
             <ChevronRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2} />
@@ -149,7 +149,7 @@ export default function ReviewsCarousel({ reviews, rating, userRatingCount, goog
             href={googleMapsLink} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 bg-[#181A2C] hover:bg-[#1D63B7] text-white w-full sm:w-auto px-8 py-4 rounded-xl font-bold transition-colors"
+            className="flex items-center justify-center gap-2 bg-[#181A2C] hover:bg-[#064E3B] text-white w-full sm:w-auto px-8 py-4 rounded-xl font-bold transition-colors"
           >
             <ExternalLink size={20} />
             Összes értékelés megtekintése

@@ -65,7 +65,7 @@ export default function VideosCarousel({
     <section id="referenciak" className="py-32 bg-white relative">
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h3 className="text-4xl md:text-5xl font-bold text-[#1D63B7] mb-6">{title}</h3>
+          <h3 className="text-4xl md:text-5xl font-bold text-[#064E3B] mb-6">{title}</h3>
           <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">{subtitle}</p>
         </div>
 
@@ -103,14 +103,14 @@ export default function VideosCarousel({
           <div className="flex md:hidden justify-center gap-6 mt-8">
             <button
               onClick={() => scroll("left")}
-              className="bg-[#1D63B7] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none hover:bg-[#3AC2FE] hover:scale-110 active:scale-95"
+              className="bg-[#064E3B] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none hover:bg-[#059669] hover:scale-110 active:scale-95"
               aria-label="Előző videó"
             >
               <ChevronLeft className="w-8 h-8 pr-1" strokeWidth={2.5} />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="bg-[#1D63B7] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none hover:bg-[#3AC2FE] hover:scale-110 active:scale-95"
+              className="bg-[#064E3B] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none hover:bg-[#059669] hover:scale-110 active:scale-95"
               aria-label="Következő videó"
             >
               <ChevronRight className="w-8 h-8 pl-1" strokeWidth={2.5} />

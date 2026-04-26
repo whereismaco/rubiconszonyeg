@@ -54,7 +54,7 @@ export default async function HomePage() {
   const bullet1 = settings.hero_bullet_1 || 'Igazolt minőség: 76 valódi ügyfél véleménye alapján.';
   const bullet2 = settings.hero_bullet_2 || 'Teljes kényelem: Ingyenes háztól-házig szállítás (15 m² felett).';
   const bullet3 = settings.hero_bullet_3 || 'Mélytisztítás: Eltávolítjuk a port, az atkákat és a makacs foltokat is.';
-  const heroCta = settings.hero_cta || 'Ingyenes Ajánlatkérés';
+  const heroCta = settings.hero_cta || 'Érdeklődjön most';
   const heroBgImage = settings.hero_bg_image || '/images/rubicon_szonyegtisztitas_hero_img.webp';
   
   // --- 2. ÉRTÉKELÉSEK SZEKCIÓ ---
@@ -101,16 +101,16 @@ export default async function HomePage() {
   const pricingCar = settings.pricing_car || { categories: {}, packages: {} };
 
   // --- 6. KAPCSOLAT SZEKCIÓ ---
-  const contactTitle = settings.contact_title || 'Kérjen ajánlatot most, és szabaduljon meg a takarítás gondjától!';
+  const contactTitle = settings.contact_title || 'Érdeklődjön most, és szabaduljon meg a takarítás gondjától!';
   const contactSubtitle = settings.contact_subtitle || 'Töltse ki az alábbi mezőket, és 24 órán belül felvesszük Önnel a kapcsolatot az időpont egyeztetése miatt.';
-  const contactCta = settings.contact_cta || 'Kérem a tiszta szőnyeget – Ajánlatküldés';
+  const contactCta = settings.contact_cta || 'Kérem a tiszta szőnyeget – Érdeklődés';
 
   const contactAddress = settings.contact_address || '2030 Érd, Bajcsy Zsilinszky út 23.';
   const contactPhone = settings.contact_phone || '+36 30 350 6109';
   const contactEmail = settings.contact_email || 'info@rubiconszonyeg.hu';
 
   return (
-    <div className="min-h-screen bg-[#EDEDED] text-[#181A2C] font-sans selection:bg-[#3AC2FE] selection:text-white scroll-smooth">
+    <div className="min-h-screen bg-[#EDEDED] text-[#181A2C] font-sans selection:bg-[#059669] selection:text-white scroll-smooth">
       {/* Navbar */}
       <PublicHeader settings={settings} />
 
@@ -130,7 +130,7 @@ export default async function HomePage() {
 
           <div className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-[35vh] pb-24 md:pt-32 md:pb-32 md:min-h-[90vh] flex flex-col justify-center">
             <div className="max-w-3xl">
-              <span className="inline-block py-1 px-3 rounded-full bg-[#3AC2FE]/20 text-[#3AC2FE] font-bold text-sm tracking-widest uppercase mb-4 md:mb-6 border border-[#3AC2FE]/30">{heroBadge}</span>
+              <span className="inline-block py-1 px-3 rounded-full bg-[#059669]/20 text-[#059669] font-bold text-sm tracking-widest uppercase mb-4 md:mb-6 border border-[#059669]/30">{heroBadge}</span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4">
                 {heroTitle}
               </h1>
@@ -140,7 +140,7 @@ export default async function HomePage() {
               <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light mb-10 leading-relaxed">
                 {heroParagraph}
               </p>              
-              <a href="#kapcsolat" className="inline-block bg-[#3AC2FE] hover:bg-white hover:text-[#1D63B7] text-white font-bold text-xl px-10 py-5 rounded-full transition-all shadow-[0_0_40px_rgba(58,194,254,0.4)] hover:shadow-xl md:mt-8">
+              <a href="#kapcsolat" className="inline-block bg-[#059669] hover:bg-white hover:text-[#064E3B] text-white font-bold text-xl px-10 py-5 rounded-full transition-all shadow-[0_0_40px_rgba(58,194,254,0.4)] hover:shadow-xl md:mt-8">
                 {heroCta}
               </a>
             </div>
@@ -151,20 +151,20 @@ export default async function HomePage() {
         <section className="bg-[#F8F9FA] py-12 relative z-20 -mt-16 mx-6 rounded-3xl shadow-xl max-w-7xl lg:mx-auto border border-gray-100">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-8">
             <div className="flex items-center gap-4 text-[#181A2C]">
-              <div className="bg-[#1D63B7]/10 p-3 rounded-full flex-shrink-0">
-                <CheckCircle2 className="text-[#1D63B7] w-8 h-8" />
+              <div className="bg-[#064E3B]/10 p-3 rounded-full flex-shrink-0">
+                <CheckCircle2 className="text-[#064E3B] w-8 h-8" />
               </div>
               <span className="text-lg font-bold leading-tight">{bullet1}</span>
             </div>
             <div className="flex items-center gap-4 text-[#181A2C]">
-              <div className="bg-[#1D63B7]/10 p-3 rounded-full flex-shrink-0">
-                <CheckCircle2 className="text-[#1D63B7] w-8 h-8" />
+              <div className="bg-[#064E3B]/10 p-3 rounded-full flex-shrink-0">
+                <CheckCircle2 className="text-[#064E3B] w-8 h-8" />
               </div>
               <span className="text-lg font-bold leading-tight">{bullet2}</span>
             </div>
             <div className="flex items-center gap-4 text-[#181A2C]">
-              <div className="bg-[#1D63B7]/10 p-3 rounded-full flex-shrink-0">
-                <CheckCircle2 className="text-[#1D63B7] w-8 h-8" />
+              <div className="bg-[#064E3B]/10 p-3 rounded-full flex-shrink-0">
+                <CheckCircle2 className="text-[#064E3B] w-8 h-8" />
               </div>
               <span className="text-lg font-bold leading-tight">{bullet3}</span>
             </div>
@@ -189,10 +189,10 @@ export default async function HomePage() {
                 {aboutText}
               </div>
               <div className="flex flex-wrap gap-4">
-                <a href="#kapcsolat" className="inline-block bg-[#1D63B7] hover:bg-[#3AC2FE] text-white font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl">
-                  Ajánlatkérés
+                <a href="#kapcsolat" className="inline-block bg-[#064E3B] hover:bg-[#059669] text-white font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl">
+                  Érdeklődés
                 </a>
-                <a href={`tel:${contactPhone.replace(/\s+/g, '')}`} className="inline-block bg-white hover:bg-gray-50 text-[#1D63B7] font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl border-2 border-[#1D63B7]">
+                <a href={`tel:${contactPhone.replace(/\s+/g, '')}`} className="inline-block bg-white hover:bg-gray-50 text-[#064E3B] font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl border-2 border-[#064E3B]">
                   Hívjon most
                 </a>
               </div>
@@ -204,7 +204,7 @@ export default async function HomePage() {
         <section id="szolgaltatasok" className="py-32 bg-[#EDEDED] relative">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-20">
-              <h3 className="text-4xl md:text-5xl font-bold text-[#1D63B7] mb-6">{servicesTitle}</h3>
+              <h3 className="text-4xl md:text-5xl font-bold text-[#064E3B] mb-6">{servicesTitle}</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -214,7 +214,7 @@ export default async function HomePage() {
                 </div>
                 <div className="p-8 flex-1">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-[#1D63B7]/10 text-[#1D63B7] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                    <div className="w-14 h-14 bg-[#064E3B]/10 text-[#064E3B] rounded-2xl flex-shrink-0 flex items-center justify-center">
                       <Sparkles size={28} />
                     </div>
                     <h4 className="text-2xl font-bold text-[#181A2C]">{srv1Title}</h4>
@@ -229,7 +229,7 @@ export default async function HomePage() {
                 </div>
                 <div className="p-8 flex-1">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-[#3AC2FE]/10 text-[#3AC2FE] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                    <div className="w-14 h-14 bg-[#059669]/10 text-[#059669] rounded-2xl flex-shrink-0 flex items-center justify-center">
                       <Sofa size={28} />
                     </div>
                     <h4 className="text-2xl font-bold text-[#181A2C]">{srv2Title}</h4>
@@ -271,7 +271,7 @@ export default async function HomePage() {
         />
 
         {/* 5. ÁRAK SZEKCIÓ */}
-        <section id="arak" className="py-24 bg-[#181A2C] text-white">
+        <section id="arak" className="py-24 bg-[#022C22] text-white">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">{pricingTitle}</h3>
             <p className="text-xl text-gray-300 font-light mb-16 max-w-2xl mx-auto">{pricingBody}</p>
@@ -290,7 +290,7 @@ export default async function HomePage() {
         </section>
 
         {/* 6. KAPCSOLAT SZEKCIÓ */}
-        <section id="kapcsolat" className="py-24 bg-[#1D63B7] relative overflow-hidden">
+        <section id="kapcsolat" className="py-24 bg-[#059669] relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           
           <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -300,15 +300,15 @@ export default async function HomePage() {
                 <p className="text-xl font-medium opacity-90 mb-10">{contactSubtitle}</p>
                 
                 <div className="space-y-6">
-                  <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
+                  <div className="flex items-center gap-4 bg-[#059669]/20 p-4 rounded-2xl border border-white/10">
                     <div className="bg-white/20 p-3 rounded-full"><MapPin size={24} /></div>
                     <span className="text-lg font-medium">{contactAddress}</span>
                   </div>
-                  <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
+                  <div className="flex items-center gap-4 bg-[#059669]/20 p-4 rounded-2xl border border-white/10">
                     <div className="bg-white/20 p-3 rounded-full"><Phone size={24} /></div>
                     <span className="text-lg font-medium">{contactPhone}</span>
                   </div>
-                  <div className="flex items-center gap-4 bg-[#1D63B7]/20 p-4 rounded-2xl border border-white/10">
+                  <div className="flex items-center gap-4 bg-[#059669]/20 p-4 rounded-2xl border border-white/10">
                     <div className="bg-white/20 p-3 rounded-full"><Mail size={24} /></div>
                     <span className="text-lg font-medium">{contactEmail}</span>
                   </div>
@@ -328,7 +328,7 @@ export default async function HomePage() {
                   />
                 </div>
                 <div className="mt-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 shadow-lg">
-                  <MapPin size={18} className="text-[#3AC2FE]" />
+                  <MapPin size={18} className="text-[#059669]" />
                   <span>Lefedettségi térképünk: <strong>15 km-es sugárban</strong> a telephelytől</span>
                 </div>
               </div>

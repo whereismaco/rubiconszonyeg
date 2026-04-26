@@ -44,7 +44,7 @@ export default function JobStatusEditor({ jobId, currentStatus }: { jobId: numbe
         <select 
           value={selectedStatus} 
           onChange={(e) => setSelectedStatus(e.target.value)}
-          className="bg-gray-50 border border-gray-200 rounded-lg text-sm px-2 py-1 outline-none focus:ring-1 focus:ring-[#3AC2FE]"
+          className="bg-gray-50 border border-gray-200 rounded-lg text-sm px-2 py-1 outline-none focus:ring-1 focus:ring-[#059669]"
           disabled={isLoading}
         >
           {statuses.map(s => <option key={s} value={s}>{s}</option>)}
@@ -77,7 +77,7 @@ export default function JobStatusEditor({ jobId, currentStatus }: { jobId: numbe
       </span>
       <button 
         onClick={() => setIsEditing(true)}
-        className="p-1.5 text-gray-400 hover:text-[#1D63B7] hover:bg-blue-50 rounded-lg transition-all focus:opacity-100"
+        className="p-1.5 text-gray-400 hover:text-[#064E3B] hover:bg-blue-50 rounded-lg transition-all focus:opacity-100"
         title="Státusz módosítása"
       >
         <Pencil size={14} />

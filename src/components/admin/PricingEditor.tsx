@@ -44,7 +44,7 @@ function DictEditor({ title, data, onChange, unit = "Ft" }: { title: string, dat
     <div className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
       <div className="flex justify-between items-center mb-3">
         <h5 className="font-bold text-[#181A2C] text-sm">{title}</h5>
-        <button type="button" onClick={add} className="text-xs bg-[#1D63B7] text-white px-3 py-1.5 rounded-lg hover:bg-[#3AC2FE] flex items-center gap-1 transition-colors font-medium">
+        <button type="button" onClick={add} className="text-xs bg-[#064E3B] text-white px-3 py-1.5 rounded-lg hover:bg-[#059669] flex items-center gap-1 transition-colors font-medium">
           <Plus size={14} /> Hozzáadás
         </button>
       </div>
@@ -55,14 +55,14 @@ function DictEditor({ title, data, onChange, unit = "Ft" }: { title: string, dat
               type="text" 
               value={item.k} 
               onChange={e => updateKey(item.id, e.target.value)} 
-              className="flex-1 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+              className="flex-1 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
               placeholder="Megnevezés"
             />
             <input 
               type="number" 
               value={item.v} 
               onChange={e => updateValue(item.id, Number(e.target.value))} 
-              className="w-24 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+              className="w-24 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
             />
             <span className="text-sm text-gray-500 font-medium w-4">Ft</span>
             <button 
@@ -112,7 +112,7 @@ function ListEditor({ title, data, onChange }: { title: string, data: string[], 
     <div className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
       <div className="flex justify-between items-center mb-3">
         <h5 className="font-bold text-[#181A2C] text-sm">{title}</h5>
-        <button type="button" onClick={add} className="text-xs bg-[#1D63B7] text-white px-3 py-1.5 rounded-lg hover:bg-[#3AC2FE] flex items-center gap-1 transition-colors font-medium">
+        <button type="button" onClick={add} className="text-xs bg-[#064E3B] text-white px-3 py-1.5 rounded-lg hover:bg-[#059669] flex items-center gap-1 transition-colors font-medium">
           <Plus size={14} /> Hozzáadás
         </button>
       </div>
@@ -123,7 +123,7 @@ function ListEditor({ title, data, onChange }: { title: string, data: string[], 
               type="text" 
               value={item.val} 
               onChange={e => update(item.id, e.target.value)} 
-              className="flex-1 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+              className="flex-1 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
               placeholder="Megnevezés"
             />
             <button 
@@ -189,7 +189,7 @@ function PackageEditor({ title, data, onChange }: { title: string, data: Record<
     <div className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm md:col-span-2">
       <div className="flex justify-between items-center mb-4">
         <h5 className="font-bold text-[#181A2C] text-sm">{title}</h5>
-        <button type="button" onClick={add} className="text-xs bg-[#1D63B7] text-white px-3 py-1.5 rounded-lg hover:bg-[#3AC2FE] flex items-center gap-1 transition-colors font-medium">
+        <button type="button" onClick={add} className="text-xs bg-[#064E3B] text-white px-3 py-1.5 rounded-lg hover:bg-[#059669] flex items-center gap-1 transition-colors font-medium">
           <Plus size={14} /> Csomag Hozzáadása
         </button>
       </div>
@@ -201,7 +201,7 @@ function PackageEditor({ title, data, onChange }: { title: string, data: Record<
                 type="text" 
                 value={item.name} 
                 onChange={e => update(item.id, { name: e.target.value })} 
-                className="flex-1 border border-gray-200 rounded-lg p-2 text-sm font-bold focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+                className="flex-1 border border-gray-200 rounded-lg p-2 text-sm font-bold focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
                 placeholder="Csomag neve (pl. Rubicon Prémium)"
               />
               <div className="flex items-center gap-2">
@@ -209,7 +209,7 @@ function PackageEditor({ title, data, onChange }: { title: string, data: Record<
                   type="number" 
                   value={item.price} 
                   onChange={e => update(item.id, { price: Number(e.target.value) })} 
-                  className="w-28 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+                  className="w-28 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
                 />
                 <span className="text-sm text-gray-500 font-medium">Ft</span>
               </div>
@@ -227,7 +227,7 @@ function PackageEditor({ title, data, onChange }: { title: string, data: Record<
                 <textarea 
                   value={item.description} 
                   onChange={e => update(item.id, { description: e.target.value })}
-                  className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:outline-none focus:border-[#3AC2FE]"
+                  className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:outline-none focus:border-[#059669]"
                   rows={2}
                   placeholder="Ez a szöveg jelenik meg a csomag alatt..."
                 ></textarea>
@@ -237,7 +237,7 @@ function PackageEditor({ title, data, onChange }: { title: string, data: Record<
                 <textarea 
                   value={item.services} 
                   onChange={e => update(item.id, { services: e.target.value })}
-                  className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:outline-none focus:border-[#3AC2FE]"
+                  className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:outline-none focus:border-[#059669]"
                   rows={2}
                   placeholder="Kárpittisztítás, Vegyszeres mosás, Szárítás..."
                 ></textarea>
@@ -273,7 +273,7 @@ export default function PricingEditor({
 
       {/* Rug Pricing */}
       <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200">
-        <h4 className="text-xl font-black text-[#1D63B7] mb-6 flex items-center gap-2">
+        <h4 className="text-xl font-black text-[#064E3B] mb-6 flex items-center gap-2">
           1. Szőnyegtisztítás Árak
         </h4>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -285,7 +285,7 @@ export default function PricingEditor({
       </div>
       {/* Upholstery Pricing */}
       <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200">
-        <h4 className="text-xl font-black text-[#1D63B7] mb-6 flex items-center gap-2">
+        <h4 className="text-xl font-black text-[#064E3B] mb-6 flex items-center gap-2">
           2. Kárpittisztítás Árak
         </h4>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -296,7 +296,7 @@ export default function PricingEditor({
 
       {/* Car Pricing */}
       <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200">
-        <h4 className="text-xl font-black text-[#1D63B7] mb-6 flex items-center gap-2">
+        <h4 className="text-xl font-black text-[#064E3B] mb-6 flex items-center gap-2">
           3. Autótisztítás Árak
         </h4>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

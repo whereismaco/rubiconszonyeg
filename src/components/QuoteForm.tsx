@@ -234,21 +234,21 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Név *</label>
-          <input type="text" name="name" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="Példa János" />
+          <input type="text" name="name" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="Példa János" />
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Telefonszám *</label>
-          <input type="tel" name="phone" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="+36 30 123 4567" />
+          <input type="tel" name="phone" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="+36 30 123 4567" />
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Email Cím *</label>
-          <input type="email" name="email" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="pelda@email.hu" />
+          <input type="email" name="email" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="pelda@email.hu" />
         </div>
       </div>
       
       <div>
         <label className="block text-sm font-bold text-gray-700 mb-2">Település és utca *</label>
-        <input type="text" name="address" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" placeholder="2030 Érd, Fő utca 12." />
+        <input type="text" name="address" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="2030 Érd, Fő utca 12." />
       </div>
 
       <div className="pt-4 border-t border-gray-100">
@@ -257,21 +257,21 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
           {/* Rug Checkbox */}
           <div 
             onClick={() => handleServiceToggle('rug')}
-            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.rug ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
+            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.rug ? 'bg-[#059669]/10 border-[#059669]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
           >
             <span className="font-bold text-sm text-[#181A2C] leading-tight">Szőnyegtisztítás</span>
           </div>
           {/* Upholstery Checkbox */}
           <div 
             onClick={() => handleServiceToggle('upholstery')}
-            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.upholstery ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
+            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.upholstery ? 'bg-[#059669]/10 border-[#059669]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
           >
             <span className="font-bold text-sm text-[#181A2C] leading-tight">Kárpittisztítás</span>
           </div>
           {/* Car Checkbox */}
           <div 
             onClick={() => handleServiceToggle('car')}
-            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.car ? 'bg-[#3AC2FE]/10 border-[#3AC2FE]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
+            className={`cursor-pointer flex items-center justify-center p-4 rounded-2xl border-2 h-full transition-all text-center ${services.car ? 'bg-[#059669]/10 border-[#059669]' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}
           >
             <span className="font-bold text-sm text-[#181A2C] leading-tight">Autókozmetika</span>
           </div>
@@ -298,7 +298,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
             rows={3} 
             value={simpleMessage}
             onChange={(e) => setSimpleMessage(e.target.value)}
-            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#3AC2FE] focus:bg-white transition-all" 
+            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" 
             placeholder="Kérjük írja le röviden a tisztítandó tárgyakat (pl: 2 darab közepes szőnyeg, 1 nagy kanapé)..."
           ></textarea>
         ) : (
@@ -306,20 +306,20 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
             {/* RUG ADVANCED */}
             {services.rug && (
               <div className="space-y-4">
-                <h5 className="font-bold text-[#1D63B7] border-b border-gray-200 pb-2">Szőnyegek hozzáadása</h5>
+                <h5 className="font-bold text-[#064E3B] border-b border-gray-200 pb-2">Szőnyegek hozzáadása</h5>
                 {rugs.map((rug, idx) => (
                   <div key={idx} className="flex flex-col gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
                     <div className="flex flex-wrap md:flex-nowrap items-center gap-4">
                       <div className="flex-1">
                         <label className="block text-xs text-gray-500 mb-1">Szélesség (cm)</label>
-                        <input type="number" step="1" value={rug.w} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].w = e.target.value; setRugs(newRugs); }} placeholder="Pl: 150" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                        <input type="number" step="1" value={rug.w} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].w = e.target.value; setRugs(newRugs); }} placeholder="Pl: 150" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669]" />
                       </div>
                       <span className="text-gray-400 font-bold mt-4">X</span>
                       <div className="flex-1">
                         <label className="block text-xs text-gray-500 mb-1">Hosszúság (cm)</label>
-                        <input type="number" step="1" value={rug.l} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].l = e.target.value; setRugs(newRugs); }} placeholder="Pl: 200" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                        <input type="number" step="1" value={rug.l} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].l = e.target.value; setRugs(newRugs); }} placeholder="Pl: 200" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669]" />
                       </div>
-                      <div className="w-full md:w-32 bg-[#3AC2FE]/10 text-[#1D63B7] rounded-lg px-3 py-2 text-center font-bold mt-4 md:mt-0">
+                      <div className="w-full md:w-32 bg-[#059669]/10 text-[#064E3B] rounded-lg px-3 py-2 text-center font-bold mt-4 md:mt-0">
                         {((parseFloat(rug.w) || 0) * (parseFloat(rug.l) || 0) / 10000).toFixed(2)} m²
                       </div>
                       <button type="button" onClick={() => removeRug(idx)} className="mt-4 md:mt-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
@@ -330,19 +330,19 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-gray-50">
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Vastagság</label>
-                        <select value={rug.thickness} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].thickness = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                        <select value={rug.thickness} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].thickness = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669] text-sm">
                           {rugTypes.map(t => <option key={t} value={t}>{t}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Szőnyeg Anyaga</label>
-                        <select value={rug.material} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].material = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                        <select value={rug.material} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].material = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669] text-sm">
                           {rugMaterials.map(m => <option key={m} value={m}>{m}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Szennyeződés Mértéke</label>
-                        <select value={rug.dirtiness} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].dirtiness = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                        <select value={rug.dirtiness} onChange={(e) => { const newRugs = [...rugs]; newRugs[idx].dirtiness = e.target.value; setRugs(newRugs); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669] text-sm">
                           {rugConditions.map(c => <option key={c} value={c}>{c}</option>)}
                         </select>
                       </div>
@@ -363,7 +363,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
                               }
                               setRugs(newRugs);
                             }}
-                            className={`cursor-pointer px-3 py-1.5 rounded-lg border text-sm font-medium transition-all ${rug.extras.includes(extra) ? 'bg-[#3AC2FE] border-[#3AC2FE] text-[#1D63B7] font-bold' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+                            className={`cursor-pointer px-3 py-1.5 rounded-lg border text-sm font-medium transition-all ${rug.extras.includes(extra) ? 'bg-[#059669] border-[#059669] text-[#064E3B] font-bold' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
                           >
                             {extra}
                           </div>
@@ -373,7 +373,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
 
                   </div>
                 ))}
-                <button type="button" onClick={addRug} className="flex items-center gap-2 text-sm font-bold text-[#1D63B7] hover:text-[#3AC2FE] transition-colors">
+                <button type="button" onClick={addRug} className="flex items-center gap-2 text-sm font-bold text-[#064E3B] hover:text-[#059669] transition-colors">
                   <Plus size={16} /> Új szőnyeg
                 </button>
               </div>
@@ -382,29 +382,29 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
             {/* UPHOLSTERY ADVANCED */}
             {services.upholstery && (
               <div className="space-y-4">
-                <h5 className="font-bold text-[#1D63B7] border-b border-gray-200 pb-2">Kárpitok hozzáadása</h5>
+                <h5 className="font-bold text-[#064E3B] border-b border-gray-200 pb-2">Kárpitok hozzáadása</h5>
                 {upholsteries.map((uph, idx) => (
                   <div key={idx} className="flex flex-wrap md:flex-nowrap items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
                     <div className="w-full md:w-1/3">
                       <label className="block text-xs text-gray-500 mb-1">Típus</label>
-                      <select value={uph.type} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].type = e.target.value; setUpholsteries(newUph); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]">
+                      <select value={uph.type} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].type = e.target.value; setUpholsteries(newUph); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669]">
                         {uphTypes.map(t => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </div>
                     <div className="w-24">
                       <label className="block text-xs text-gray-500 mb-1">Db</label>
-                      <input type="number" min="1" value={uph.quantity || 1} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].quantity = Math.max(1, parseInt(e.target.value) || 1); setUpholsteries(newUph); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                      <input type="number" min="1" value={uph.quantity || 1} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].quantity = Math.max(1, parseInt(e.target.value) || 1); setUpholsteries(newUph); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669]" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-xs text-gray-500 mb-1">Méretek / Részletek</label>
-                      <input type="text" value={uph.desc} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].desc = e.target.value; setUpholsteries(newUph); }} placeholder="Pl: 3 személyes L-alakú" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE]" />
+                      <input type="text" value={uph.desc} onChange={(e) => { const newUph = [...upholsteries]; newUph[idx].desc = e.target.value; setUpholsteries(newUph); }} placeholder="Pl: 3 személyes L-alakú" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669]" />
                     </div>
                     <button type="button" onClick={() => removeUph(idx)} className="mt-4 md:mt-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
                       <Trash2 size={20} />
                     </button>
                   </div>
                 ))}
-                <button type="button" onClick={addUph} className="flex items-center gap-2 text-sm font-bold text-[#1D63B7] hover:text-[#3AC2FE] transition-colors">
+                <button type="button" onClick={addUph} className="flex items-center gap-2 text-sm font-bold text-[#064E3B] hover:text-[#059669] transition-colors">
                   <Plus size={16} /> Új kárpit
                 </button>
               </div>
@@ -413,19 +413,19 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
             {/* CAR ADVANCED */}
             {services.car && (
               <div className="space-y-4">
-                <h5 className="font-bold text-[#1D63B7] border-b border-gray-200 pb-2">Autók hozzáadása</h5>
+                <h5 className="font-bold text-[#064E3B] border-b border-gray-200 pb-2">Autók hozzáadása</h5>
                 {cars.map((car, idx) => (
                   <div key={idx} className="flex flex-col gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Választott Csomag</label>
-                        <select value={car.pkg} onChange={(e) => { const newCars = [...cars]; newCars[idx].pkg = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                        <select value={car.pkg} onChange={(e) => { const newCars = [...cars]; newCars[idx].pkg = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669] text-sm">
                           {carPackages.map(p => <option key={p} value={p}>{p}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Gépjármű Kategória</label>
-                        <select value={car.size} onChange={(e) => { const newCars = [...cars]; newCars[idx].size = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm">
+                        <select value={car.size} onChange={(e) => { const newCars = [...cars]; newCars[idx].size = e.target.value; setCars(newCars); }} className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669] text-sm">
                           {carSizes.map(s => <option key={s} value={s}>{s}</option>)}
                         </select>
                       </div>
@@ -433,7 +433,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
                     
                     <div>
                       <label className="block text-xs text-gray-500 mb-1">Autó Típusa / Részletek</label>
-                      <input type="text" value={car.type} onChange={(e) => { const newCars = [...cars]; newCars[idx].type = e.target.value; setCars(newCars); }} placeholder="Pl: Ford Focus Kombi" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#3AC2FE] text-sm" />
+                      <input type="text" value={car.type} onChange={(e) => { const newCars = [...cars]; newCars[idx].type = e.target.value; setCars(newCars); }} placeholder="Pl: Ford Focus Kombi" className="w-full bg-gray-50 border rounded-lg px-3 py-2 outline-none focus:border-[#059669] text-sm" />
                     </div>
 
                     <div className="pt-2">
@@ -451,7 +451,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
                               }
                               setCars(newCars);
                             }}
-                            className={`cursor-pointer px-3 py-1.5 rounded-lg border text-sm font-medium transition-all ${car.extras.includes(extra) ? 'bg-[#3AC2FE] border-[#3AC2FE] text-[#1D63B7] font-bold' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+                            className={`cursor-pointer px-3 py-1.5 rounded-lg border text-sm font-medium transition-all ${car.extras.includes(extra) ? 'bg-[#059669] border-[#059669] text-[#064E3B] font-bold' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
                           >
                             {extra}
                           </div>
@@ -464,7 +464,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
                     </button>
                   </div>
                 ))}
-                <button type="button" onClick={addCar} className="flex items-center gap-2 text-sm font-bold text-[#1D63B7] hover:text-[#3AC2FE] transition-colors">
+                <button type="button" onClick={addCar} className="flex items-center gap-2 text-sm font-bold text-[#064E3B] hover:text-[#059669] transition-colors">
                   <Plus size={16} /> Új autó hozzáadása
                 </button>
               </div>
@@ -480,10 +480,10 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       {/* Ez a konténer rejthető el később egyszerűen css-el vagy feltétellel */}
       <div className="quote-summary-container">
         {advancedMode && estimatedTotal > 0 && (
-          <div className="bg-[#3AC2FE]/10 border border-[#3AC2FE]/30 rounded-2xl p-6 flex flex-col gap-4 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#3AC2FE]/20 pb-4">
+          <div className="bg-[#059669]/10 border border-[#059669]/30 rounded-2xl p-6 flex flex-col gap-4 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#059669]/20 pb-4">
               <div>
-                <h4 className="text-lg font-bold text-[#1D63B7]">Kiszállási díj</h4>
+                <h4 className="text-lg font-bold text-[#064E3B]">Kiszállási díj</h4>
                 {estimatedDelivery === 0 ? (
                   <p className="text-sm text-gray-500 mt-1">A rendelés elérte a(z) {deliveryFeeLimit.toLocaleString('hu-HU')} Ft-os limitet.</p>
                 ) : (
@@ -497,7 +497,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
             
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h4 className="text-2xl font-black text-[#1D63B7]">Becsült Végösszeg</h4>
+                <h4 className="text-2xl font-black text-[#064E3B]">Becsült Végösszeg</h4>
                 <p className="text-sm text-gray-500 mt-1">Az itt látható ár tájékoztató jellegű a megadott adatok alapján.</p>
               </div>
               <div className="text-4xl font-black text-[#181A2C]">
@@ -508,7 +508,7 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
         )}
       </div>
 
-      <button type="submit" className="w-full bg-[#181A2C] hover:bg-[#1D63B7] text-white font-bold text-xl py-5 rounded-2xl transition-all shadow-[0_20px_40px_rgba(24,26,44,0.3)] hover:shadow-[0_20px_40px_rgba(29,99,183,0.4)]">
+      <button type="submit" className="w-full bg-[#181A2C] hover:bg-[#064E3B] text-white font-bold text-xl py-5 rounded-2xl transition-all shadow-[0_20px_40px_rgba(24,26,44,0.3)] hover:shadow-[0_20px_40px_rgba(29,99,183,0.4)]">
         {buttonText}
       </button>
     </form>

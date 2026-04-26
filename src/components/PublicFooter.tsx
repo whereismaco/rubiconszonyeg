@@ -5,7 +5,7 @@ export default function PublicFooter({ settings }: { settings: any }) {
   const contactEmail = settings?.contact_email || 'info@rubiconszonyeg.hu';
 
   return (
-    <footer className="bg-[#181A2C] py-16 text-center text-gray-400 border-t border-gray-800">
+    <footer className="bg-[#022C22] py-16 text-center text-gray-400 border-t border-[#064E3B]">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
         <div>
           <h4 className="text-white font-bold text-xl mb-4">{settings?.company_name || 'RUBICON'}</h4>

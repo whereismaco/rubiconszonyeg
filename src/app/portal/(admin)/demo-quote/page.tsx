@@ -14,7 +14,7 @@ export default async function DemoQuoteFormPage() {
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
-      <div className="bg-gradient-to-br from-[#181A2C] to-[#1D63B7] p-8 rounded-3xl shadow-xl text-white">
+      <div className="bg-gradient-to-br from-[#181A2C] to-[#064E3B] p-8 rounded-3xl shadow-xl text-white">
         <h1 className="text-3xl md:text-4xl font-black mb-4 text-[#FEC500]">Intelligens Ajánlatkérő (DEMO)</h1>
         <p className="text-lg text-gray-200 leading-relaxed">
           Így nézne ki a weboldalad ajánlatkérője a látogatók számára, ha elérhető lenne az intelligens, automatikus árkalkuláció. 
@@ -26,7 +26,7 @@ export default async function DemoQuoteFormPage() {
       <div className="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-100">
         <QuoteForm 
           action={dummyAction}
-          buttonText="Próba Ajánlatkérés Elküldése (DEMO)"
+          buttonText="Próba Érdeklődés Elküldése (DEMO)"
           pricingRug={settings.pricing_rug || {}}
           pricingUph={settings.pricing_upholstery || {}}
           pricingCar={settings.pricing_car || {}}

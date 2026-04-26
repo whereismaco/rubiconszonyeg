@@ -122,7 +122,7 @@ export default function ExtrasPage() {
           {extras.map((extra, idx) => (
             <div 
               key={idx} 
-              className={`p-5 rounded-2xl border transition-all ${extra.active ? 'bg-green-50/50 border-green-200' : 'bg-gray-50 border-gray-200 hover:border-[#3AC2FE]/50'}`}
+              className={`p-5 rounded-2xl border transition-all ${extra.active ? 'bg-green-50/50 border-green-200' : 'bg-gray-50 border-gray-200 hover:border-[#059669]/50'}`}
             >
               <div className="flex items-start gap-4">
                 <div className="shrink-0 mt-1">
@@ -137,7 +137,7 @@ export default function ExtrasPage() {
                     <h3 className={`font-bold text-lg ${extra.active ? 'text-green-800' : 'text-[#181A2C]'}`}>
                       {extra.title}
                     </h3>
-                    <div className="shrink-0 font-mono font-bold text-[#1D63B7] bg-white px-3 py-1 rounded-lg border border-gray-100">
+                    <div className="shrink-0 font-mono font-bold text-[#064E3B] bg-white px-3 py-1 rounded-lg border border-gray-100">
                       {extra.price}
                     </div>
                   </div>
@@ -150,7 +150,7 @@ export default function ExtrasPage() {
                   )}
 
                   {!extra.active && extra.demoLink && (
-                    <a href={extra.demoLink} className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-[#3AC2FE] hover:text-[#1D63B7] transition-colors">
+                    <a href={extra.demoLink} className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-[#059669] hover:text-[#064E3B] transition-colors">
                       Demo megtekintése <ArrowRight size={16} />
                     </a>
                   )}
@@ -164,7 +164,7 @@ export default function ExtrasPage() {
           <p className="text-gray-500 mb-4">Megtetszett valamelyik funkció?</p>
           <a 
             href="mailto:whereismaco@gmail.com?subject=Rubicon%20-%20Extra%20Funkci%C3%B3%20%C3%89rdekl%C5%91d%C3%A9s" 
-            className="inline-flex bg-[#181A2C] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#1D63B7] transition-colors shadow-lg"
+            className="inline-flex bg-[#181A2C] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#064E3B] transition-colors shadow-lg"
           >
             Érdeklődöm a fejlesztésről
           </a>

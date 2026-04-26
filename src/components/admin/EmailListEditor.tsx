@@ -37,7 +37,7 @@ export default function EmailListEditor({ data }: { data: string[] }) {
                 type="email" 
                 value={item.val} 
                 onChange={e => update(item.id, e.target.value)} 
-                className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#3AC2FE] focus:ring-1 focus:ring-[#3AC2FE]" 
+                className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
                 placeholder="admin@pelda.hu"
                 required
               />

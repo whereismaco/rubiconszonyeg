@@ -43,7 +43,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <div className={`fixed lg:relative z-40 inset-y-0 left-0 w-64 bg-[#181A2C] text-[#EDEDED] transform transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         <div className="p-6 pt-16 lg:pt-6">
-          <h2 className="text-2xl font-bold text-[#3AC2FE]">Rubicon Portál</h2>
+          <h2 className="text-2xl font-bold text-[#059669]">Rubicon Portál</h2>
           <p className="text-sm text-gray-400 mt-1">Adminportál</p>
         </div>
         <nav className="mt-6 flex flex-col space-y-1 px-4">
@@ -56,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={item.name} 
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#1D63B7] text-white' : 'hover:bg-[#1D63B7]/50'}`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#064E3B] text-white' : 'hover:bg-[#064E3B]/50'}`}
               >
                 <Icon size={20} />
                 <span className="font-medium">{item.name}</span>
@@ -73,7 +73,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={item.name} 
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#3AC2FE]/20 text-[#3AC2FE]' : 'hover:bg-[#3AC2FE]/10 text-gray-300'}`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#059669]/20 text-[#059669]' : 'hover:bg-[#059669]/10 text-gray-300'}`}
               >
                 <Icon size={20} />
                 <span className="font-medium">{item.name}</span>

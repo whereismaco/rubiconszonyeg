@@ -4,7 +4,7 @@ export default function StatisticsPage() {
   return (
     <div className="space-y-8">
       {/* Header & Upsell Banner */}
-      <div className="bg-gradient-to-br from-[#181A2C] to-[#1D63B7] rounded-3xl p-8 shadow-xl text-white relative overflow-hidden">
+      <div className="bg-gradient-to-br from-[#181A2C] to-[#064E3B] rounded-3xl p-8 shadow-xl text-white relative overflow-hidden">
         <div className="relative z-10">
           <div className="flex items-center gap-2 text-[#FEC500] font-bold mb-4 uppercase tracking-wider text-sm">
             <Lock size={16} /> Prémium DEMO Funkció
@@ -13,7 +13,7 @@ export default function StatisticsPage() {
           <p className="text-lg text-gray-200 mb-6 max-w-3xl leading-relaxed">
             Az alapvető keresőoptimalizálást az alap ár is tartalmazza, viszont ebben az opcióban a Google keresési konzollal (Search console), Címke kezelővel (Tag manager) és Analitikával (Analytics) is összekötjük a weboldalt. 
             <br/><br/>
-            <strong className="text-[#3AC2FE]">AIO (AI Keresőoptimalizálás):</strong> Ha valaki egy AI-nál (pl. ChatGPT, Gemini) érdeklődik, hogyan tisztítson szőnyeget a környékeden, akkor az AI a Te vállalkozásodat fogja ajánlani!
+            <strong className="text-[#059669]">AIO (AI Keresőoptimalizálás):</strong> Ha valaki egy AI-nál (pl. ChatGPT, Gemini) érdeklődik, hogyan tisztítson szőnyeget a környékeden, akkor az AI a Te vállalkozásodat fogja ajánlani!
           </p>
           <a href="mailto:whereismaco@gmail.com?subject=SEO%20%2B%20AIO%20Csomag%20Aktiv%C3%A1l%C3%A1s" className="inline-flex bg-[#FEC500] text-[#181A2C] px-8 py-4 rounded-xl font-bold text-lg hover:bg-white transition-colors shadow-lg items-center gap-2">
             <Zap size={20} /> Modul Aktiválása (40.000 Ft)
@@ -25,7 +25,7 @@ export default function StatisticsPage() {
       {/* Mock Data Dashboard */}
       <div>
         <h2 className="text-2xl font-bold text-[#181A2C] mb-6 flex items-center gap-2">
-          <BarChart3 className="text-[#3AC2FE]" />
+          <BarChart3 className="text-[#059669]" />
           Így nézne ki a valós idejű statisztikád:
         </h2>
         
@@ -92,7 +92,7 @@ export default function StatisticsPage() {
             <h4 className="font-bold text-[#181A2C] mb-4">Látogatottság az elmúlt 30 napban</h4>
             <div className="flex-1 flex items-end gap-2 justify-between">
               {Array.from({length: 30}).map((_, i) => (
-                <div key={i} className="bg-[#3AC2FE] w-full rounded-t-sm" style={{ height: `${Math.max(20, Math.random() * 100)}%`}}></div>
+                <div key={i} className="bg-[#059669] w-full rounded-t-sm" style={{ height: `${Math.max(20, Math.random() * 100)}%`}}></div>
               ))}
             </div>
           </div>
@@ -102,11 +102,11 @@ export default function StatisticsPage() {
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between text-sm mb-1"><span className="text-gray-600">Google Kereső (SEO)</span><span className="font-bold text-[#181A2C]">45%</span></div>
-                <div className="w-full bg-gray-100 rounded-full h-2.5"><div className="bg-[#1D63B7] h-2.5 rounded-full" style={{width: '45%'}}></div></div>
+                <div className="w-full bg-gray-100 rounded-full h-2.5"><div className="bg-[#064E3B] h-2.5 rounded-full" style={{width: '45%'}}></div></div>
               </div>
               <div>
                 <div className="flex justify-between text-sm mb-1"><span className="text-gray-600">Facebook / Instagram Ads</span><span className="font-bold text-[#181A2C]">30%</span></div>
-                <div className="w-full bg-gray-100 rounded-full h-2.5"><div className="bg-[#3AC2FE] h-2.5 rounded-full" style={{width: '30%'}}></div></div>
+                <div className="w-full bg-gray-100 rounded-full h-2.5"><div className="bg-[#059669] h-2.5 rounded-full" style={{width: '30%'}}></div></div>
               </div>
               <div>
                 <div className="flex justify-between text-sm mb-1"><span className="text-gray-600">AI Chatbotok (ChatGPT)</span><span className="font-bold text-[#181A2C]">15%</span></div>
