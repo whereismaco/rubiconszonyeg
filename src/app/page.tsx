@@ -1,9 +1,9 @@
 import { getSettings, createJob } from '@/lib/actions';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
-import { CheckCircle2, Sparkles, MapPin, Phone, Mail, Sofa, CarFront } from 'lucide-react';
+import { CheckCircle2, Sparkles, MapPin, Phone, Mail, Sofa, CarFront, Layers } from 'lucide-react';
 import GoogleReviews from "@/components/GoogleReviews";
-import VideosCarousel from "@/components/VideosCarousel";
+import BeforeAfterGallery from "@/components/BeforeAfterGallery";
 import QuoteForm from "@/components/QuoteForm";
 import PricingTable from "@/components/PricingTable";
 import PublicHeader from "@/components/PublicHeader";
@@ -74,22 +74,13 @@ export default async function HomePage() {
   const srv2Text = settings.service_2_text || 'Kanapék, fotelek és matracok professzionális kezelése. Eltávolítjuk a foltokat és a baktériumokat, hogy családja biztonságban pihenhessen. Matractisztításunk során a teljes mélységű higiéniára fókuszálunk.';
   const srv3Title = settings.service_3_title || 'Ózonos Fertőtlenítés';
   const srv3Text = settings.service_3_text || 'A legmodernebb megoldás a szagok és kórokozók ellen. Vegyszermentes, gyors és kíméletlen a baktériumokkal, penésszel és vírusokkal szemben. Ideális választás kisgyermekes családoknak és kisállattartóknak.';
+  const srv3Iframe = settings.service_3_iframe || '';
+  const srv4Title = settings.service_4_title || 'Padlószőnyeg tisztítás';
+  const srv4Text = settings.service_4_text || 'Helyszíni tisztítás nagyteljesítményű gépekkel. Kíméletesen, mégis rendkívül hatékonyan távolítjuk el a mindennapos használatból eredő szennyeződéseket és felfrissítjük az irodák vagy otthonok burkolatát.';
+  const srv4Iframe = settings.service_4_iframe || '';
 
-  // --- 4.5. VIDEÓK SZEKCIÓ ---
-  const videosTitle = settings.videos_title || 'Nézze meg munkáinkat akció közben';
-  const videosSubtitle = settings.videos_subtitle || 'Ismerje meg a folyamatot videóinkon keresztül.';
-  
-  const v1Title = settings.video_1_title || 'Facebook Poszt';
-  const v1Desc = settings.video_1_desc || 'Egy korábbi szőnyegünk...';
-  const v1Iframe = settings.video_1_iframe || '<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02vXPwHK1HUg2yxxh8m4XfysjddfhQnRxATkfvhHGshasdZpvM778KdjAwhRqvs4Bql%26id%3D100063469152945&show_text=true&width=500" width="500" height="978" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>';
-
-  const v2Title = settings.video_2_title || 'Első Reels Videónk';
-  const v2Desc = settings.video_2_desc || 'Így dolgozunk a műhelyben';
-  const v2Iframe = settings.video_2_iframe || '<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F801175599372582%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>';
-
-  const v3Title = settings.video_3_title || 'Második Reels Videónk';
-  const v3Desc = settings.video_3_desc || 'Még egy videó a tisztításról';
-  const v3Iframe = settings.video_3_iframe || '<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F993489449670381%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>';
+  const srv1Iframe = settings.service_1_iframe || '';
+  const srv2Iframe = settings.service_2_iframe || '';
 
   // --- 5. ÁRAK SZEKCIÓ ---
   const pricingTitle = settings.pricing_title || 'Átlátható árak, rejtett költségek nélkül';
@@ -207,68 +198,94 @@ export default async function HomePage() {
               <h3 className="text-4xl md:text-5xl font-bold text-[#064E3B] mb-6">{servicesTitle}</h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
-                <div className="relative aspect-square w-full overflow-hidden">
-                  <Image src="/images/rubicon_szonyegtisztitas_szolgaltatas.webp" alt={srv1Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12">
+              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
+                <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
+                  {srv1Iframe ? (
+                    <div dangerouslySetInnerHTML={{ __html: srv1Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                  ) : (
+                    <Image src="/images/rubicon_szonyegtisztitas_szolgaltatas.webp" alt={srv1Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  )}
                 </div>
-                <div className="p-8 flex-1">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-[#064E3B]/10 text-[#064E3B] rounded-2xl flex-shrink-0 flex items-center justify-center">
-                      <Sparkles size={28} />
+                <div className="p-8 flex-1 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-[#064E3B]/10 text-[#064E3B] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                      <Sparkles size={20} />
                     </div>
-                    <h4 className="text-2xl font-bold text-[#181A2C]">{srv1Title}</h4>
+                    <h4 className="text-xl md:text-2xl font-bold text-[#181A2C] leading-tight">{srv1Title}</h4>
                   </div>
                   <p className="text-gray-600 leading-relaxed font-light">{srv1Text}</p>
                 </div>
-                </div>
+              </div>
 
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
-                <div className="relative aspect-square w-full overflow-hidden">
-                  <Image src="/images/rubicon_karpittisztitas_szolgaltatas.webp" alt={srv2Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
+                <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
+                  {srv2Iframe ? (
+                    <div dangerouslySetInnerHTML={{ __html: srv2Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                  ) : (
+                    <Image src="/images/rubicon_karpittisztitas_szolgaltatas.webp" alt={srv2Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  )}
                 </div>
-                <div className="p-8 flex-1">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-[#059669]/10 text-[#059669] rounded-2xl flex-shrink-0 flex items-center justify-center">
-                      <Sofa size={28} />
+                <div className="p-8 flex-1 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-[#059669]/10 text-[#059669] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                      <Sofa size={20} />
                     </div>
-                    <h4 className="text-2xl font-bold text-[#181A2C]">{srv2Title}</h4>
+                    <h4 className="text-xl md:text-2xl font-bold text-[#181A2C] leading-tight">{srv2Title}</h4>
                   </div>
                   <p className="text-gray-600 leading-relaxed font-light">{srv2Text}</p>
                 </div>
-                </div>
+              </div>
 
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col">
-                <div className="relative aspect-square w-full overflow-hidden">
-                  <Image src="/images/rubicon_autokozmetika_szolgaltatas.webp" alt={srv3Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
+                <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
+                  {srv3Iframe ? (
+                    <div dangerouslySetInnerHTML={{ __html: srv3Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                  ) : (
+                    <Image src="/images/rubicon_autokozmetika_szolgaltatas.webp" alt={srv3Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  )}
                 </div>
-                <div className="p-8 flex-1">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-[#181A2C]/10 text-[#181A2C] rounded-2xl flex-shrink-0 flex items-center justify-center">
-                      <CarFront size={28} />
+                <div className="p-8 flex-1 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-[#181A2C]/10 text-[#181A2C] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                      <CarFront size={20} />
                     </div>
-                    <h4 className="text-2xl font-bold text-[#181A2C]">{srv3Title}</h4>
+                    <h4 className="text-xl md:text-2xl font-bold text-[#181A2C] leading-tight">{srv3Title}</h4>
                   </div>
                   <p className="text-gray-600 leading-relaxed font-light">{srv3Text}</p>
-                </div>              </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
+                <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-[#181A2C] flex items-center justify-center shrink-0">
+                  {srv4Iframe ? (
+                    <div dangerouslySetInnerHTML={{ __html: srv4Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                  ) : (
+                    <Layers size={64} className="text-white/20 group-hover:scale-110 transition-transform duration-700" />
+                  )}
+                </div>
+                <div className="p-8 flex-1 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-[#064E3B]/10 text-[#064E3B] rounded-2xl flex-shrink-0 flex items-center justify-center">
+                      <Layers size={20} />
+                    </div>
+                    <h4 className="text-xl md:text-2xl font-bold text-[#181A2C] leading-tight">{srv4Title}</h4>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed font-light">{srv4Text}</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* 4.5. VIDEÓK SZEKCIÓ */}
-        <VideosCarousel
-          title={videosTitle}
-          subtitle={videosSubtitle}
-          v1Title={v1Title}
-          v1Desc={v1Desc}
-          v1Iframe={v1Iframe}
-          v2Title={v2Title}
-          v2Desc={v2Desc}
-          v2Iframe={v2Iframe}
-          v3Title={v3Title}
-          v3Desc={v3Desc}
-          v3Iframe={v3Iframe}
-        />
+        {/* 4.5. ELŐTTE-UTÁNA GALÉRIA */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <h3 className="text-4xl md:text-5xl font-bold text-[#064E3B] mb-6">Munkáink a valóságban</h3>
+            <p className="text-xl text-gray-600 font-light mb-16 max-w-2xl mx-auto">Húzza a csúszkát, és győződjön meg a saját szemével a különbségről, amit a Rubicon mélytisztító technológiája képes elérni!</p>
+            <BeforeAfterGallery />
+          </div>
+        </section>
 
         {/* 5. ÁRAK SZEKCIÓ */}
         <section id="arak" className="py-24 bg-[#022C22] text-white">
