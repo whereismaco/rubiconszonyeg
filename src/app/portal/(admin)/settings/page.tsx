@@ -260,7 +260,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Gomb Szövege</label>
-                <input type="text" name="contact_cta" defaultValue={settings.contact_cta || 'Kérem a tiszta szőnyeget – Érdeklődés'} className="w-full border rounded-lg p-2 text-sm" />
+                <input type="text" name="contact_cta" defaultValue={settings.contact_cta || 'Üzenetküldés'} className="w-full border rounded-lg p-2 text-sm" />
               </div>
             </div>
 

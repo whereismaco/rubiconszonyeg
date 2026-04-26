@@ -237,8 +237,8 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
           <input type="text" name="name" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="Példa János" />
         </div>
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">Telefonszám *</label>
-          <input type="tel" name="phone" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="+36 30 123 4567" />
+          <label className="block text-sm font-bold text-gray-700 mb-2">Telefonszám</label>
+          <input type="tel" name="phone" className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="+36 30 123 4567" />
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Email Cím *</label>
@@ -247,8 +247,8 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
       </div>
       
       <div>
-        <label className="block text-sm font-bold text-gray-700 mb-2">Település és utca *</label>
-        <input type="text" name="address" required className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="2030 Érd, Fő utca 12." />
+        <label className="block text-sm font-bold text-gray-700 mb-2">Település és utca</label>
+        <input type="text" name="address" className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:bg-white transition-all" placeholder="2030 Érd, Fő utca 12." />
       </div>
 
       <div className="pt-4 border-t border-gray-100">

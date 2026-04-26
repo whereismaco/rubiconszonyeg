@@ -54,7 +54,9 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
                 {Object.entries(pricingRug?.types || {}).map(([name, price]) => (
                   <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
                     <span className="text-lg font-medium text-left">{name}</span>
-                    <span className="text-xl font-black text-white text-right">{formatPrice(price)} Ft <span className="text-xs text-gray-400">/m²</span></span>
+                    <span className="text-xl font-black text-white text-right">
+                      {name.toLowerCase().includes('padlószőnyeg') ? `${formatPrice(price)} - 1 800` : formatPrice(price)} Ft <span className="text-xs text-gray-400">/m²</span>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -77,7 +79,7 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
              {/* Anyag felárak */}
-             <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
+             <div className="hidden bg-white/5 rounded-3xl p-8 border border-white/10">
               <h4 className="text-xl font-bold text-[#059669] mb-6 flex items-center gap-2">
                 <Sparkles size={20} /> Speciális Anyagok
               </h4>
@@ -111,7 +113,7 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
       {/* --- KÁRPIT TÁBLÁZAT --- */}
       {activeTab === 'uph' && (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8">
             <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
               <h4 className="text-xl font-bold text-[#059669] mb-6 flex items-center gap-2">
                 <Sofa size={20} /> Bútortípusok Árai
@@ -125,7 +127,7 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
                 ))}
               </div>
             </div>
-            <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
+            <div className="hidden bg-white/5 rounded-3xl p-8 border border-white/10">
               <h4 className="text-xl font-bold text-[#059669] mb-6 flex items-center gap-2">
                 <Plus size={20} /> Választható Extrák
               </h4>

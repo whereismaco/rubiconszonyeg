@@ -46,7 +46,7 @@ export async function updateJob(id: number, data: any) {
     data.phone,
     data.email,
     data.address,
-    `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
+    `https://maps.google.com/?q=${encodeURIComponent(data.address || '')}`,
     data.total,
     data.notes,
     JSON.stringify(data.items),
@@ -96,7 +96,7 @@ export async function createJob(data: any) {
     data.phone,
     data.email,
     data.address,
-    `https://maps.google.com/?q=${encodeURIComponent(data.address)}`,
+    `https://maps.google.com/?q=${encodeURIComponent(data.address || '')}`,
     status,
     data.total,
     data.notes,
@@ -135,7 +135,7 @@ export async function createJob(data: any) {
         <p><b>Név:</b> ${data.name}</p>
         <p><b>Email:</b> ${data.email || 'Nincs megadva'}</p>
         <p><b>Telefon:</b> ${data.phone || 'Nincs megadva'}</p>
-        <p><b>Cím:</b> ${data.address}</p>
+        <p><b>Cím:</b> ${data.address || 'Nincs megadva'}</p>
         <p><b>Végösszeg (Becsült):</b> ${data.total.toLocaleString('hu-HU')} Ft</p>
         <hr />
         <h3>Megjegyzés / Üzenet:</h3>

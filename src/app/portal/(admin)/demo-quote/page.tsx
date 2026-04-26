@@ -26,7 +26,7 @@ export default async function DemoQuoteFormPage() {
       <div className="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-100">
         <QuoteForm 
           action={dummyAction}
-          buttonText="Próba Érdeklődés Elküldése (DEMO)"
+          buttonText="Próba Ajánlatkérés Elküldése (DEMO)"
           pricingRug={settings.pricing_rug || {}}
           pricingUph={settings.pricing_upholstery || {}}
           pricingCar={settings.pricing_car || {}}

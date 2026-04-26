@@ -94,7 +94,7 @@ export default async function HomePage() {
   // --- 6. KAPCSOLAT SZEKCIÓ ---
   const contactTitle = settings.contact_title || 'Érdeklődjön most, és szabaduljon meg a takarítás gondjától!';
   const contactSubtitle = settings.contact_subtitle || 'Töltse ki az alábbi mezőket, és 24 órán belül felvesszük Önnel a kapcsolatot az időpont egyeztetése miatt.';
-  const contactCta = settings.contact_cta || 'Kérem a tiszta szőnyeget – Érdeklődés';
+  const contactCta = (settings.contact_cta === 'Kérem a tiszta szőnyeget – Ajánlatküldés' || settings.contact_cta === 'Kérem a tiszta szőnyeget – Érdeklődés') ? 'Üzenetküldés' : (settings.contact_cta || 'Üzenetküldés');
 
   const contactAddress = settings.contact_address || '2030 Érd, Bajcsy Zsilinszky út 23.';
   const contactPhone = settings.contact_phone || '+36 30 350 6109';
@@ -181,7 +181,7 @@ export default async function HomePage() {
               </div>
               <div className="flex flex-wrap gap-4">
                 <a href="#kapcsolat" className="inline-block bg-[#064E3B] hover:bg-[#059669] text-white font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl">
-                  Érdeklődés
+                  Üzenetküldés
                 </a>
                 <a href={`tel:${contactPhone.replace(/\s+/g, '')}`} className="inline-block bg-white hover:bg-gray-50 text-[#064E3B] font-bold text-lg px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl border-2 border-[#064E3B]">
                   Hívjon most
@@ -351,7 +351,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Ajánlatkérő Űrlap Teljes Szélességben */}
+            {/* Üzenetküldő Űrlap Teljes Szélességben */}
             <div className="bg-white rounded-[40px] p-8 md:p-12 shadow-2xl max-w-5xl mx-auto">
               <QuoteForm 
                 action={handleContact} 

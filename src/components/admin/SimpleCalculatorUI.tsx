@@ -90,7 +90,7 @@ export default function SimpleCalculatorUI({ pricingRug, pricingUpholstery, pric
   };
 
   const handleSave = async () => {
-    if (!customerInfo.name || !customerInfo.address) return alert("Név és Cím kötelező!");
+    if (!customerInfo.name) return alert("Név kötelező!");
     if (items.length === 0) return alert("Adj hozzá legalább egy tételt!");
     
     if (initialJob?.id) {
