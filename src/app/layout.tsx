@@ -15,8 +15,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rubiconszonyeg.hu'),
   title: "Rubicon Szőnyegtisztítás",
   description: "Professzionális szőnyegtisztítás, kárpittisztítás és autókozmetika.",
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "Rubicon Szőnyegtisztítás",
+    description: "Professzionális szőnyegtisztítás, kárpittisztítás és autókozmetika.",
+    images: [
+      {
+        url: "/images/rubicon_opengraph.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Rubicon Szőnyegtisztítás",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

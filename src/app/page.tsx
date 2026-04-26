@@ -11,9 +11,24 @@ import PublicFooter from "@/components/PublicFooter";
 
 export async function generateMetadata() {
   const settings = await getSettings();
+  const title = `${settings.company_name || 'Rubicon Szőnyegtisztítás'} | ${settings.hero_title || 'Érd legmegbízhatóbb szőnyegtisztítója'}`;
+  const description = settings.hero_subtitle || 'Ne kockáztasson amatőrökkel. Mi elszállítjuk, professzionális technológiával újjávarázsoljuk, és tisztán hozzuk vissza otthonába szőnyegeit és kárpitjait.';
+  
   return {
-    title: `${settings.company_name || 'Rubicon Szőnyegtisztítás'} | ${settings.hero_title || 'Érd legmegbízhatóbb szőnyegtisztítója'}`,
-    description: settings.hero_subtitle || 'Ne kockáztasson amatőrökkel. Mi elszállítjuk, professzionális technológiával újjávarázsoljuk, és tisztán hozzuk vissza otthonába szőnyegeit és kárpitjait.',
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: "/images/rubicon_opengraph.jpg",
+          width: 1200,
+          height: 630,
+          alt: settings.company_name || "Rubicon Szőnyegtisztítás",
+        },
+      ],
+    },
   };
 }
 
