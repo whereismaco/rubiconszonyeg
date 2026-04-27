@@ -24,6 +24,8 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
 
   const [advancedMode, setAdvancedMode] = useState(demoMode ? true : false);
   const [simpleMessage, setSimpleMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Dynamic Options
   const rugTypes = Object.keys(pricingRug?.types || {});
@@ -202,12 +204,14 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
     setServices((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (demoMode) {
-      e.preventDefault();
       alert("Ez a funkció csak a PRÉMIUM csomagban érhető el!\n\nHa szeretnéd, hogy a látogatóid is tudják használni ezt a pontos, intelligens árkalkulátort a weboldaladon, kérd az Árkalkulátor modul aktiválását!");
       return;
     }
+
+    setIsSubmitting(true);
 
     if (typeof window !== "undefined") {
       const w = window as any;
@@ -221,10 +225,34 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
         w.gtag('event', 'generate_lead', { value: value, currency: 'HUF' });
       }
     }
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      await action(formData);
+      setIsSuccess(true);
+    } catch (error) {
+      console.error("Hiba történt a küldés során", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  if (isSuccess) {
+    return (
+      <div className="bg-green-50 rounded-3xl p-8 md:p-12 text-center flex flex-col items-center justify-center animate-in fade-in duration-500 border border-green-100 shadow-sm">
+        <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
+          <CheckSquare size={40} />
+        </div>
+        <h3 className="text-3xl font-black text-[#181A2C] mb-4">Sikeres küldés!</h3>
+        <p className="text-xl text-gray-600 max-w-lg mx-auto">
+          Köszönjük az érdeklődést! Az ajánlatkérését megkaptuk, és hamarosan felvesszük Önnel a kapcsolatot a megadott elérhetőségek egyikén.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <form action={demoMode ? undefined : (action as any)} onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-8">
       {/* Hidden inputs for Server Action */}
       <input type="hidden" name="service_type" value={generatedServiceType} />
       <input type="hidden" name="message" value={generatedMessage} />
@@ -508,8 +536,8 @@ export default function QuoteForm({ action, buttonText, pricingRug, pricingUph, 
         )}
       </div>
 
-      <button type="submit" className="w-full bg-[#181A2C] hover:bg-[#064E3B] text-white font-bold text-xl py-5 rounded-2xl transition-all shadow-[0_20px_40px_rgba(24,26,44,0.3)] hover:shadow-[0_20px_40px_rgba(29,99,183,0.4)]">
-        {buttonText}
+      <button type="submit" disabled={isSubmitting} className="w-full bg-[#181A2C] hover:bg-[#064E3B] text-white font-bold text-xl py-5 rounded-2xl transition-all shadow-[0_20px_40px_rgba(24,26,44,0.3)] hover:shadow-[0_20px_40px_rgba(29,99,183,0.4)] disabled:opacity-70 disabled:cursor-not-allowed">
+        {isSubmitting ? 'Küldés folyamatban...' : buttonText}
       </button>
     </form>
   );

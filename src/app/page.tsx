@@ -58,7 +58,8 @@ export default async function HomePage() {
       items: parsedItems,
       total: Number(formData.get('total') || 0)
     });
-    redirect('/?success=1#kapcsolat');
+    
+    return { success: true };
   }
 
   // --- 1. HERO SZEKCIÓ ---
