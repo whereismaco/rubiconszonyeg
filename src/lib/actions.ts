@@ -177,3 +177,24 @@ export async function updateSetting(key: string, value: string | any) {
   revalidatePath('/portal/settings');
   revalidatePath('/'); // assuming settings affect website
 }
+
+export async function getReviews() {
+  const [rows]: any = await pool.query('SELECT * FROM google_reviews ORDER BY id DESC');
+  return rows;
+}
+
+export async function addReview(data: any) {
+  await pool.execute('INSERT INTO google_reviews (reviewer_name, rating, text) VALUES (?, ?, ?)', [
+    data.reviewer_name,
+    data.rating,
+    data.text
+  ]);
+  revalidatePath('/portal/reviews');
+  revalidatePath('/');
+}
+
+export async function deleteReview(id: number) {
+  await pool.execute('DELETE FROM google_reviews WHERE id = ?', [id]);
+  revalidatePath('/portal/reviews');
+  revalidatePath('/');
+}
