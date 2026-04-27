@@ -13,6 +13,22 @@ export default function HelpCenterPage() {
         </div>
       </div>
 
+      {/* Videós Útmutató */}
+      <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+        <div className="aspect-video w-full bg-gray-100">
+          <iframe 
+            width="100%" 
+            height="100%" 
+            src="https://www.youtube.com/embed/y1dER9ksVh8" 
+            title="Rubicon Admin Portál Bemutató" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowFullScreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+
       {/* Általános áttekintés */}
       <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
         <h2 className="text-xl font-bold text-[#181A2C] flex items-center gap-2 mb-6">

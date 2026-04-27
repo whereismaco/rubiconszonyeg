@@ -198,3 +198,33 @@ export async function deleteReview(id: number) {
   revalidatePath('/portal/reviews');
   revalidatePath('/');
 }
+
+export async function sendExtrasEmail(selectedExtras: string[]) {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'smtp.hostinger.com',
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER || 'info@rubiconszonyeg.hu',
+        pass: process.env.SMTP_PASS || '', 
+      },
+    });
+
+    const emailBody = selectedExtras.length > 0 
+      ? `Szia!<br><br>Az alábbi extra funkciók/modulok aktiválása iránt érdeklődik valaki az admin portálról:<br><ul>${selectedExtras.map(s => `<li>${s}</li>`).join('')}</ul>`
+      : `Szia!<br><br>Érdeklődés érkezett a Rubicon portál extra fejlesztéseivel kapcsolatban, de nem lett konkrét modul kijelölve.`;
+
+    await transporter.sendMail({
+      from: '"Rubicon Portál (Extrák)" <' + (process.env.SMTP_USER || 'info@rubiconszonyeg.hu') + '>',
+      to: 'whereismaco@gmail.com', // Az email cím, amit eddig is használtál
+      subject: `Rubicon - Extra Funkció Érdeklődés (${selectedExtras.length} modul)`,
+      html: emailBody,
+    });
+    
+    return { success: true };
+  } catch (error) {
+    console.error("Hiba az extrák email küldésekor:", error);
+    return { success: false, error: 'Nem sikerült elküldeni az emailt.' };
+  }
+}
