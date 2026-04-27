@@ -70,30 +70,31 @@ export default function ReviewsCarousel({ reviews, rating, userRatingCount, goog
           <p className="text-xl text-gray-600 font-light mb-8 max-w-2xl">
             {subtitle || "Nem csupán ígérjük a minőséget – ügyfeleink visszajelzései a garanciánk a kiváló munkára."}
           </p>
-          <div className="flex items-center gap-3">
-            <div className="flex text-[#FEC500]">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-current" />
-              ))}
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center gap-3">
+              <div className="flex text-[#FEC500]">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-6 h-6 fill-current" />
+                ))}
+              </div>
+              <span className="font-bold text-[#181A2C] text-xl">{rating.toLocaleString('hu-HU')}</span>
             </div>
-            <div className="flex items-center gap-2 text-lg">
-              <span className="font-bold text-[#181A2C]">{rating}</span>
-              <span className="text-gray-500 font-medium">Google értékeléseink alapján</span>
-            </div>
+            <span className="text-gray-500 font-medium">Google értékeléseink alapján</span>
           </div>
         </div>
 
         {/* Körhinta (Carousel) Konténer */}
         <div className="relative group">
           
-          {/* Bal nyíl */}
+          {/* Bal nyíl (Asztali) */}
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-3 md:-left-14 lg:-left-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#064E3B] w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white hover:scale-110"
+            className="hidden md:flex absolute -left-14 lg:-left-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#064E3B] w-14 h-14 rounded-full items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white hover:scale-110"
             aria-label="Előző értékelések"
           >
-            <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2} />
+            <ChevronLeft className="w-8 h-8" strokeWidth={2} />
           </button>
+          
           {/* Értékelések */}
           <div 
             ref={scrollContainerRef}
@@ -131,15 +132,34 @@ export default function ReviewsCarousel({ reviews, rating, userRatingCount, goog
                   </p>
                 </div>
               );
-            })}          </div>
+            })}          
+          </div>
 
-          {/* Jobb nyíl */}
+          {/* Jobb nyíl (Asztali) */}
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-3 md:-right-14 lg:-right-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#064E3B] w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white hover:scale-110"
+            className="hidden md:flex absolute -right-14 lg:-right-20 top-1/2 -translate-y-1/2 z-10 bg-white text-[#064E3B] w-14 h-14 rounded-full items-center justify-center shadow-xl border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white hover:scale-110"
             aria-label="Következő értékelések"
           >
-            <ChevronRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2} />
+            <ChevronRight className="w-8 h-8" strokeWidth={2} />
+          </button>
+        </div>
+
+        {/* Mobil nyílak (Alul) */}
+        <div className="flex md:hidden justify-center items-center gap-6 mt-4">
+          <button
+            onClick={() => scroll("left")}
+            className="bg-white text-[#064E3B] w-12 h-12 rounded-full flex items-center justify-center shadow-md border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white active:scale-95"
+            aria-label="Előző értékelések"
+          >
+            <ChevronLeft className="w-6 h-6" strokeWidth={2} />
+          </button>
+          <button
+            onClick={() => scroll("right")}
+            className="bg-white text-[#064E3B] w-12 h-12 rounded-full flex items-center justify-center shadow-md border border-gray-100 transition-all focus:outline-none hover:bg-[#064E3B] hover:text-white active:scale-95"
+            aria-label="Következő értékelések"
+          >
+            <ChevronRight className="w-6 h-6" strokeWidth={2} />
           </button>
         </div>
 

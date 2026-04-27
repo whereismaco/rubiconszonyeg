@@ -28,10 +28,9 @@ export default async function GoogleReviews({ title, subtitle }: { title?: strin
     return null;
   }
 
-  // Statisztika számítása
-  const userRatingCount = reviews.length;
-  const avgRating = reviews.reduce((acc: number, cur: any) => acc + cur.rating, 0) / userRatingCount;
-  const roundedRating = Math.round(avgRating * 10) / 10;
+  // Statisztika számítása (Google Maps szerinti fix értékek)
+  const userRatingCount = reviews.length; // vagy 79, ha a pontos értékelésszámot is be akarod égetni
+  const roundedRating = 4.7;
 
   const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/SpRePRjg2beahjgC8";
 

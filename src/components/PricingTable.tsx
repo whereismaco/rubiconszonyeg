@@ -43,70 +43,68 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
 
       {/* --- SZŐNYEG TÁBLÁZAT --- */}
       {activeTab === 'rug' && (
-        <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="columns-1 md:columns-2 gap-8 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Alapárak */}
-            <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
+            <div className="break-inside-avoid bg-white/5 rounded-3xl p-8 border border-white/10 mb-8">
               <h4 className="text-xl font-bold text-[#059669] mb-6 flex items-center gap-2">
                 <Check className="text-green-400" /> Alapárak (Vastagság szerint)
               </h4>
               <div className="space-y-4">
                 {Object.entries(pricingRug?.types || {}).map(([name, price]) => (
                   <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium text-left">{name}</span>
-                    <span className="text-xl font-black text-white text-right">
+                    <span className="text-sm md:text-lg font-medium text-left">{name}</span>
+                    <span className="text-base md:text-xl font-black text-white text-right">
                       {name.toLowerCase().includes('padlószőnyeg') ? `${formatPrice(price)} - 1 800` : formatPrice(price)} Ft <span className="text-xs text-gray-400">/m²</span>
                     </span>
                   </div>
                 ))}
               </div>
             </div>
+            
             {/* Állapot felárak */}
-            <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
+            <div className="break-inside-avoid bg-white/5 rounded-3xl p-8 border border-white/10 mb-8">
               <h4 className="text-xl font-bold text-[#059669] mb-6 flex items-center gap-2">
                 <Info size={20} /> Szennyeződés felárak
               </h4>
               <div className="space-y-4">
                 {Object.entries(pricingRug?.conditions || {}).map(([name, price]) => (
                   <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium text-left">{name}</span>
-                    <span className="text-xl font-black text-white text-right">+{formatPrice(price)} Ft <span className="text-xs text-gray-400">/m²</span></span>
+                    <span className="text-sm md:text-lg font-medium text-left">{name}</span>
+                    <span className="text-base md:text-xl font-black text-white text-right">+{formatPrice(price)} Ft <span className="text-xs text-gray-400">/m²</span></span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
              {/* Anyag felárak */}
-             <div className="hidden bg-white/5 rounded-3xl p-8 border border-white/10">
+             <div className="hidden break-inside-avoid bg-white/5 rounded-3xl p-8 border border-white/10 mb-8">
               <h4 className="text-xl font-bold text-[#059669] mb-6 flex items-center gap-2">
                 <Sparkles size={20} /> Speciális Anyagok
               </h4>
               <div className="space-y-4">
                 {Object.entries(pricingRug?.materials || {}).map(([name, price]) => (
                   <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium text-left">{name}</span>
-                    <span className="text-xl font-black text-white text-right">+{formatPrice(price)} Ft <span className="text-xs text-gray-400">/m²</span></span>
+                    <span className="text-sm md:text-lg font-medium text-left">{name}</span>
+                    <span className="text-base md:text-xl font-black text-white text-right">+{formatPrice(price)} Ft <span className="text-xs text-gray-400">/m²</span></span>
                   </div>
                 ))}
               </div>
             </div>
+
             {/* Extrák */}
-            <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
+            <div className="break-inside-avoid bg-white/5 rounded-3xl p-8 border border-white/10 mb-8">
               <h4 className="text-xl font-bold text-[#059669] mb-6 flex items-center gap-2">
                 <Plus size={20} /> Opcionális Extrák
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {Object.entries(pricingRug?.extras || {}).map(([name, price]) => (
                   <div key={name} className="bg-white/5 p-4 rounded-xl border border-white/5 flex flex-col">
-                    <span className="text-sm text-gray-400 mb-1">{name}</span>
-                    <span className="text-lg font-black text-white">+{formatPrice(price)} Ft <span className="text-xs">/m²</span></span>
+                    <span className="text-xs md:text-sm text-gray-400 mb-1">{name}</span>
+                    <span className="text-base md:text-lg font-black text-white">+{formatPrice(price)} Ft <span className="text-xs">/m²</span></span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
         </div>
       )}
 
@@ -121,8 +119,8 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
               <div className="space-y-4">
                 {Object.entries(pricingUph?.types || {}).map(([name, price]) => (
                   <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium text-left">{name}</span>
-                    <span className="text-xl font-black text-white text-right">{formatPrice(price)} Ft <span className="text-xs text-gray-400">/db-tól</span></span>
+                    <span className="text-sm md:text-lg font-medium text-left">{name}</span>
+                    <span className="text-base md:text-xl font-black text-white text-right">{formatPrice(price)} Ft <span className="text-xs text-gray-400">/db-tól</span></span>
                   </div>
                 ))}
               </div>
@@ -134,8 +132,8 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
               <div className="space-y-4">
                 {Object.entries(pricingUph?.options || {}).map(([name, price]) => (
                   <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium text-left">{name}</span>
-                    <span className="text-xl font-black text-white text-right">+{formatPrice(price)} Ft</span>
+                    <span className="text-sm md:text-lg font-medium text-left">{name}</span>
+                    <span className="text-base md:text-xl font-black text-white text-right">+{formatPrice(price)} Ft</span>
                   </div>
                 ))}
               </div>
@@ -186,8 +184,8 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
               <div className="space-y-4">
                 {Object.entries(pricingCar?.categories || {}).map(([name, price]) => (
                   <div key={name} className="flex justify-between items-center border-b border-white/5 pb-3">
-                    <span className="text-lg font-medium text-left">{name}</span>
-                    <span className="text-xl font-black text-white text-right">+{formatPrice(price)} Ft</span>
+                    <span className="text-sm md:text-lg font-medium text-left">{name}</span>
+                    <span className="text-base md:text-xl font-black text-white text-right">+{formatPrice(price)} Ft</span>
                   </div>
                 ))}
               </div>
@@ -198,8 +196,8 @@ export default function PricingTable({ pricingRug, pricingUph, pricingCar }: Pri
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {Object.entries(pricingCar?.extras || {}).map(([name, price]) => (
                   <div key={name} className="bg-white/5 p-4 rounded-xl border border-white/5 flex flex-col">
-                    <span className="text-sm text-gray-400 mb-1">{name}</span>
-                    <span className="text-lg font-black text-white">+{formatPrice(price)} Ft</span>
+                    <span className="text-xs md:text-sm text-gray-400 mb-1">{name}</span>
+                    <span className="text-base md:text-lg font-black text-white">+{formatPrice(price)} Ft</span>
                   </div>
                 ))}
               </div>
