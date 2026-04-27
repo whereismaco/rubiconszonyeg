@@ -1,57 +1,94 @@
-# Adatvédelmi és Adatkezelési Tájékoztató
+# Adatvédelmi Tájékoztató
 
-**Hatályos: 2026. április 25-től visszavonásig**
+Jelen Adatvédelmi Tájékoztató célja, hogy bemutassa, hogyan kezeljük az Ön személyes adatait a **{{COMPANY_NAME}}** weboldalon és szolgáltatásaink nyújtása során, összhangban az Európai Unió Általános Adatvédelmi Rendeletével (GDPR) és a vonatkozó magyar jogszabályokkal (különösen az információs önrendelkezési jogról és az információszabadságról szóló 2011. évi CXII. törvénnyel).
 
-A **Rubicon Szőnyegtisztítás** (a továbbiakban: Adatkezelő) magára nézve kötelezőnek ismeri el a jelen jogi közlemény tartalmát. Kötelezettséget vállal arra, hogy tevékenységével kapcsolatos minden adatkezelés megfelel a jelen szabályzatban és a hatályos nemzeti jogszabályokban, valamint az Európai Unió jogi aktusaiban, különösen a GDPR-ban (Általános Adatvédelmi Rendelet) meghatározott elvárásoknak.
+## 1. Az Adatkezelő adatai
 
-## 1. Az Adatkezelő Adatai
-- **Név/Cégnév:** Rubicon Szőnyegtisztítás
-- **Székhely:** 2030 Érd (A pontos székhely a kapcsolat menüpont alatt vagy szerződéskötéskor elérhető)
-- **Email cím:** info@rubiconszonyeg.hu
-- **Telefonszám:** A weboldalon aktuálisan feltüntetett telefonszám.
+- **Vállalkozás neve:** {{COMPANY_LEGAL_NAME}}
+- **Székhely / Cím:** {{COMPANY_ADDRESS}}
+- **Adószám:** {{COMPANY_TAX_NUMBER}}
+- **Nyilvántartási szám / Cégjegyzékszám:** {{COMPANY_REGISTRY_NUMBER}}
+- **Képviselő:** A vállalkozás vezetője
+- **E-mail cím:** {{COMPANY_EMAIL}}
+- **Telefonszám:** {{COMPANY_PHONE}}
 
-## 2. A Kezelt Adatok Köre és az Adatkezelés Célja
+## 2. A kezelt adatok köre, az adatkezelés célja és jogalapja
 
-### 2.1. Ajánlatkérés és Megrendelés
-Amikor Ön a weboldalon árajánlatot kér vagy megrendelést ad le, az alábbi személyes adatait kezeljük:
-- **Kezelt adatok:** Név, Telefonszám, E-mail cím, Szállítási cím, a tisztítandó tárgyak adatai (méret, típus), valamint a "Részletek" rovatban Ön által megadott egyéb személyes információk.
-- **Az adatkezelés célja:** Árajánlat adása, a megrendelés teljesítése, kapcsolatfelvétel, kiszállítás és számlázás.
-- **Jogalap:** A szerződés teljesítése (GDPR 6. cikk (1) bek. b) pont).
-- **Megőrzési idő:** A számviteli törvénynek megfelelően a kiállított számlákat és az ahhoz kapcsolódó alapadatokat 8 évig őrizzük meg. A meg nem valósult ajánlatkéréseket az ajánlat érvényességének lejártát követő 1 év elteltével töröljük.
+A szolgáltatásaink igénybevétele (ajánlatkérés, megrendelés leadása, kapcsolatfelvétel) során az alábbi személyes adatokat kezeljük:
 
-### 2.2. Cookie-k (Sütik) és Analitika
-A weboldal megfelelő működése, a felhasználói élmény javítása, valamint a forgalom elemzése érdekében sütiket használunk.
-- **Kezelt adatok:** IP-cím, használt böngésző és eszköz típusa, böngészési előzmények az oldalon.
-- **Az adatkezelés célja:** Statisztikai adatok gyűjtése (Google Analytics) és célzott hirdetések megjelenítése (Meta Pixel, Google Ads) – amennyiben ezek aktívak a weboldalon.
-- **Jogalap:** Az Érintett önkéntes hozzájárulása (GDPR 6. cikk (1) bek. a) pont).
-- **Megőrzési idő:** A sütik érvényességi idejéig, vagy amíg a felhasználó a böngészőjéből nem törli azokat.
+### 2.1. Ajánlatkérés és megrendelés teljesítése
+- **Kezelt adatok:** Név, e-mail cím, telefonszám, cím (szállítási és számlázási cím), a tisztítandó tárgyak (szőnyeg, kárpit, autó) adatai és az azokhoz fűzött esetleges megjegyzések.
+- **Az adatkezelés célja:** Kapcsolatfelvétel, egyedi árajánlat készítése, a megrendelt szolgáltatás (szőnyegtisztítás, kárpittisztítás stb.) teljesítése, kiszállítás megszervezése, valamint a számla kiállítása.
+- **Jogalap:** A szerződés teljesítése (GDPR 6. cikk (1) bek. b) pontja), illetve a számlázás tekintetében jogi kötelezettség teljesítése (GDPR 6. cikk (1) bek. c) pontja, a Számv. tv. 169. § (2) bekezdése alapján).
+- **Megőrzési idő:** A szerződésből eredő polgári jogi elévülési idő (általában 5 év), a számviteli bizonylatok esetében 8 év.
 
-## 3. Adattovábbítás és Adatfeldolgozók
-Az Adatkezelő a személyes adatokat harmadik fél részére csak kivételes esetekben, a szolgáltatás teljesítése vagy jogszabályi kötelezettség alapján továbbítja.
-Az igénybe vett Adatfeldolgozók:
-- **Tárhelyszolgáltató:** Vercel Inc. (weboldal futtatása) és Hostinger (E-mail forgalom).
-- **Számlázó program:** (pl. Számlázz.hu - amennyiben aktív az összeköttetés) – A számlázási adatok továbbításra kerülnek a NAV felé a hatályos jogszabályoknak megfelelően.
-- **Analitika és Marketing:** Google Ireland Ltd. (Google Analytics, Google Ads) és Meta Platforms Ireland Ltd. (Facebook Pixel).
+### 2.2. Kapcsolatfelvétel, üzenetküldés
+- **Kezelt adatok:** Név, e-mail cím, telefonszám, üzenet tartalma.
+- **Az adatkezelés célja:** Az érdeklődő kérdéseinek megválaszolása, információ nyújtása.
+- **Jogalap:** Az érintett hozzájárulása (GDPR 6. cikk (1) bek. a) pontja), illetve az adatkezelő jogos érdeke.
+- **Megőrzési idő:** Az ügy elintézéséig, vagy a hozzájárulás visszavonásáig (de legfeljebb az utolsó kapcsolatfelvételtől számított 1 évig).
 
-## 4. Adatbiztonság
-Az Adatkezelő megfelelő technikai és szervezési intézkedéseket hajt végre a személyes adatok védelme érdekében, így különösen a jogosulatlan hozzáférés, megváltoztatás, továbbítás, nyilvánosságra hozatal, törlés vagy megsemmisítés, valamint a véletlen megsemmisülés és sérülés ellen. Az adatok zárt, jelszóval (és Google hitelesítéssel) védett adatbázisban (SQLite / Firebase) tárolódnak.
+## 3. Adatfeldolgozók és adattovábbítás
 
-## 5. Az Érintettek Jogai
-Ön, mint érintett az adatkezelés időtartama alatt az alábbi jogokkal rendelkezik:
-- **Tájékoztatáshoz és hozzáféréshez való jog:** Ön jogosult arra, hogy visszajelzést kapjon arra vonatkozóan, hogy személyes adatainak kezelése folyamatban van-e, és hozzáférést kapjon a kezelt adatokhoz.
-- **Helyesbítéshez való jog:** Ön kérheti az elírt vagy pontatlan adatok javítását.
-- **Törléshez ("elfeledtetéshez") való jog:** Ön kérheti adatai törlését, ha az adatkezelés célja megszűnt, vagy ha visszavonja hozzájárulását (kivéve a jogszabály által kötelezően megőrzendő adatokat, pl. számlák).
-- **Adatkezelés korlátozásához való jog.**
-- **Adathordozhatósághoz való jog.**
+Az adatkezelő a szolgáltatások minőségi biztosítása és az informatikai háttér működtetése érdekében adatfeldolgozókat vesz igénybe. Az adatfeldolgozók az adatkezelő utasításai szerint járnak el, és az adatokat saját célra nem használhatják fel.
 
-## 6. Jogorvoslati Lehetőségek
-Amennyiben úgy ítéli meg, hogy az Adatkezelő megsértette a vonatkozó adatvédelmi jogszabályokat, panaszával az alábbi hatósághoz fordulhat:
-**Nemzeti Adatvédelmi és Információszabadság Hatóság (NAIH)**
-- Cím: 1055 Budapest, Falk Miksa utca 9-11.
-- Levelezési cím: 1363 Budapest, Pf.: 9.
-- E-mail: ugyfelszolgalat@naih.hu
-- Web: www.naih.hu
+**Tárhelyszolgáltató és Levelezés (SMTP):**
+- **Név:** Hostinger International Ltd.
+- **Székhely:** 61 Lordou Vironos Street, 6023 Larnaca, Cyprus
+- **Kapcsolat:** adatvedelem@hostinger.com (vagy https://www.hostinger.com)
+- **Tevékenység:** A weboldal üzemeltetéséhez szükséges szerver infrastruktúra és az elektronikus levelezés (SMTP) biztosítása.
 
-Bírósági jogérvényesítés: Ön a jogainak megsértése esetén bírósághoz is fordulhat. A per elbírálása a törvényszék hatáskörébe tartozik.
+Számlázás esetén az adatokat az aktuálisan használt számlázóprogram (pl. Számlázz.hu / Billingo) felé továbbítjuk, kizárólag a jogszabályban előírt bizonylat-kiállítási kötelezettség teljesítése céljából.
 
-A jelen Adatvédelmi Tájékoztató visszavonásig érvényes.
+### 3.1. Analitikai és marketing szolgáltatók
+
+A weboldalon látogatottsági méréseket, valamint marketing célú analitikát is végzünk annak érdekében, hogy szolgáltatásainkat és hirdetéseinket a felhasználói igényekre szabhassuk. Ezen szolgáltatók esetenként cookie-kat (sütiket) és egyéb követőkódokat (pl. pixel) használnak:
+
+- **Google Analytics és Google Ads (Google Ireland Limited)**
+  - Székhely: Gordon House, Barrow Street, Dublin 4, Írország
+  - Cél: Weboldal látogatottsági és viselkedési adatainak gyűjtése, elemzése, valamint célzott hirdetések megjelenítése és azok hatékonyságának mérése. A Google ezeket az adatokat anonimizált (pl. maszkolt IP cím) formában kezeli, de hirdetési rendszereiben a felhasználó profilozása is megtörténhet.
+  - Adatkezelési tájékoztató: https://policies.google.com/privacy
+
+- **Meta Pixel (Meta Platforms Ireland Limited)**
+  - Székhely: 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Írország
+  - Cél: A Facebook és Instagram felületeken futtatott hirdetéseink eredményességének mérése, a felhasználói interakciók nyomon követése a weboldalon, és célzott remarketing (újra megszólító) hirdetések megjelenítése. A Meta összekapcsolhatja ezen adatokat az Ön közösségi média profiljával.
+  - Adatkezelési tájékoztató: https://www.facebook.com/privacy/policy/
+
+Ezen adatok kezelése és továbbítása kizárólag az Ön kifejezett hozzájárulása (cookie-k elfogadása) esetén történik meg, amelyet a weboldalon megjelenő cookie sávon (Cookie Banner) keresztül adhat meg.
+
+## 4. Adatbiztonsági intézkedések
+
+Megfelelő technikai és szervezési intézkedéseket alkalmazunk a személyes adatok védelme érdekében, beleértve az adatokhoz való jogosulatlan hozzáférés, azok megváltoztatása, továbbítása, nyilvánosságra hozatala, törlése vagy megsemmisítése, valamint a véletlen megsemmisülés és sérülés elleni védelmet (pl. titkosított csatornák, jelszóval védett adminisztrációs felületek).
+
+## 5. Az Ön jogai (Érintetti jogok)
+
+Ön az adatkezelés során az alábbi jogokkal rendelkezik:
+- **Tájékoztatáshoz és hozzáféréshez való jog:** Kérheti, hogy tájékoztassuk arról, milyen személyes adatait kezeljük, és azokhoz hozzáférést kapjon.
+- **Helyesbítéshez való jog:** Kérheti a pontatlan adatok javítását vagy a hiányos adatok kiegészítését.
+- **Törléshez való jog ("elfeledtetéshez való jog"):** Bizonyos esetekben (pl. ha visszavonja a hozzájárulását, vagy az adatokra már nincs szükség) kérheti az adatok törlését. Nem törölhetők azok az adatok, amelyeket jogszabályi kötelezettség alapján (pl. számlázás) kell megőriznünk.
+- **Adatkezelés korlátozásához való jog:** Kérheti az adatkezelés korlátozását vitatott esetekben.
+- **Adathordozhatósághoz való jog:** Kérheti, hogy a rendelkezésünkre bocsátott adatait tagolt, széles körben használt, géppel olvasható formátumban megkapja, vagy azokat egy másik adatkezelőnek továbbítsuk.
+- **Tiltakozáshoz való jog:** Tiltakozhat személyes adatainak jogos érdeken vagy közérdeken alapuló kezelése ellen.
+
+Jogainak gyakorlásához kérjük, vegye fel velünk a kapcsolatot a **{{COMPANY_EMAIL}}** e-mail címen.
+
+## 6. Jogorvoslati lehetőségek
+
+Ha úgy ítéli meg, hogy a személyes adatainak kezelése során megsértettük a vonatkozó adatvédelmi jogszabályokat, panasszal élhet a Nemzeti Adatvédelmi és Információszabadság Hatóságnál (NAIH):
+- **Cím:** 1055 Budapest, Falk Miksa utca 9-11.
+- **Levelezési cím:** 1363 Budapest, Pf. 9.
+- **Telefon:** +36-1-391-1400
+- **E-mail:** ugyfelszolgalat@naih.hu
+- **Weboldal:** [www.naih.hu](https://www.naih.hu)
+
+Továbbá Ön jogosult bírósághoz (a lakóhelye vagy tartózkodási helye szerinti törvényszékhez) fordulni az adatvédelmi jogainak megsértése esetén.
+
+## 7. Cookie-k (Sütik) kezelése
+
+A weboldal a megfelelő működés és a felhasználói élmény javítása érdekében rövid adatfájlokat, úgynevezett cookie-kat (sütiket) helyezhet el a látogató eszközén. A weboldal használatával Ön, mint felhasználó elfogadja a sütik használatát, amelyeket a böngészője beállításaiban bármikor törölhet vagy tilthat.
+
+## 8. Egyéb rendelkezések
+
+Fenntartjuk a jogot a jelen Adatvédelmi Tájékoztató egyoldalú módosítására, amelyről a weboldalon történő közzététellel tájékoztatjuk az érintetteket.
+
+Hatályos: 2026. április 27-től visszavonásig.

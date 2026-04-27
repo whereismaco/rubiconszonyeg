@@ -14,6 +14,17 @@ export default async function AszfPage() {
   
   try {
     markdownContent = fs.readFileSync(filePath, 'utf8');
+    
+    // Helyettesítjük a cégadatokat az adatbázisból (Beállítások)
+    markdownContent = markdownContent
+      .replace(/{{COMPANY_LEGAL_NAME}}/g, settings.company_legal_name || '[Vállalkozás neve]')
+      .replace(/{{COMPANY_NAME}}/g, settings.company_name || 'Rubicon Szőnyegtisztítás')
+      .replace(/{{COMPANY_ADDRESS}}/g, settings.contact_address || '[Székhely címe]')
+      .replace(/{{COMPANY_TAX_NUMBER}}/g, settings.company_tax_number || '[Adószám]')
+      .replace(/{{COMPANY_REGISTRY_NUMBER}}/g, settings.company_registry_number || '[Nyilvántartási szám]')
+      .replace(/{{COMPANY_EMAIL}}/g, settings.contact_email || '[Email]')
+      .replace(/{{COMPANY_PHONE}}/g, settings.contact_phone || '[Telefonszám]');
+
   } catch (error) {
     markdownContent = '# Hiba történt\nAz ÁSZF fájl nem található a szerveren.';
   }

@@ -1,6 +1,6 @@
 import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import db from "@/lib/db"
+import pool from "@/lib/db"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -12,7 +12,8 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ user }) {
       try {
-        const row = db.prepare("SELECT value FROM settings WHERE key = 'whitelisted_emails'").get() as any;
+        const [rows]: any = await pool.execute("SELECT value FROM settings WHERE \`key\` = 'whitelisted_emails'");
+        const row = rows[0];
         const whitelisted = row ? JSON.parse(row.value) : [];
         if (user.email && whitelisted.includes(user.email)) {
           return true;

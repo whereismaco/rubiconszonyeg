@@ -57,8 +57,20 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-500 mb-1">Cégnév</label>
+                <label className="block text-sm text-gray-500 mb-1">Cégnév (Fantázianév, pl. Rubicon Szőnyegtisztítás)</label>
                 <input type="text" name="company_name" defaultValue={settings.company_name} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Vállalkozás hivatalos neve (Jogi név)</label>
+                <input type="text" name="company_legal_name" defaultValue={settings.company_legal_name} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Adószám</label>
+                <input type="text" name="company_tax_number" defaultValue={settings.company_tax_number} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500 mb-1">Cégjegyzékszám / Nyilvántartási szám</label>
+                <input type="text" name="company_registry_number" defaultValue={settings.company_registry_number} className="w-full border rounded-lg p-2" />
               </div>
               <div>
                 <label className="block text-sm text-gray-500 mb-1">Logó URL (pl. /images/logo/rubicon-logo-fekvo.png)</label>

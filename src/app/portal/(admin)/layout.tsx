@@ -41,12 +41,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed lg:relative z-40 inset-y-0 left-0 w-64 bg-[#181A2C] text-[#EDEDED] transform transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="p-6 pt-16 lg:pt-6">
+      <div className={`fixed lg:relative z-40 inset-y-0 left-0 w-64 bg-[#181A2C] text-[#EDEDED] transform transition-transform duration-300 ease-in-out flex flex-col ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="p-6 pt-16 lg:pt-6 shrink-0">
           <h2 className="text-2xl font-bold text-[#059669]">Rubicon Portál</h2>
           <p className="text-sm text-gray-400 mt-1">Adminportál</p>
         </div>
-        <nav className="mt-6 flex flex-col space-y-1 px-4">
+        <nav className="mt-2 flex-1 overflow-y-auto flex flex-col space-y-1 px-4 pb-6">
           <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 px-4 mt-2">Menü</div>
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -81,7 +81,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             );
           })}
         </nav>
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-700">
+        <div className="shrink-0 w-full p-4 border-t border-gray-700 bg-[#181A2C]">
           <button 
             onClick={handleLogout}
             className="flex w-full items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-900/50 text-red-400 transition-colors"

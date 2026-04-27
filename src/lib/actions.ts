@@ -1,11 +1,13 @@
 'use server';
 
-import db from './db';
+import pool from './db';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
+import nodemailer from 'nodemailer';
 
 export async function login(email: string) {
-  const settings = db.prepare('SELECT value FROM settings WHERE key = ?').get('whitelisted_emails') as any;
+  const [rows]: any = await pool.execute('SELECT value FROM settings WHERE \`key\` = ?', ['whitelisted_emails']);
+  const settings = rows[0];
   const emails = settings ? JSON.parse(settings.value) : [];
   
   if (emails.includes(email)) {
@@ -20,28 +22,26 @@ export async function logout() {
 }
 
 export async function getJobs() {
-  const stmt = db.prepare('SELECT * FROM jobs ORDER BY created_at DESC');
-  return stmt.all();
+  const [rows]: any = await pool.query('SELECT * FROM jobs ORDER BY created_at DESC');
+  return rows;
 }
 
 export async function getJobsByDate(datePrefix: string) {
-  const stmt = db.prepare('SELECT * FROM jobs WHERE created_at LIKE ? ORDER BY created_at DESC');
-  return stmt.all(`${datePrefix}%`);
+  const [rows]: any = await pool.execute('SELECT * FROM jobs WHERE created_at LIKE ? ORDER BY created_at DESC', [`${datePrefix}%`]);
+  return rows;
 }
 
 export async function getJobById(id: number) {
-  const stmt = db.prepare('SELECT * FROM jobs WHERE id = ?');
-  return stmt.get(id);
+  const [rows]: any = await pool.execute('SELECT * FROM jobs WHERE id = ?', [id]);
+  return rows[0];
 }
 
 export async function updateJob(id: number, data: any) {
-  const stmt = db.prepare(`
+  await pool.execute(`
     UPDATE jobs 
     SET name = ?, phone = ?, email = ?, address = ?, map_link = ?, total = ?, notes = ?, data_json = ?
     WHERE id = ?
-  `);
-  
-  stmt.run(
+  `, [
     data.name,
     data.phone,
     data.email,
@@ -51,7 +51,7 @@ export async function updateJob(id: number, data: any) {
     data.notes,
     JSON.stringify(data.items),
     id
-  );
+  ]);
   
   revalidatePath('/portal');
 }
@@ -65,33 +65,30 @@ const statusOrder = [
 ];
 
 export async function advanceJobStatus(id: number) {
-  const job = db.prepare('SELECT status FROM jobs WHERE id = ?').get(id) as any;
+  const [rows]: any = await pool.execute('SELECT status FROM jobs WHERE id = ?', [id]);
+  const job = rows[0];
   if (!job) return;
   const currentIndex = statusOrder.indexOf(job.status);
   if (currentIndex >= 0 && currentIndex < statusOrder.length - 1) {
     const nextStatus = statusOrder[currentIndex + 1];
-    db.prepare('UPDATE jobs SET status = ? WHERE id = ?').run(nextStatus, id);
+    await pool.execute('UPDATE jobs SET status = ? WHERE id = ?', [nextStatus, id]);
     revalidatePath('/portal');
   }
 }
 
 export async function updateJobStatus(id: number, newStatus: string) {
   if (statusOrder.includes(newStatus)) {
-    db.prepare('UPDATE jobs SET status = ? WHERE id = ?').run(newStatus, id);
+    await pool.execute('UPDATE jobs SET status = ? WHERE id = ?', [newStatus, id]);
     revalidatePath('/portal');
   }
 }
 
-import nodemailer from 'nodemailer';
-
 export async function createJob(data: any) {
   const status = data.status || 'Felvételre vár';
-  const stmt = db.prepare(`
+  await pool.execute(`
     INSERT INTO jobs (name, phone, email, address, map_link, status, total, notes, data_json)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `);
-
-  stmt.run(
+  `, [
     data.name,
     data.phone,
     data.email,
@@ -101,7 +98,7 @@ export async function createJob(data: any) {
     data.total,
     data.notes,
     JSON.stringify(data.items)
-  );
+  ]);
 
   revalidatePath('/portal');
 
@@ -158,7 +155,7 @@ export async function createJob(data: any) {
 }
 
 export async function getSettings() {
-  const rows = db.prepare('SELECT * FROM settings').all() as {key: string, value: string}[];
+  const [rows]: any = await pool.query('SELECT * FROM settings');
   const settings: Record<string, any> = {};
   for (const row of rows) {
     try {
@@ -172,11 +169,11 @@ export async function getSettings() {
 
 export async function updateSetting(key: string, value: string | any) {
   const strValue = typeof value === 'string' ? value : JSON.stringify(value);
-  db.prepare(`
-    INSERT INTO settings (key, value) 
+  await pool.execute(`
+    INSERT INTO settings (\`key\`, value) 
     VALUES (?, ?) 
-    ON CONFLICT(key) DO UPDATE SET value = excluded.value
-  `).run(key, strValue);
+    ON DUPLICATE KEY UPDATE value = VALUES(value)
+  `, [key, strValue]);
   revalidatePath('/portal/settings');
   revalidatePath('/'); // assuming settings affect website
 }

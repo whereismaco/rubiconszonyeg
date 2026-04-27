@@ -78,6 +78,12 @@ export default function ExtrasPage() {
       active: false
     },
     {
+      title: "GDPR és Jogi megfeleltetés",
+      price: "40 000 Ft",
+      desc: "Teljes körű, személyre szabott ÁSZF és Adatvédelmi Nyilatkozat elkészítése és integrációja a weboldalba, Cookie banner beállítása a magyar jogszabályoknak megfelelően.",
+      active: true
+    },
+    {
       title: "Ügyfél visszaszerző rendszer",
       price: "30 000 Ft",
       desc: "Ha egy ügyfél szőnyegét 6-12 hónapja tisztítottuk, automatikusan küldünk neki emailt kedvezménnyel az újabb tisztításra.",
