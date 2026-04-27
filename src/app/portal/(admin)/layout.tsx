@@ -55,6 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link 
                 key={item.name} 
                 href={item.href}
+                prefetch={false}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#064E3B] text-white' : 'hover:bg-[#064E3B]/50'}`}
               >
@@ -72,6 +73,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link 
                 key={item.name} 
                 href={item.href}
+                prefetch={false}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive ? 'bg-[#059669]/20 text-[#059669]' : 'hover:bg-[#059669]/10 text-gray-300'}`}
               >
