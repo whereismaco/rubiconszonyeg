@@ -10,7 +10,7 @@ export default function PublicHeader({ settings }: { settings: any }) {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link href="/">
           <div className="relative h-10 w-48">
-            <Image src={companyLogo} alt={settings?.company_name || 'RUBICON'} fill className="object-contain object-left" priority />
+            <Image src={companyLogo} alt={settings?.company_name || 'RUBICON'} fill className="object-contain object-left brightness-0" priority />
           </div>
         </Link>
         <nav className="hidden md:flex gap-8 items-center">
