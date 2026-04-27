@@ -1,13 +1,15 @@
 import { getSettings, createJob } from '@/lib/actions';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { CheckCircle2, Sparkles, MapPin, Phone, Mail, Sofa, CarFront, Layers } from 'lucide-react';
-import GoogleReviews from "@/components/GoogleReviews";
-import BeforeAfterGallery from "@/components/BeforeAfterGallery";
-import QuoteForm from "@/components/QuoteForm";
-import PricingTable from "@/components/PricingTable";
-import PublicHeader from "@/components/PublicHeader";
-import PublicFooter from "@/components/PublicFooter";
+
+const PublicHeader = dynamic(() => import('@/components/PublicHeader'));
+const PublicFooter = dynamic(() => import('@/components/PublicFooter'));
+const GoogleReviews = dynamic(() => import('@/components/GoogleReviews'));
+const BeforeAfterGallery = dynamic(() => import('@/components/BeforeAfterGallery'));
+const QuoteForm = dynamic(() => import('@/components/QuoteForm'));
+const PricingTable = dynamic(() => import('@/components/PricingTable'));
 
 export async function generateMetadata() {
   const settings = await getSettings();
@@ -218,7 +220,7 @@ export default async function HomePage() {
               <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
                 <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
                   {srv1Iframe ? (
-                    <div dangerouslySetInnerHTML={{ __html: srv1Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                    <div dangerouslySetInnerHTML={{ __html: srv1Iframe.replace('<iframe ', '<iframe loading="lazy" ') }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
                   ) : (
                     <Image src="/images/rubicon_szonyegtisztitas_szolgaltatas.webp" alt={srv1Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                   )}
@@ -237,7 +239,7 @@ export default async function HomePage() {
               <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
                 <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
                   {srv2Iframe ? (
-                    <div dangerouslySetInnerHTML={{ __html: srv2Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                    <div dangerouslySetInnerHTML={{ __html: srv2Iframe.replace('<iframe ', '<iframe loading="lazy" ') }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
                   ) : (
                     <Image src="/images/rubicon_karpittisztitas_szolgaltatas.webp" alt={srv2Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                   )}
@@ -256,7 +258,7 @@ export default async function HomePage() {
               <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
                 <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
                   {srv3Iframe ? (
-                    <div dangerouslySetInnerHTML={{ __html: srv3Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                    <div dangerouslySetInnerHTML={{ __html: srv3Iframe.replace('<iframe ', '<iframe loading="lazy" ') }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
                   ) : (
                     <Image src="/images/rubicon_autokozmetika_szolgaltatas.webp" alt={srv3Title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                   )}
@@ -275,7 +277,7 @@ export default async function HomePage() {
               <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group flex flex-col md:flex-row">
                 <div className="relative aspect-[9/16] md:w-1/3 xl:w-2/5 overflow-hidden bg-[#181A2C] flex items-center justify-center shrink-0">
                   {srv4Iframe ? (
-                    <div dangerouslySetInnerHTML={{ __html: srv4Iframe }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
+                    <div dangerouslySetInnerHTML={{ __html: srv4Iframe.replace('<iframe ', '<iframe loading="lazy" ') }} className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:object-cover [&>video]:w-full [&>video]:h-full [&>video]:object-cover" />
                   ) : (
                     <Layers size={64} className="text-white/20 group-hover:scale-110 transition-transform duration-700" />
                   )}
