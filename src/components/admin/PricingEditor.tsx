@@ -29,6 +29,7 @@ function DictEditor({ title, data, onChange, unit = "Ft" }: { title: string, dat
   };
 
   const remove = (id: string) => {
+    if (!window.confirm('Biztosan törölni szeretnéd ezt a tételt?')) return;
     const newItems = items.filter(it => it.id !== id);
     setItems(newItems);
     sync(newItems);
@@ -99,6 +100,7 @@ function ListEditor({ title, data, onChange }: { title: string, data: string[], 
   };
 
   const remove = (id: string) => {
+    if (!window.confirm('Biztosan törölni szeretnéd ezt a tételt?')) return;
     const newItems = items.filter(it => it.id !== id);
     setItems(newItems);
     sync(newItems);
@@ -176,6 +178,7 @@ function PackageEditor({ title, data, onChange }: { title: string, data: Record<
   };
 
   const remove = (id: string) => {
+    if (!window.confirm('Biztosan törölni szeretnéd ezt a tételt?')) return;
     const newItems = items.filter(it => it.id !== id);
     setItems(newItems);
     sync(newItems);
