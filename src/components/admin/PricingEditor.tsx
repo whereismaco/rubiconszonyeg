@@ -50,29 +50,31 @@ function DictEditor({ title, data, onChange, unit = "Ft" }: { title: string, dat
       </div>
       <div className="space-y-2">
         {items.map((item) => (
-          <div key={item.id} className="flex items-center gap-2 group">
+          <div key={item.id} className="flex flex-col md:flex-row items-start md:items-center gap-2 group border-b border-gray-100 pb-4 mb-2 last:border-0 last:pb-0 last:mb-0">
             <input 
               type="text" 
               value={item.k} 
               onChange={e => updateKey(item.id, e.target.value)} 
-              className="flex-1 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
+              className="w-full md:flex-1 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
               placeholder="Megnevezés"
             />
-            <input 
-              type="number" 
-              value={item.v} 
-              onChange={e => updateValue(item.id, Number(e.target.value))} 
-              className="w-24 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
-            />
-            <span className="text-sm text-gray-500 font-medium w-4">Ft</span>
-            <button 
-              type="button" 
-              onClick={() => remove(item.id)} 
-              className="text-gray-300 hover:text-red-500 p-2 transition-colors"
-              title="Törlés"
-            >
-              <Trash size={16} />
-            </button>
+            <div className="flex items-center gap-2 w-full md:w-auto justify-end">
+              <input 
+                type="number" 
+                value={item.v} 
+                onChange={e => updateValue(item.id, Number(e.target.value))} 
+                className="w-full md:w-24 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
+              />
+              <span className="text-sm text-gray-500 font-medium w-4">Ft</span>
+              <button 
+                type="button" 
+                onClick={() => remove(item.id)} 
+                className="text-gray-300 hover:text-red-500 p-2 transition-colors"
+                title="Törlés"
+              >
+                <Trash size={16} />
+              </button>
+            </div>
           </div>
         ))}
         {items.length === 0 && <p className="text-xs text-gray-400 italic">Nincsenek tételek megadva.</p>}
@@ -118,7 +120,7 @@ function ListEditor({ title, data, onChange }: { title: string, data: string[], 
       </div>
       <div className="space-y-2">
         {items.map((item) => (
-          <div key={item.id} className="flex items-center gap-2 group">
+          <div key={item.id} className="flex items-center gap-2 group border-b border-gray-100 pb-4 mb-2 last:border-0 last:pb-0 last:mb-0">
             <input 
               type="text" 
               value={item.val} 
@@ -196,30 +198,30 @@ function PackageEditor({ title, data, onChange }: { title: string, data: Record<
       <div className="space-y-4">
         {items.map((item) => (
           <div key={item.id} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3 group relative">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
               <input 
                 type="text" 
                 value={item.name} 
                 onChange={e => update(item.id, { name: e.target.value })} 
-                className="flex-1 border border-gray-200 rounded-lg p-2 text-sm font-bold focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
+                className="w-full md:flex-1 border border-gray-200 rounded-lg p-2 text-sm font-bold focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
                 placeholder="Csomag neve (pl. Rubicon Prémium)"
               />
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full md:w-auto justify-end">
                 <input 
                   type="number" 
                   value={item.price} 
                   onChange={e => update(item.id, { price: Number(e.target.value) })} 
-                  className="w-28 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
+                  className="w-full md:w-28 border border-gray-200 rounded-lg p-2 text-sm text-right focus:outline-none focus:border-[#059669] focus:ring-1 focus:ring-[#059669]" 
                 />
                 <span className="text-sm text-gray-500 font-medium">Ft</span>
+                <button 
+                  type="button" 
+                  onClick={() => remove(item.id)} 
+                  className="text-gray-300 hover:text-red-500 p-2 transition-colors"
+                >
+                  <Trash size={18} />
+                </button>
               </div>
-              <button 
-                type="button" 
-                onClick={() => remove(item.id)} 
-                className="text-gray-300 hover:text-red-500 p-2 transition-colors"
-              >
-                <Trash size={18} />
-              </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
