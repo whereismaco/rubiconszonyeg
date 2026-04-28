@@ -135,7 +135,7 @@ export default function BeforeAfterGallery() {
               setActiveIndex(idx);
               setSliderPosition(50); // Reset slider position when changing image
             }}
-            className={`relative shrink-0 snap-center w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-[3px] transition-all duration-300 ${activeIndex === idx ? 'border-[#059669] scale-105 shadow-xl' : 'border-transparent shadow-sm hover:border-gray-300 opacity-70 hover:opacity-100'}`}
+            className={`relative shrink-0 snap-center w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden border-[3px] transition-all duration-300 ${activeIndex === idx ? 'border-[#059669] scale-105 shadow-xl' : 'border-transparent shadow-sm hover:border-gray-300 opacity-70 hover:opacity-100'}`}
           >
             <Image 
               src={pair.after} 

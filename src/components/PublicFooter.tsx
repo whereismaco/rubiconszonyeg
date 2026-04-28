@@ -30,7 +30,7 @@ export default function PublicFooter({ settings }: { settings: any }) {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
           <p>&copy; {new Date().getFullYear()} {settings?.company_name || 'Rubicon Szőnyegtisztítás'}. Minden jog fenntartva.</p>
-          <p className="mt-2 text-xs opacity-50">Powered by MacoLabs & Rubicon Engine v2</p>
+          <p className="mt-2 text-xs opacity-50">This entire website was proudly designed and created by <a href="https://webstart.studio/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline">webstart.studio</a></p>
         </div>
         <div className="flex gap-4 text-sm font-medium">
           <Link href="/aszf" className="hover:text-white transition-colors">Általános Szerződési Feltételek (ÁSZF)</Link>

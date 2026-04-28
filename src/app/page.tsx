@@ -297,7 +297,7 @@ export default async function HomePage() {
         </section>
 
         {/* 4.5. ELŐTTE-UTÁNA GALÉRIA */}
-        <section className="py-24 bg-white">
+        <section id="referenciak" className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h3 className="text-4xl md:text-5xl font-bold text-[#064E3B] mb-6">Munkáink a valóságban</h3>
             <p className="text-xl text-gray-600 font-light mb-16 max-w-2xl mx-auto">Húzza a csúszkát, és győződjön meg a saját szemével a különbségről, amit a Rubicon mélytisztító technológiája képes elérni!</p>
